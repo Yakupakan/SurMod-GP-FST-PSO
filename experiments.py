@@ -4,7 +4,6 @@ import sys
 import json
 import os
 
-
 def make_train_set(membrane, ruleset, steps):
     data = []
     for i in range(0, steps):
