@@ -7,3 +7,4 @@ def plot_(x):
     y = [ackley([el]) for el in x]
     plt.plot(x, y)
     plt.show()
+    plt.close()
