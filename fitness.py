@@ -4,10 +4,12 @@ import math
 import fstpso
 from fstpso import FuzzyPSO
 
+from eval import eval
 from benchmark_function import ackley
 
 
 def fit(prg):
+    print(eval([6], prg))
     print(prg)
     x_coord_best = fst_pso_loss(prg)
     y_benchmark_function = ackley(x_coord_best)
