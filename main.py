@@ -13,11 +13,6 @@ def function(x):
 
 D = 1  # dimensione del problema
 interval = [-30, 30]
-n_point = 100
-
-initial_population = [ackley([x]) for x in np.linspace(interval[0], interval[1], n_point)]
-
-argmin = np.argmin()
 
 
 '''
