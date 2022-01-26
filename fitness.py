@@ -1,4 +1,6 @@
-import gplearn
+import numpy as np
+
+from gplearn import fitness
 import fstpso
 
 
@@ -8,4 +10,4 @@ def _fstpso_loss(y, y_pred, w):
     return 100. * np.average(diffs, weights=w)
 
 
-fstpso_loss = make_fitness(_fstpso_loss, greater_is_better=False)
+fstpso_loss = fitness.make_fitness(_fstpso_loss, greater_is_better=False)

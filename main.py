@@ -1,8 +1,28 @@
+import scipy
+
 import gplearn
 
 from fitness import fstpso_loss
 from plot_function import *
 from benchmark_function import *
+
+
+def function(x):
+    return ackley(x)
+
+
+D = 1  # dimensione del problema
+interval = [-30, 30]
+n_point = 100
+
+initial_population = [ackley([x]) for x in np.linspace(interval[0], interval[1], n_point)]
+
+argmin = np.argmin()
+
+
+'''
+# campioniamo la funzione per avere la popolazione iniziale 
+
 
 est_gp = gplearn.genetic.SymbolicRegressor(population_size=1000, generations=20, tournament_size=20,
                                            stopping_criteria=0.0,
@@ -16,9 +36,6 @@ est_gp = gplearn.genetic.SymbolicRegressor(population_size=1000, generations=20,
 
 est_gp.fit(X, y)
 
-
-
-'''
 y = ackley([2])
 print(y)
 
