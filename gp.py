@@ -49,7 +49,7 @@ def mutation(x, p_m):
 
 def linear_GP(fit, pop_size, n_iter=100):
     p_m = 0.1
-    pop = [random_program(1) for _ in range(0, pop_size)]
+    pop = [random_program(10) for _ in range(0, pop_size)]
     best = []
     for i in range(0, n_iter):
         selected = [tournament_selection(fit, pop) for _ in range(0, pop_size)]
@@ -70,6 +70,9 @@ def linear_GP(fit, pop_size, n_iter=100):
     return best
 
 
+best = linear_GP(fit, 10)
+print(best)
+
 '''
  def fit(prg):
   data = [(i, i**2 + 3*i + 2) for i in range(0, 100)]
@@ -85,4 +88,3 @@ def linear_GP(fit, pop_size, n_iter=100):
       sq_errors += (y - stack.pop())**2
   return sq_errors/len(data)
 '''
-linear_GP(fit, 1, 1)

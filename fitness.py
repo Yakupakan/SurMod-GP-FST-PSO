@@ -4,6 +4,7 @@ import math
 import fstpso
 from fstpso import FuzzyPSO
 
+from print import *
 from eval import eval, make_function
 from benchmark_function import ackley
 
@@ -28,10 +29,12 @@ def fst_pso_loss(prg):
     :param interval: interval of the problem (insert a list like: [[-10, 10]])
     :return: coordinates relative to the minimum of prg
     """
-    dims = 1
+    dims = 10
     interval = [[-30, 30]]
+    blockPrint()
     FP = FuzzyPSO()
     FP.set_search_space(interval * dims)
     FP.set_fitness(make_function(prg))
     result = FP.solve_with_fstpso()
+    enablePrint()
     return result[0].X  # the .X transfrom the Particle structure into a list
