@@ -1,4 +1,5 @@
 import enum
+import math
 
 opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD DUP NOP')
 
@@ -78,7 +79,7 @@ def make_function(program):
                 pass
             else:
                 stack.append(op)
-        return stack
+        return stack[-1]  # in the last value of the stack is collected the value of the fitness
 
     return lambda x: function_from_prgr(x)
 
