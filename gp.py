@@ -13,7 +13,7 @@ def random_program(n):
     prg = []
     func = list(opcodes)
     for i in range(0, n):
-        if random.random() < 0.5:
+        if random.random() < 0.25:  # 0.5
             op = random.choice(func)
         else:
             op = random.randint(-2, 2)
@@ -50,7 +50,8 @@ def mutation(x, p_m):
     return [change(b) for b in x]
 
 
-def linear_GP(fit, pop_size, n_iter=100):
+def linear_GP(fit, pop_size, n_iter=100, dire=None):
+    f = open(dire + "res.txt", "w")
     p_m = 0.1
     pop = [random_program(10) for _ in range(0, pop_size)]
     best = []
@@ -68,11 +69,23 @@ def linear_GP(fit, pop_size, n_iter=100):
             best = candidate_best
         if fit(best) == 0:
             return best
+
         print(f"Best individual at generation {i}: {best}")
+        f.write(f"GEN: {i} \t Best individual: {best}\n")
+
         print(f"Best fitness at generation {i}: {fit(best)}")
+        f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
+
+        # np_prg = np.fromfunction(make_function(best), [1])
+        # min_i = np_prg.argmin(axis=0)
+        # print(f"Mimimum of the prg at generation {i}: {min_i}\n")
+        # f.write(f"GEN: {i} \t Mimimum of the prg: {min_i}\n\n")
+
         interval = [-30, 30]
         x = np.linspace(interval[0], interval[1], 100)
-        plot_prg(best, x)
+        if dire:
+            plot_prg(best, x, dire, i)
+    f.close()
     return best
 
 

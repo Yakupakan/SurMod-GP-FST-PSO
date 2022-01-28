@@ -1,3 +1,4 @@
+import os
 import scipy
 import gplearn
 
@@ -10,21 +11,20 @@ from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
 
 
-def function(x):
-    return ackley(x)
+pop_size = 100
+num_iteration = 1000
+dir_results = "results/ackley/"
+if not os.path.exists(dir_results):
+    os.mkdir(dir_results)
+dir_results = dir_results + "pop" + str(pop_size) + "_it" + str(num_iteration) + "/"
+if not os.path.exists(dir_results):
+    os.mkdir(dir_results)
 
 
-pop_size = 50
-num_iteration = 10
-
-best = linear_GP(fit, pop_size, num_iteration)
+best = linear_GP(fit, pop_size, num_iteration, dir_results)
 function_approximated = make_function(best)
 
 D = 1  # dimensione del problema
 interval = [-30, 30]
 
-x = np.linspace(interval[0], interval[1], 100)
-
-plot_ackley(x)
-plot_prg(best, x)
-print(best)
+# x = np.linspace(interval[0], interval[1], 100)
