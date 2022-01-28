@@ -29,7 +29,7 @@ def fst_pso_loss(prg):
     :param interval: interval of the problem (insert a list like: [[-10, 10]])
     :return: coordinates relative to the minimum of prg
     """
-    dims = 10
+    dims = 1
     interval = [[-30, 30]]
     blockPrint()
     FP = FuzzyPSO()

@@ -2,8 +2,11 @@ import enum
 import math
 import random
 
-from eval import eval, opcodes
+import numpy as np
+
+from eval import eval, opcodes, make_function
 from fitness import fit
+from plot_function import plot_prg
 
 
 def random_program(n):
@@ -65,13 +68,13 @@ def linear_GP(fit, pop_size, n_iter=100):
             best = candidate_best
         if fit(best) == 0:
             return best
-        # print(f"Best individual at generation {i}: {best}")
+        print(f"Best individual at generation {i}: {best}")
         print(f"Best fitness at generation {i}: {fit(best)}")
+        interval = [-30, 30]
+        x = np.linspace(interval[0], interval[1], 100)
+        plot_prg(best, x)
     return best
 
-
-best = linear_GP(fit, 10)
-print(best)
 
 '''
  def fit(prg):
