@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 
 from gp import linear_GP
 from fitness import fit
-from eval import make_function
+from eval_extended import make_function
 from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
 
 
-pop_size = 100
+pop_size = 50
 num_iteration = 1000
-dir_results = "results/ackley/"
+dir_results = "results/ackley_extended/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "pop" + str(pop_size) + "_it" + str(num_iteration) + "/"

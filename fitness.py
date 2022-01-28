@@ -5,7 +5,7 @@ import fstpso
 from fstpso import FuzzyPSO
 
 from print import *
-from eval import eval, make_function
+from eval_extended import eval, make_function
 from benchmark_function import ackley
 
 dims = 1

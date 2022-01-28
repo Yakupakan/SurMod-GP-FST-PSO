@@ -4,7 +4,7 @@ import random
 
 import numpy as np
 
-from eval import eval, opcodes, make_function
+from eval_extended import eval, opcodes, make_function
 from fitness import fit
 from plot_function import plot_prg
 

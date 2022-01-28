@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-from eval import make_function
+from eval_extended import make_function
 from benchmark_function import *
 
 
