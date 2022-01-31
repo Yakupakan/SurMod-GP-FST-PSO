@@ -14,8 +14,8 @@ from plot_function import plot_ackley, plot_prg
 
 
 dim_prg = 10  # int(sys.argv[1])
-pop_size = 100  # int(sys.argv[2])
-num_iteration = 1000  # int(sys.argv[3])
+pop_size = 250  # int(sys.argv[2])
+num_iteration = 10000  # int(sys.argv[3])
 function = "ackley"  # sys.argv[4]
 
 dir_results = "results/" + function + "/"

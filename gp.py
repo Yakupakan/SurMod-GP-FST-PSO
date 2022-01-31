@@ -85,32 +85,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
         f_loss.write(f"{fit(best)}\n")
 
-        # np_prg = np.fromfunction(make_function(best), [1])
-        # min_i = np_prg.argmin(axis=0)
-        # print(f"Mimimum of the prg at generation {i}: {min_i}\n")
-        # f.write(f"GEN: {i} \t Mimimum of the prg: {min_i}\n\n")
-
         interval = [-30, 30]
         x = np.linspace(interval[0], interval[1], 100)
         if dire and i % snap == 0:
             plot_prg(best, x, dire, i)
+
     f.close()
     f_loss.close()
     return best
-
-
-'''
- def fit(prg):
-  data = [(i, i**2 + 3*i + 2) for i in range(0, 100)]
-  sq_errors = 0
-  for x, y in data:
-    try:
-      stack = eval([x], prg)
-    except Exception:
-      return math.inf
-    if stack == []:
-      return math.inf
-    else:
-      sq_errors += (y - stack.pop())**2
-  return sq_errors/len(data)
-'''

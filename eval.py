@@ -1,7 +1,8 @@
 import enum
 import math
 
-opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD DUP NOP')
+# opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE DUP NOP')
+opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE DUP MOD SWAP NOP')  # MOD
 
 
 def eval(stack, program):
@@ -34,6 +35,11 @@ def eval(stack, program):
                 stack.append(op1 % op2)
             except Exception:
                 pass
+        elif op == opcodes.SWAP:
+            tmp1 = stack.pop()
+            tmp2 = stack.pop()
+            stack.append(tmp1)
+            stack.append(tmp2)
         elif op == opcodes.DUP:
             tmp = stack.pop()
             stack.append(tmp)
@@ -83,6 +89,11 @@ def make_function(program):
                     stack.append(op1 % op2)
                 except Exception:
                     pass
+            elif op == opcodes.SWAP:
+                tmp1 = stack.pop()
+                tmp2 = stack.pop()
+                stack.append(tmp1)
+                stack.append(tmp2)
             elif op == opcodes.DUP:
                 tmp = stack.pop()
                 stack.append(tmp)
