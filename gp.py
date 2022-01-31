@@ -4,7 +4,7 @@ import random
 
 import numpy as np
 
-from eval_extended import eval, opcodes, make_function
+from eval import eval, opcodes, make_function
 from fitness import fit
 from plot_function import plot_prg
 
@@ -13,7 +13,7 @@ def random_program(n):
     prg = []
     func = list(opcodes)
     for i in range(0, n):
-        if random.random() < 0.25:  # 0.5
+        if random.random() < 0.5:  # 0.5
             op = random.choice(func)
         else:
             op = random.randint(-2, 2)

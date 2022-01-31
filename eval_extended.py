@@ -5,7 +5,7 @@ import enum
 import math
 import numpy as np
 
-opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD DUP NOP SIN COS')
+opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD DUP NOP')
 
 
 def eval(stack, program):
@@ -49,6 +49,9 @@ def eval(stack, program):
             if isinstance(stack[-1], float):
                 tmp = stack.pop()
                 stack.append(np.cos(tmp))
+        elif op == opcodes.EXP:
+            tmp = stack.pop()
+            stack.append(np.exp(tmp))
         else:
             stack.append(op)
     return stack
@@ -103,6 +106,9 @@ def make_function(program):
                 if isinstance(stack[-1], float):
                     tmp = stack.pop()
                     stack.append(np.cos(tmp))
+            elif op == opcodes.EXP:
+                tmp = stack.pop()
+                stack.append(np.exp(tmp))
             else:
                 stack.append(op)
         return stack[-1]  # in the last value of the stack is collected the value of the fitness
