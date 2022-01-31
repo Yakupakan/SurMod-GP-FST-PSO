@@ -27,7 +27,6 @@ def fit(prg):
 
 
 def fit_3_points(prg):
-    " 60% min and 20% other points"
     try:
         fst_pso_loss(prg)
     except Exception:
