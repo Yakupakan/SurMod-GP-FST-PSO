@@ -30,7 +30,10 @@ def eval(stack, program):
         elif op == opcodes.MOD:
             op1 = stack.pop()
             op2 = stack.pop()
-            stack.append(op1 % op2)
+            try:
+                stack.append(op1 % op2)
+            except Exception:
+                pass
         elif op == opcodes.DUP:
             tmp = stack.pop()
             stack.append(tmp)
@@ -76,7 +79,10 @@ def make_function(program):
             elif op == opcodes.MOD:
                 op1 = stack.pop()
                 op2 = stack.pop()
-                stack.append(op1 % op2)
+                try:
+                    stack.append(op1 % op2)
+                except Exception:
+                    pass
             elif op == opcodes.DUP:
                 tmp = stack.pop()
                 stack.append(tmp)

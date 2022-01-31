@@ -37,7 +37,7 @@ def fit_3_points(prg):
     approx_fun = make_function(prg)
     y_true = [ackley(first_point), ackley(second_point), ackley(x_coord_best)]
     y_pred = [approx_fun(first_point), approx_fun(second_point), approx_fun(x_coord_best)]
-    rmse = mean_squared_error(y_true, y_pred, sample_weight=[0.2, 0.2, 0.6])
+    rmse = mean_squared_error(y_true, y_pred, sample_weight=[0.25, 0.25, 0.5])
     return rmse
 
 

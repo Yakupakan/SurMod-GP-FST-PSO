@@ -4,8 +4,9 @@ import random
 
 import numpy as np
 
+from print import *
 from eval import eval, opcodes, make_function
-from fitness import fit
+from fitness import fit_3_points as fit
 from plot_function import plot_prg
 
 
@@ -50,10 +51,10 @@ def mutation(x, p_m):
     return [change(b) for b in x]
 
 
-def linear_GP(fit, pop_size, n_iter=100, dire=None):
+def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10,  dire=None):
     f = open(dire + "res.txt", "w")
     p_m = 0.1
-    pop = [random_program(10) for _ in range(0, pop_size)]
+    pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
     for i in range(0, n_iter):
         selected = [tournament_selection(fit, pop) for _ in range(0, pop_size)]
@@ -64,6 +65,8 @@ def linear_GP(fit, pop_size, n_iter=100, dire=None):
             offsprings.append(of1)
             offsprings.append(of2)
         pop = [mutation(x, p_m) for x in offsprings]
+        # enablePrint()
+        # print("pop: " + str(len(pop)))
         candidate_best = min(pop, key=fit)
         if fit(candidate_best) < fit(best):
             best = candidate_best
