@@ -91,6 +91,10 @@ def make_function(program):
                 pass
             else:
                 stack.append(op)
+        try:
+            stack[-1]
+        except Exception:
+            return math.inf
         return stack[-1]  # in the last value of the stack is collected the value of the fitness
 
     return lambda x: function_from_prgr(x)

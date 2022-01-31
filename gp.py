@@ -9,6 +9,8 @@ from eval import eval, opcodes, make_function
 from fitness import fit_3_points as fit
 from plot_function import plot_prg
 
+snap = 5
+
 
 def random_program(n):
     prg = []
@@ -51,7 +53,7 @@ def mutation(x, p_m):
     return [change(b) for b in x]
 
 
-def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10,  dire=None):
+def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f = open(dire + "res.txt", "w")
     p_m = 0.1
     pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
@@ -73,10 +75,10 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10,  dire=None):
         if fit(best) == 0:
             return best
 
-        print(f"Best individual at generation {i}: {best}")
+        print(f"GEN: {i} \t Best individual: {best}")
         f.write(f"GEN: {i} \t Best individual: {best}\n")
 
-        print(f"Best fitness at generation {i}: {fit(best)}")
+        print(f"GEN: {i} \t Best fitness: {fit(best)}\n")
         f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
 
         # np_prg = np.fromfunction(make_function(best), [1])
@@ -86,7 +88,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10,  dire=None):
 
         interval = [-30, 30]
         x = np.linspace(interval[0], interval[1], 100)
-        if dire:
+        if dire and i % snap == 0:
             plot_prg(best, x, dire, i)
     f.close()
     return best

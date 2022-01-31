@@ -1,4 +1,6 @@
 import os
+import sys
+
 import scipy
 import gplearn
 
@@ -11,18 +13,18 @@ from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
 
 
-pop_size = 100
-num_iteration = 100
-dim_prg = 25
+dim_prg = 10  # int(sys.argv[1])
+pop_size = 50  # int(sys.argv[2])
+num_iteration = 10000  # int(sys.argv[3])
+function = "ackley"  # sys.argv[4]
 
-
-dir_results = "results/ackley/"
+dir_results = "results/" + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "fit_3/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + "pop" + str(pop_size) + "_it" + str(num_iteration) + "_dimprg" + str(dim_prg) + "/"
+dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 
