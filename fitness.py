@@ -11,15 +11,11 @@ from benchmark_function import ackley
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 
-
 dims = 1
 interval = [[-30, 30]]
 
 
 def fit(prg):
-    #    function__ = make_function(prg)
-    #    print(function__([3, 3, 3, 3]))
-    #    print(eval([3,3,3,3], prg))
     try:
         fst_pso_loss(prg)
     except Exception:
@@ -37,20 +33,13 @@ def fit_3_points(prg):
     except Exception:
         return math.inf
     x_coord_best = fst_pso_loss(prg)
-    first_point = interval[0]
-    second_point = interval[-1]
+    first_point = [interval[0][0]]
+    second_point = [interval[0][-1]]
     approx_fun = make_function(prg)
     y_true = [ackley(first_point), ackley(second_point), ackley(x_coord_best)]
     y_pred = [approx_fun(first_point), approx_fun(second_point), approx_fun(x_coord_best)]
-    rmse = mean_squared_error(y_true, y_pred, sample_weight=[0.1,0.1,0.8])
-    #rmse_1 = mean_squared_error(ackley(first_point), approx_fun(first_point))
-    #rmse_2 = mean_squared_error(ackley(second_point), approx_fun(second_point))
-    #rmse_best = mean_squared_error(ackley(x_coord_best), approx_fun(x_coord_best))
-    #loss_3_points = (0.6*rmse_best) + (0.2*(rmse_1 + rmse_2))
-    #print(rmse)
+    rmse = mean_squared_error(y_true, y_pred, sample_weight=[0.2, 0.2, 0.6])
     return rmse
-
-
 
 
 def fst_pso_loss(prg):
@@ -60,10 +49,10 @@ def fst_pso_loss(prg):
     :param interval: interval of the problem (insert a list like: [[-10, 10]])
     :return: coordinates relative to the minimum of prg
     """
-#     blockPrint()
+    blockPrint()
     FP = FuzzyPSO()
     FP.set_search_space(interval * dims)
     FP.set_fitness(make_function(prg))
     result = FP.solve_with_fstpso()
-#    enablePrint()
+    enablePrint()
     return result[0].X  # the .X transfrom the Particle structure into a list
