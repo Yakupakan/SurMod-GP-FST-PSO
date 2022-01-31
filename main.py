@@ -7,15 +7,15 @@ import gplearn
 import matplotlib.pyplot as plt
 
 from gp import linear_GP
-from fitness import fit_3_points as fit
+from fitness import fit_combined as fit
 from eval import make_function
 from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
 
 
 dim_prg = 10  # int(sys.argv[1])
-pop_size = 50  # int(sys.argv[2])
-num_iteration = 10000  # int(sys.argv[3])
+pop_size = 100  # int(sys.argv[2])
+num_iteration = 1000  # int(sys.argv[3])
 function = "ackley"  # sys.argv[4]
 
 dir_results = "results/" + function + "/"

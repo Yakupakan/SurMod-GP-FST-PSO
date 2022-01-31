@@ -20,6 +20,6 @@ def plot_prg(prg, x, dire=None, it=-1):
     plt.plot(x, y)
     plt.title("best prg")
     if dire:
-        if it > 0:
+        if it > 0 or it == 0:
             plt.savefig(dire + "/best_prg_" + str(it) + ".png")
     plt.close()

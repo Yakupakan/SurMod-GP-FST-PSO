@@ -19,6 +19,7 @@ def fit(prg):
     try:
         fst_pso_loss(prg)
     except Exception:
+        # enablePrint()
         print("exception")
         return math.inf
     x_coord_best = fst_pso_loss(prg)
@@ -28,17 +29,39 @@ def fit(prg):
 
 def fit_3_points(prg):
     try:
-        fst_pso_loss(prg)
+        x_coord_best = fst_pso_loss(prg)
     except Exception:
         return math.inf
-    x_coord_best = fst_pso_loss(prg)
+    if not x_coord_best:
+        return math.inf
     first_point = [interval[0][0]]
     second_point = [interval[0][-1]]
     approx_fun = make_function(prg)
+
     y_true = [ackley(first_point), ackley(second_point), ackley(x_coord_best)]
     y_pred = [approx_fun(first_point), approx_fun(second_point), approx_fun(x_coord_best)]
     rmse = mean_squared_error(y_true, y_pred, sample_weight=[0.25, 0.25, 0.5])
     return rmse
+
+
+def fit_combined(prg):
+    try:
+        x_coord_best = fst_pso_loss(prg)
+    except Exception:
+        return math.inf
+    if not x_coord_best:
+        return math.inf
+    y_benchmark_function = ackley(x_coord_best)
+
+    first_point = [interval[0][0]]
+    second_point = [interval[0][-1]]
+    approx_fun = make_function(prg)
+
+    y_true = [ackley(first_point), ackley(second_point)]
+    y_pred = [approx_fun(first_point), approx_fun(second_point)]
+    rmse = mean_squared_error(y_true, y_pred)
+
+    return y_benchmark_function + rmse
 
 
 def fst_pso_loss(prg):

@@ -6,7 +6,7 @@ import numpy as np
 
 from print import *
 from eval import eval, opcodes, make_function
-from fitness import fit_3_points as fit
+from fitness import fit_combined as fit
 from plot_function import plot_prg
 
 snap = 5
@@ -19,7 +19,7 @@ def random_program(n):
         if random.random() < 0.5:  # 0.5
             op = random.choice(func)
         else:
-            op = random.randint(-2, 2)
+            op = random.randint(-5, 5)  # (-2, 2)
         prg.append(op)
     return prg
 
@@ -45,7 +45,7 @@ def mutation(x, p_m):
             if random.random() < 0.5:
                 op = random.choice(list(opcodes))
             else:
-                op = random.randint(-2, 2)
+                op = random.randint(-5, 5)  # (-2, 2)
             return op
         else:
             return b
@@ -54,7 +54,7 @@ def mutation(x, p_m):
 
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
-    f = open(dire + "res.txt", "w")
+    f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"),
     p_m = 0.1
     pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
@@ -67,8 +67,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             offsprings.append(of1)
             offsprings.append(of2)
         pop = [mutation(x, p_m) for x in offsprings]
-        # enablePrint()
-        # print("pop: " + str(len(pop)))
+
+        number_real_solution = [sol for sol in pop if fit(sol) != math.inf]
+        enablePrint()
+        print("number of real solution : " + str(len(number_real_solution)))
+
         candidate_best = min(pop, key=fit)
         if fit(candidate_best) < fit(best):
             best = candidate_best
@@ -80,6 +83,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         print(f"GEN: {i} \t Best fitness: {fit(best)}\n")
         f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
+        f_loss.write(f"{fit(best)}\n")
 
         # np_prg = np.fromfunction(make_function(best), [1])
         # min_i = np_prg.argmin(axis=0)
@@ -91,6 +95,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         if dire and i % snap == 0:
             plot_prg(best, x, dire, i)
     f.close()
+    f_loss.close()
     return best
 
 
