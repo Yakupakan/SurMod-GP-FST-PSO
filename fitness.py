@@ -37,8 +37,8 @@ def fit_3_points(prg):
     except Exception:
         return math.inf
     x_coord_best = fst_pso_loss(prg)
-    first_point = interval[0]
-    second_point = interval[-1]
+    first_point = [item[0] for item in interval]
+    second_point = [item[-1] for item in interval]
     approx_fun = make_function(prg)
     y_true = [ackley(first_point), ackley(second_point), ackley(x_coord_best)]
     y_pred = [approx_fun(first_point), approx_fun(second_point), approx_fun(x_coord_best)]
@@ -47,7 +47,7 @@ def fit_3_points(prg):
     #rmse_2 = mean_squared_error(ackley(second_point), approx_fun(second_point))
     #rmse_best = mean_squared_error(ackley(x_coord_best), approx_fun(x_coord_best))
     #loss_3_points = (0.6*rmse_best) + (0.2*(rmse_1 + rmse_2))
-    #print(rmse)
+    print(rmse)
     return rmse
 
 
