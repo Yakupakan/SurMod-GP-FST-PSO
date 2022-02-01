@@ -14,7 +14,7 @@ from plot_function import plot_ackley, plot_prg
 
 
 dim_prg = 10  # int(sys.argv[1])
-pop_size = 100  # int(sys.argv[2])
+pop_size = 50  # int(sys.argv[2])
 num_iteration = 10**5  # int(sys.argv[3])
 function = "ackley"  # sys.argv[4]
 

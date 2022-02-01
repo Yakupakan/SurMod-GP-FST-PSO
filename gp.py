@@ -10,16 +10,20 @@ from fitness import fit_combined as fit
 from plot_function import plot_prg
 
 snap = 5
+min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
 
 
 def random_program(n):
     prg = []
     func = list(opcodes)
-    for i in range(0, n):
-        if random.random() < 0.75:  # 0.5
+    for i in range(0, 2):
+        op = random.randint(min_con, max_con)
+        prg.append(op)
+    for i in range(2, n):
+        if random.random() < 0.5:  # 0.5
             op = random.choice(func)
         else:
-            op = random.randint(-5, 5)  # (-2, 2)
+            op = random.randint(min_con, max_con)  # (-2, 2)
         prg.append(op)
     return prg
 
@@ -42,10 +46,10 @@ def two_points_crossover(x, y):
 def mutation(x, p_m):
     def change(b):
         if random.random() < p_m:
-            if random.random() < 0.75:  # 0.5
+            if random.random() < 0.5:  # 0.5
                 op = random.choice(list(opcodes))
             else:
-                op = random.randint(-5, 5)  # (-2, 2)
+                op = random.randint(min_con, max_con)  # (-2, 2)
             return op
         else:
             return b
@@ -55,10 +59,16 @@ def mutation(x, p_m):
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"),
-    p_m = 0.5
+    p_m = 0.2
     pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
     for i in range(0, n_iter):
+        if i > 0:
+            pop.append(best)  # the best solution is inserted again
+
+        pop = list(dict.fromkeys([tuple(el) for el in pop]))
+        pop = [list(el) for el in pop]
+
         selected = [tournament_selection(fit, pop) for _ in range(0, pop_size)]
         pairs = zip(selected, selected[1:] + [selected[0]])
         offsprings = []
