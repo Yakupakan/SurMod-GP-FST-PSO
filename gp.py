@@ -16,7 +16,7 @@ def random_program(n):
     prg = []
     func = list(opcodes)
     for i in range(0, n):
-        if random.random() < 0.5:  # 0.5
+        if random.random() < 0.75:  # 0.5
             op = random.choice(func)
         else:
             op = random.randint(-5, 5)  # (-2, 2)
@@ -42,7 +42,7 @@ def two_points_crossover(x, y):
 def mutation(x, p_m):
     def change(b):
         if random.random() < p_m:
-            if random.random() < 0.5:
+            if random.random() < 0.75:  # 0.5
                 op = random.choice(list(opcodes))
             else:
                 op = random.randint(-5, 5)  # (-2, 2)
@@ -55,7 +55,7 @@ def mutation(x, p_m):
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"),
-    p_m = 0.1
+    p_m = 0.5
     pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
     for i in range(0, n_iter):
@@ -71,8 +71,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         number_real_solution = [sol for sol in pop if fit(sol) != math.inf]
         enablePrint()
         print("number of real solution : " + str(len(number_real_solution)))
+        for j in range(len(number_real_solution)):
+            print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(fit(number_real_solution[j])))
 
         candidate_best = min(pop, key=fit)
+        print("\n fitness candidate best : " + str(fit(candidate_best)))
         if fit(candidate_best) < fit(best):
             best = candidate_best
         if fit(best) == 0:
