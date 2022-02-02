@@ -1,5 +1,6 @@
 import os
 import sys
+import warnings
 
 import scipy
 import gplearn
@@ -7,21 +8,25 @@ import gplearn
 import matplotlib.pyplot as plt
 
 from gp import linear_GP
-from fitness import fit_combined as fit
+from fitness import strong_fitness as fit
 from eval import make_function
 from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
+from plot import fitness_plot
 
 
-dim_prg = 15  # int(sys.argv[1])
-pop_size = 250  # int(sys.argv[2])
-num_iteration = 10**4  # int(sys.argv[3])
+warnings.filterwarnings("ignore")
+
+dim_prg = 10  # int(sys.argv[1])
+pop_size = 100  # int(sys.argv[2])
+num_iteration = 500  # int(sys.argv[3])
 function = "ackley"  # sys.argv[4]
+
 
 dir_results = "results/" + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + "smart_start/"
+dir_results = dir_results + "/strong_fitness_6/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
@@ -36,8 +41,4 @@ best = linear_GP(fit,
                  dire=dir_results)
 
 function_approximated = make_function(best)
-
-D = 1  # dimensione del problema
-interval = [-30, 30]
-
-# x = np.linspace(interval[0], interval[1], 100)
+fitness_plot(dir_results)

@@ -6,7 +6,7 @@ import numpy as np
 
 from print import *
 from eval import eval, opcodes, make_function
-from fitness import fit_combined as fit
+from fitness import strong_fitness as fit
 from plot_function import plot_prg
 
 snap = 5
@@ -14,6 +14,18 @@ min_con, max_con = -10, 10  # minimum and maximum value that constants can assum
 
 
 def random_program(n):
+    prg = []
+    func = list(opcodes)
+    for i in range(0, n):
+        if random.random() < 0.5:
+            op = random.choice(func)
+        else:
+            op = random.randint(-2, 2)
+        prg.append(op)
+    return prg
+
+
+def random_program_attention(n):
     flag = 0  # return if the program is valid
     while not flag:
         prg = []
@@ -25,6 +37,8 @@ def random_program(n):
                 op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
         if fit(prg) and fit(prg) < 10 ** 3:
+            enablePrint()
+            print("program find with fitness :" + str(fit(prg)))
             flag = 1
     return prg
 
@@ -46,7 +60,7 @@ def two_points_crossover(x, y):
 
 def two_points_crossover_attention(x, y):
     flag = 0  # return if the program is valid
-    max_number_combination = 10 ** 2
+    max_number_combination = 50
     numb_combination = 0
     while not flag:
         numb_combination += 1
@@ -79,7 +93,7 @@ def mutation(x, p_m):
 
 def mutation_attention(x, p_m):
     flag = 0  # return if the program is valid
-    max_number_combination = 10 ** 2
+    max_number_combination = 50
     numb_combination = 0
 
     def change(b):
@@ -91,9 +105,10 @@ def mutation_attention(x, p_m):
             return op
         else:
             return b
+
     while not flag:
         mutated_prg = [change(b) for b in x]
-        if fit(mutated_prg) and fit(mutated_prg) < 10**4:
+        if fit(mutated_prg) and fit(mutated_prg) < 10 ** 4:
             flag = 1
         if numb_combination == max_number_combination:
             return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
@@ -103,7 +118,7 @@ def mutation_attention(x, p_m):
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w")
     p_m = 0.2
-    pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
+    pop = [random_program_attention(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
     for i in range(0, n_iter):
         if i > 0:
@@ -130,7 +145,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(
                 fit(number_real_solution[j])))
         """
-
+        enablePrint()
         candidate_best = min(pop, key=fit)
         print("\n fitness candidate best : " + str(fit(candidate_best)))
         if fit(candidate_best) < fit(best):

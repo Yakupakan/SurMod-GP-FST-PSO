@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-sns.set(context='notebook', style='whitegrid', palette='deep', font='sans-serif', font_scale=1)
+sns.set(context='notebook',
+        style='whitegrid',
+        palette='deep',
+        font='sans-serif',
+        font_scale=1)
 
 
 def fitness_plot(dir):
