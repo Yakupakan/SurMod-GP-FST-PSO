@@ -14,17 +14,24 @@ min_con, max_con = -10, 10  # minimum and maximum value that constants can assum
 
 
 def random_program(n):
-    prg = []
-    func = list(opcodes)
-    for i in range(0, 2):
-        op = random.randint(min_con, max_con)
-        prg.append(op)
-    for i in range(2, n):
-        if random.random() < 0.5:  # 0.5
-            op = random.choice(func)
-        else:
-            op = random.randint(min_con, max_con)  # (-2, 2)
-        prg.append(op)
+    flag = 0  # return if the program is valid
+    while not flag:
+        prg = []
+        func = list(opcodes)
+        #    for i in range(0, 1):
+        #        op = random.randint(min_con, max_con)
+        #        prg.append(op)
+        for i in range(0, n):
+            if random.random() < 0.5:  # 0.5
+                op = random.choice(func)
+            else:
+                op = random.randint(min_con, max_con)  # (-2, 2)
+            prg.append(op)
+        if fit(prg) and fit(prg) < 10 ** 3:
+            #       if fit(prg) and fit(prg) != math.inf:
+            enablePrint()
+            print("program find fitness " + str(fit(prg)))
+            flag = 1
     return prg
 
 
@@ -58,7 +65,7 @@ def mutation(x, p_m):
 
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
-    f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"),
+    f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w")
     p_m = 0.2
     pop = [random_program(dim_prg) for _ in range(0, pop_size)]  # 10
     best = []
@@ -68,6 +75,13 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         pop = list(dict.fromkeys([tuple(el) for el in pop]))
         pop = [list(el) for el in pop]
+
+        # pop = [sol for sol in pop if fit(sol) and fit(sol) != math.inf]
+        # enablePrint()
+        # print(len(pop))
+        #        for j in range(len(pop)):
+        #            print(str(j) + " program : " + str(pop[j]) + "\t fitness : " + str(
+        #                fit(pop[j])))
 
         selected = [tournament_selection(fit, pop) for _ in range(0, pop_size)]
         pairs = zip(selected, selected[1:] + [selected[0]])
@@ -82,7 +96,8 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         enablePrint()
         print("number of real solution : " + str(len(number_real_solution)))
         for j in range(len(number_real_solution)):
-            print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(fit(number_real_solution[j])))
+            print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(
+                fit(number_real_solution[j])))
 
         candidate_best = min(pop, key=fit)
         print("\n fitness candidate best : " + str(fit(candidate_best)))
@@ -96,6 +111,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         print(f"GEN: {i} \t Best fitness: {fit(best)}\n")
         f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
+
         f_loss.write(f"{fit(best)}\n")
 
         interval = [-30, 30]
@@ -105,4 +121,5 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
     f.close()
     f_loss.close()
+
     return best

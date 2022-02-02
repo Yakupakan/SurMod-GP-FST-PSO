@@ -13,15 +13,15 @@ from benchmark_function import *
 from plot_function import plot_ackley, plot_prg
 
 
-dim_prg = 10  # int(sys.argv[1])
-pop_size = 50  # int(sys.argv[2])
-num_iteration = 10**5  # int(sys.argv[3])
+dim_prg = 15  # int(sys.argv[1])
+pop_size = 250  # int(sys.argv[2])
+num_iteration = 10**4  # int(sys.argv[3])
 function = "ackley"  # sys.argv[4]
 
 dir_results = "results/" + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + "fit_1-02/"
+dir_results = dir_results + "smart_start/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
