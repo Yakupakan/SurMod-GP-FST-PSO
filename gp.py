@@ -18,9 +18,6 @@ def random_program(n):
     while not flag:
         prg = []
         func = list(opcodes)
-        #    for i in range(0, 1):
-        #        op = random.randint(min_con, max_con)
-        #        prg.append(op)
         for i in range(0, n):
             if random.random() < 0.5:  # 0.5
                 op = random.choice(func)
@@ -28,9 +25,6 @@ def random_program(n):
                 op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
         if fit(prg) and fit(prg) < 10 ** 3:
-            #       if fit(prg) and fit(prg) != math.inf:
-            enablePrint()
-            print("program find fitness " + str(fit(prg)))
             flag = 1
     return prg
 
@@ -50,6 +44,25 @@ def two_points_crossover(x, y):
     return of1, of2
 
 
+def two_points_crossover_attention(x, y):
+    flag = 0  # return if the program is valid
+    max_number_combination = 10 ** 2
+    numb_combination = 0
+    while not flag:
+        numb_combination += 1
+        k1 = random.randint(0, len(x) - 1)
+        k2 = random.randint(k1, len(x) - 1)
+        h1 = random.randint(0, len(y) - 1)
+        h2 = random.randint(h1, len(y) - 1)
+        of1 = x[0:k1] + y[h1:h2] + x[k2:]
+        of2 = y[0:h1] + x[k1:k2] + y[h2:]
+        if fit(of1) and fit(of2) and fit(of1) < 10 ** 4 and fit(of2) < 10 ** 4:
+            flag = 1
+        if numb_combination == max_number_combination:
+            return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
+    return of1, of2
+
+
 def mutation(x, p_m):
     def change(b):
         if random.random() < p_m:
@@ -64,6 +77,29 @@ def mutation(x, p_m):
     return [change(b) for b in x]
 
 
+def mutation_attention(x, p_m):
+    flag = 0  # return if the program is valid
+    max_number_combination = 10 ** 2
+    numb_combination = 0
+
+    def change(b):
+        if random.random() < p_m:
+            if random.random() < 0.5:  # 0.5
+                op = random.choice(list(opcodes))
+            else:
+                op = random.randint(min_con, max_con)  # (-2, 2)
+            return op
+        else:
+            return b
+    while not flag:
+        mutated_prg = [change(b) for b in x]
+        if fit(mutated_prg) and fit(mutated_prg) < 10**4:
+            flag = 1
+        if numb_combination == max_number_combination:
+            return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
+    return mutated_prg
+
+
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w")
     p_m = 0.2
@@ -76,28 +112,24 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         pop = list(dict.fromkeys([tuple(el) for el in pop]))
         pop = [list(el) for el in pop]
 
-        # pop = [sol for sol in pop if fit(sol) and fit(sol) != math.inf]
-        # enablePrint()
-        # print(len(pop))
-        #        for j in range(len(pop)):
-        #            print(str(j) + " program : " + str(pop[j]) + "\t fitness : " + str(
-        #                fit(pop[j])))
-
         selected = [tournament_selection(fit, pop) for _ in range(0, pop_size)]
         pairs = zip(selected, selected[1:] + [selected[0]])
         offsprings = []
         for x, y in pairs:
-            of1, of2 = two_points_crossover(x, y)
+            of1, of2 = two_points_crossover_attention(x, y)
             offsprings.append(of1)
             offsprings.append(of2)
-        pop = [mutation(x, p_m) for x in offsprings]
 
+        pop = [mutation_attention(x, p_m) for x in offsprings]
+
+        """
         number_real_solution = [sol for sol in pop if fit(sol) != math.inf]
         enablePrint()
         print("number of real solution : " + str(len(number_real_solution)))
         for j in range(len(number_real_solution)):
             print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(
                 fit(number_real_solution[j])))
+        """
 
         candidate_best = min(pop, key=fit)
         print("\n fitness candidate best : " + str(fit(candidate_best)))
