@@ -91,6 +91,7 @@ def strong_fitness_4(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
+
     y_benchmark_function = ackley(x_coord_best)
 
     points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], 4)]
