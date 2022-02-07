@@ -7,26 +7,23 @@ import gplearn
 
 import matplotlib.pyplot as plt
 
+from hyperparam import *
 from gp import linear_GP
-from fitness import strong_fitness as fit
+if fitn == "strong_fitness_4":
+    from fitness import strong_fitness_4 as fit
 from eval import make_function
-from benchmark_function import *
+from benchmark_function import alpine as benchmark_fun
 from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
 
 
 warnings.filterwarnings("ignore")
 
-dim_prg = 10  # int(sys.argv[1])
-pop_size = 100  # int(sys.argv[2])
-num_iteration = 500  # int(sys.argv[3])
-function = "ackley"  # sys.argv[4]
-
 
 dir_results = "results/" + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + "/strong_fitness_6/"
+dir_results = dir_results + "/" + fitn + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"

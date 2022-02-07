@@ -1,18 +1,24 @@
 import numpy as np
 import math
+from math import sqrt
+from sklearn.metrics import mean_squared_error
 
 import fstpso
 from fstpso import FuzzyPSO
 
 from print import *
 from eval import eval, make_function
-from benchmark_function import ackley
+from hyperparam import *
 
-from sklearn.metrics import mean_squared_error
-from math import sqrt
+if function == "alpine":
+    from benchmark_function import alpine as benchmark_fun
+    interval = [[-10, 10]]
+
+if function == "ackley":
+    from benchmark_function import alpine as benchmark_fun
+    interval = [[-30, 30]]
 
 dims = 1
-interval = [[-30, 30]]
 
 
 def fit(prg):
@@ -23,7 +29,7 @@ def fit(prg):
         print("exception")
         return math.inf
     x_coord_best = fst_pso_loss(prg)
-    y_benchmark_function = ackley(x_coord_best)
+    y_benchmark_function = benchmark_fun(x_coord_best)
     return y_benchmark_function
 
 
@@ -34,13 +40,13 @@ def fit_combined_2(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
-    y_benchmark_function = ackley(x_coord_best)
+    y_benchmark_function = benchmark_fun(x_coord_best)
 
     first_point = [interval[0][0]]
     second_point = [interval[0][-1]]
     approx_fun = make_function(prg)
 
-    y_true = [ackley(first_point), ackley(second_point)]
+    y_true = [benchmark_fun(first_point), benchmark_fun(second_point)]
     try:
         y_pred = [approx_fun(first_point), approx_fun(second_point)]
     except Exception:
@@ -64,13 +70,13 @@ def fit_combined_4(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
-    y_benchmark_function = ackley(x_coord_best)
+    y_benchmark_function = benchmark_fun(x_coord_best)
 
     points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], 4)]
 
     approx_fun = make_function(prg)
 
-    y_true = [ackley(point) for point in points]
+    y_true = [benchmark_fun(point) for point in points]
     try:
         y_pred = [approx_fun(point) for point in points]
     except Exception:
@@ -92,13 +98,13 @@ def strong_fitness_4(prg):
     if not x_coord_best:
         return math.inf
 
-    y_benchmark_function = ackley(x_coord_best)
+    y_benchmark_function = benchmark_fun(x_coord_best)
 
     points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], 4)]
 
     approx_fun = make_function(prg)
 
-    y_true = [ackley(point) for point in points]
+    y_true = [benchmark_fun(point) for point in points]
     y_true.append(y_benchmark_function)
 
     try:
@@ -118,7 +124,7 @@ def strong_fitness_4(prg):
     return y_benchmark_function + rmse
 
 
-def strong_fitness(prg, n=6):
+def strong_fitness(prg, n=8):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
@@ -132,13 +138,13 @@ def strong_fitness(prg, n=6):
         return math.inf
     if not x_coord_best:
         return math.inf
-    y_benchmark_function = ackley(x_coord_best)
+    y_benchmark_function = benchmark_fun(x_coord_best)
 
     points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], n)]
 
     approx_fun = make_function(prg)
 
-    y_true = [ackley(point) for point in points]
+    y_true = [benchmark_fun(point) for point in points]
     y_true.append(y_benchmark_function)
 
     try:

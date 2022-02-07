@@ -4,9 +4,11 @@ import random
 
 import numpy as np
 
+from hyperparam import *
 from print import *
 from eval import eval, opcodes, make_function
-from fitness import strong_fitness as fit
+if fitn == "strong_fitness_4":
+    from fitness import strong_fitness_4 as fit
 from plot_function import plot_prg
 
 snap = 5
@@ -161,8 +163,12 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         f_loss.write(f"{fit(best)}\n")
 
-        interval = [-30, 30]
-        x = np.linspace(interval[0], interval[1], 100)
+        if function == "ackley":
+            interval = [-30, 30]
+        if function == "alpine":
+            interval = [-10, 10]
+
+        x = np.linspace(interval[0], interval[1], 1001)
         if dire and i % snap == 0:
             plot_prg(best, x, dire, i)
 
