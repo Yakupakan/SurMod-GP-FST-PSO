@@ -13,6 +13,11 @@ from plot_function import plot_prg
 
 snap = 5
 min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
+if function == "griewank":
+    max_fit = 10 ** 4
+    min_con, max_con = -100, 100  # minimum and maximum value that constants can assume
+else:
+    max_fit = 10 ** 3
 
 
 def random_program(n):
@@ -38,7 +43,7 @@ def random_program_attention(n):
             else:
                 op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
-        if fit(prg) and fit(prg) < 10 ** 3:
+        if fit(prg) and fit(prg) < max_fit:
             enablePrint()
             print("program find with fitness :" + str(fit(prg)))
             flag = 1
@@ -167,6 +172,8 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             interval = [-30, 30]
         if function == "alpine":
             interval = [-10, 10]
+        if function == "griewank":
+            interval = [-600, 600]
 
         x = np.linspace(interval[0], interval[1], 1001)
         if dire and i % snap == 0:

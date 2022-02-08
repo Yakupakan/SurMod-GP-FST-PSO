@@ -15,8 +15,13 @@ if function == "alpine":
     interval = [[-10, 10]]
 
 if function == "ackley":
-    from benchmark_function import alpine as benchmark_fun
+    from benchmark_function import ackley as benchmark_fun
     interval = [[-30, 30]]
+
+if function == "griewank":
+    from benchmark_function import griewank as benchmark_fun
+    interval = [[-600, 600]]
+
 
 dims = 1
 

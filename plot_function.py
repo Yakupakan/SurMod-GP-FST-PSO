@@ -21,6 +21,14 @@ def plot_alpine(interv):
     plt.close()
 
 
+def plot_griewank(interv):
+    y = [griewank([el]) for el in interv]
+    plt.plot(interv, y)
+    plt.title("griewank")
+    plt.show()
+    plt.close()
+
+
 def plot_prg(prg, x, dire=None, it=-1):
     function_from_prg = make_function(prg)
     y_pred = [function_from_prg([el]) for el in x]
@@ -33,10 +41,15 @@ def plot_prg(prg, x, dire=None, it=-1):
         y = [alpine([el]) for el in x]
         plt.xlim([-10, 10])
 
+    if function == "griewank":
+        y = [griewank([el]) for el in x]
+        plt.xlim([-600, 600])
+
     plt.ylim([0, 24])
     plt.plot(x, y, color='r', lw=1, alpha=0.4)
     plt.plot(x, y_pred, color='g', lw=2)
-    plt.legend(['ackley', 'smoothed prg'])
+    plt.legend(['benchmark function', 'smoothed prg'])
+    plt.suptitle(function)
     plt.title("best prg at gen: " + str(it))
     if dire:
         if it > 0 or it == 0:
@@ -44,6 +57,6 @@ def plot_prg(prg, x, dire=None, it=-1):
     plt.close()
 
 
-interval = [-10, 10]
-x = np.linspace(interval[0], interval[1], 1001)
-# plot_alpine(x)
+# interval = [-600, 600]
+# x = np.linspace(interval[0], interval[1], 1001)
+# plot_griewank(x)
