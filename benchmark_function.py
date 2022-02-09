@@ -29,5 +29,5 @@ def rastring(x):
 
 def xinshe(x):
     D = len(x)
-    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[i] ** 2) for i in range(D)]))))**(-1) for i in range(D)])
+    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)])))**(-1)) for i in range(D)])
     return y

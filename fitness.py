@@ -12,20 +12,28 @@ from hyperparam import *
 
 if function == "alpine":
     from benchmark_function import alpine as benchmark_fun
+
     interval = [[-10, 10]]
 
 if function == "ackley":
     from benchmark_function import ackley as benchmark_fun
+
     interval = [[-30, 30]]
 
 if function == "griewank":
     from benchmark_function import griewank as benchmark_fun
+
     interval = [[-600, 600]]
 
 if function == "rastring":
     from benchmark_function import rastring as benchmark_fun
+
     interval = [[-5.12, 5.12]]
 
+if function == "xinshe":
+    from benchmark_function import xinshe as benchmark_fun
+
+    interval = [[-2 * np.pi, 2 * np.pi]]
 
 dims = 1
 
@@ -164,7 +172,7 @@ def strong_fitness_mul_4(prg):
     except Exception:
         return math.inf
 
-    return y_benchmark_function * rmse
+    return np.abs(y_benchmark_function * rmse)
 
 
 def strong_fitness(prg, n=8):

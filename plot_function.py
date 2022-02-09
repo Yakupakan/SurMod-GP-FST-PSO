@@ -32,7 +32,15 @@ def plot_griewank(interv):
 def plot_rastring(interv):
     y = [rastring([el]) for el in interv]
     plt.plot(interv, y)
-    plt.title("griewank")
+    plt.title("rastring")
+    plt.show()
+    plt.close()
+
+
+def plot_xinshe(interv):
+    y = [xinshe([el]) for el in interv]
+    plt.plot(interv, y)
+    plt.title("xinshe")
     plt.show()
     plt.close()
 
@@ -61,6 +69,11 @@ def plot_prg(prg, x, dire=None, it=-1):
         plt.xlim([-5.12, 5.12])
         plt.ylim([-2, 40])
 
+    if function == "xinshe":
+        y = [xinshe([el]) for el in x]
+        plt.xlim([-2 * np.pi, 2 * np.pi])
+        plt.ylim([-2, 18])
+
     plt.plot(x, y, color='k', lw=0.8, alpha=0.5)
     plt.plot(x, y_pred, color='g', lw=2.5)
     plt.legend(['benchmark function', 'smoothed prg'])
@@ -72,6 +85,6 @@ def plot_prg(prg, x, dire=None, it=-1):
     plt.close()
 
 
-# interval = [-5.12, 5.12]
-# x = np.linspace(interval[0], interval[1], 10001)
-# plot_rastring(x)
+# interval = [-2*np.pi, 2*np.pi]
+# x = np.linspace(interval[0], interval[1], 10000)
+# plot_xinshe(x)
