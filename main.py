@@ -15,6 +15,8 @@ from plot import fitness_plot
 
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
+if fitn == "strong_fitness_mul_4":
+    from fitness import strong_fitness_mul_4 as fit
 
 
 warnings.filterwarnings("ignore")

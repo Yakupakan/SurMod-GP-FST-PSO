@@ -7,9 +7,13 @@ import numpy as np
 from hyperparam import *
 from print import *
 from eval import eval, opcodes, make_function
+from plot_function import plot_prg
+
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
-from plot_function import plot_prg
+if fitn == "strong_fitness_mul_4":
+    from fitness import strong_fitness_mul_4 as fit
+
 
 snap = 5
 min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
@@ -177,7 +181,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         if function == "rastring":
             interval = [-5.12, 5.12]
 
-        x = np.linspace(interval[0], interval[1], 1001)
+        x = np.linspace(interval[0], interval[1], 10001)
         if dire and i % snap == 0:
             plot_prg(best, x, dire, i)
 

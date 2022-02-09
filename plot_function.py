@@ -44,22 +44,25 @@ def plot_prg(prg, x, dire=None, it=-1):
     if function == "ackley":
         y = [ackley([el]) for el in x]
         plt.xlim([-30, 30])
+        plt.ylim([-2, 24])
 
     if function == "alpine":
         y = [alpine([el]) for el in x]
         plt.xlim([-10, 10])
+        plt.ylim([-2, 10])
 
     if function == "griewank":
         y = [griewank([el]) for el in x]
         plt.xlim([-600, 600])
+        plt.ylim([-2, 10])
 
     if function == "rastring":
         y = [rastring([el]) for el in x]
         plt.xlim([-5.12, 5.12])
+        plt.ylim([-2, 40])
 
-#    plt.ylim([0, 24])
-    plt.plot(x, y, color='r', lw=1, alpha=0.4)
-    plt.plot(x, y_pred, color='g', lw=2)
+    plt.plot(x, y, color='k', lw=0.8, alpha=0.5)
+    plt.plot(x, y_pred, color='g', lw=2.5)
     plt.legend(['benchmark function', 'smoothed prg'])
     plt.suptitle(function)
     plt.title("best prg at gen: " + str(it))

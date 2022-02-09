@@ -133,7 +133,7 @@ def strong_fitness_4(prg):
     return y_benchmark_function + rmse
 
 
-def strong_fitness_4(prg):
+def strong_fitness_mul_4(prg):
     try:
         x_coord_best = fst_pso_loss(prg)
     except Exception:
@@ -164,7 +164,7 @@ def strong_fitness_4(prg):
     except Exception:
         return math.inf
 
-    return y_benchmark_function + rmse
+    return y_benchmark_function * rmse
 
 
 def strong_fitness(prg, n=8):
