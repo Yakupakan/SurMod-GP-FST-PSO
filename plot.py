@@ -20,6 +20,5 @@ def fitness_plot(dir):
     plt.plot(fitness)
     plt.xlabel("Generations")
     plt.ylabel("Fitness")
-    plt.show()
     plt.savefig(dir + "fitness.png")
     plt.close()

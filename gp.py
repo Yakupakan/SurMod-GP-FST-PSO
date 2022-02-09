@@ -14,8 +14,8 @@ from plot_function import plot_prg
 snap = 5
 min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
 if function == "griewank":
-    max_fit = 10 ** 4
-    min_con, max_con = -100, 100  # minimum and maximum value that constants can assume
+    max_fit = 5 * 10 ** 3
+    min_con, max_con = -50, 50  # minimum and maximum value that constants can assume
 else:
     max_fit = 10 ** 3
 
