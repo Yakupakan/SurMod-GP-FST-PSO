@@ -22,6 +22,10 @@ if function == "griewank":
     from benchmark_function import griewank as benchmark_fun
     interval = [[-600, 600]]
 
+if function == "rastring":
+    from benchmark_function import rastring as benchmark_fun
+    interval = [[-5.12, 5.12]]
+
 
 dims = 1
 
@@ -84,6 +88,40 @@ def fit_combined_4(prg):
     y_true = [benchmark_fun(point) for point in points]
     try:
         y_pred = [approx_fun(point) for point in points]
+    except Exception:
+        return math.inf
+
+    try:
+        rmse = mean_squared_error(y_true, y_pred)
+    except Exception:
+        return math.inf
+
+    return y_benchmark_function + rmse
+
+
+def strong_fitness_4(prg):
+    try:
+        x_coord_best = fst_pso_loss(prg)
+    except Exception:
+        return math.inf
+    if not x_coord_best:
+        return math.inf
+
+    y_benchmark_function = benchmark_fun(x_coord_best)
+
+    points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], 4)]
+
+    approx_fun = make_function(prg)
+
+    y_true = [benchmark_fun(point) for point in points]
+    y_true.append(y_benchmark_function)
+
+    try:
+        y_pred = [approx_fun(point) for point in points]
+    except Exception:
+        return math.inf
+    try:
+        y_pred.append(approx_fun(x_coord_best))
     except Exception:
         return math.inf
 

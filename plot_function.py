@@ -29,6 +29,14 @@ def plot_griewank(interv):
     plt.close()
 
 
+def plot_rastring(interv):
+    y = [rastring([el]) for el in interv]
+    plt.plot(interv, y)
+    plt.title("griewank")
+    plt.show()
+    plt.close()
+
+
 def plot_prg(prg, x, dire=None, it=-1):
     function_from_prg = make_function(prg)
     y_pred = [function_from_prg([el]) for el in x]
@@ -45,7 +53,11 @@ def plot_prg(prg, x, dire=None, it=-1):
         y = [griewank([el]) for el in x]
         plt.xlim([-600, 600])
 
-    plt.ylim([0, 24])
+    if function == "rastring":
+        y = [rastring([el]) for el in x]
+        plt.xlim([-5.12, 5.12])
+
+#    plt.ylim([0, 24])
     plt.plot(x, y, color='r', lw=1, alpha=0.4)
     plt.plot(x, y_pred, color='g', lw=2)
     plt.legend(['benchmark function', 'smoothed prg'])
@@ -57,6 +69,6 @@ def plot_prg(prg, x, dire=None, it=-1):
     plt.close()
 
 
-# interval = [-600, 600]
-# x = np.linspace(interval[0], interval[1], 1001)
-# plot_griewank(x)
+# interval = [-5.12, 5.12]
+# x = np.linspace(interval[0], interval[1], 10001)
+# plot_rastring(x)

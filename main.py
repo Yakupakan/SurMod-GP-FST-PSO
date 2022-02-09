@@ -16,18 +16,6 @@ from plot import fitness_plot
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 
-if function == "alpine":
-    from benchmark_function import alpine as benchmark_fun
-    interval = [[-10, 10]]
-
-if function == "ackley":
-    from benchmark_function import ackley as benchmark_fun
-    interval = [[-30, 30]]
-
-if function == "griewank":
-    from benchmark_function import griewank as benchmark_fun
-    interval = [[-600, 600]]
-
 
 warnings.filterwarnings("ignore")
 

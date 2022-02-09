@@ -174,6 +174,8 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             interval = [-10, 10]
         if function == "griewank":
             interval = [-600, 600]
+        if function == "rastring":
+            interval = [-5.12, 5.12]
 
         x = np.linspace(interval[0], interval[1], 1001)
         if dire and i % snap == 0:
