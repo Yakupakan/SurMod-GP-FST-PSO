@@ -7,8 +7,10 @@ import numpy as np
 from hyperparam import *
 from print import *
 from eval import eval, opcodes, make_function
-from plot_function import plot_prg
+from plot_function import plot_prg, plot_prg_2d
 
+if fitn == "fit":
+    from fitness import fit as fit
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_mul_4":
@@ -130,7 +132,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w")
     p_m = 0.2
     pop = [random_program_attention(dim_prg) for _ in range(0, pop_size)]  # 10
-    best = []
+    best = random_program_attention(dim_prg)  # []
     for i in range(0, n_iter):
         if i > 0:
             pop.append(best)  # the best solution is inserted again
@@ -172,20 +174,22 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         f_loss.write(f"{fit(best)}\n")
 
-        if function == "ackley":
-            interval = [-30, 30]
-        if function == "alpine":
-            interval = [-10, 10]
-        if function == "griewank":
-            interval = [-600, 600]
-        if function == "rastring":
-            interval = [-5.12, 5.12]
-        if function == "xinshe":
-            interval = [-2 * np.pi, 2 * np.pi]
+        if function[-2:] != "2d":
+            if function == "ackley":
+                interval = [-30, 30]
+            if function == "alpine":
+                interval = [-10, 10]
+            if function == "griewank":
+                interval = [-600, 600]
+            if function == "rastring":
+                interval = [-5.12, 5.12]
+            if function == "xinshe":
+                interval = [-2 * np.pi, 2 * np.pi]
 
-        x = np.linspace(interval[0], interval[1], 10001)
-        if dire and i % snap == 0:
-            plot_prg(best, x, dire, i)
+            x = np.linspace(interval[0], interval[1], 10001)
+            if dire and i % snap == 0:
+                plot_prg(best, x, dire, i)
+        plot_prg_2d(best, dire, i)
 
     f.close()
     f_loss.close()

@@ -13,6 +13,8 @@ from eval import make_function
 from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
 
+if fitn == "fit":
+    from fitness import fit as fit
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_mul_4":
@@ -31,6 +33,10 @@ if not os.path.exists(dir_results):
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
+
+print(function)
+print(fitn)
+print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
 
 best = linear_GP(fit,
                  pop_size=pop_size,

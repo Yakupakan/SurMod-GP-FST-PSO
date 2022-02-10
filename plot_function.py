@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 from hyperparam import *
 from eval import make_function
@@ -11,6 +12,18 @@ def plot_ackley(x):
     plt.title("ackley")
     plt.show()
     plt.close()
+
+
+def plot_ackley_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-30, 30, 100)
+    y = np.linspace(-30, 30, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = ackley_2d(X, Y)
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
 
 
 def plot_alpine(interv):
@@ -41,6 +54,14 @@ def plot_xinshe(interv):
     y = [xinshe([el]) for el in interv]
     plt.plot(interv, y)
     plt.title("xinshe")
+    plt.show()
+    plt.close()
+
+
+def plot_vincent(interv):
+    y = [vincent([el]) for el in interv]
+    plt.plot(interv, y)
+    plt.title("vincent")
     plt.show()
     plt.close()
 
@@ -85,6 +106,24 @@ def plot_prg(prg, x, dire=None, it=-1):
     plt.close()
 
 
-# interval = [-2*np.pi, 2*np.pi]
+def plot_prg_2d(prg, dire=None, it=-1):
+    function_from_prg = make_function(prg)
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-30, 30, 100)
+    y = np.linspace(-30, 30, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = function_from_prg([X, Y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.suptitle(function)
+    plt.title("best prg at gen: " + str(it))
+    if dire:
+        if it > 0 or it == 0:
+            plt.savefig(dire + "/best_prg_" + str(it) + ".png")
+    plt.close()
+
+
+# interval = [[0.25, 10], [0.25, 10]]
 # x = np.linspace(interval[0], interval[1], 10000)
-# plot_xinshe(x)
+# plot_ackley(x)

@@ -14,39 +14,51 @@ if function == "alpine":
     from benchmark_function import alpine as benchmark_fun
 
     interval = [[-10, 10]]
+    dims = 1
 
 if function == "ackley":
     from benchmark_function import ackley as benchmark_fun
 
     interval = [[-30, 30]]
+    dims = 1
+
+if function == "ackley_2d":
+    from benchmark_function import ackley_2d as benchmark_fun
+
+    interval = [[-30, 30]]
+    dims = 2
 
 if function == "griewank":
     from benchmark_function import griewank as benchmark_fun
 
     interval = [[-600, 600]]
+    dims = 1
 
 if function == "rastring":
     from benchmark_function import rastring as benchmark_fun
 
     interval = [[-5.12, 5.12]]
+    dims = 1
 
 if function == "xinshe":
     from benchmark_function import xinshe as benchmark_fun
 
     interval = [[-2 * np.pi, 2 * np.pi]]
-
-dims = 1
+    dims = 1
 
 
 def fit(prg):
     try:
         fst_pso_loss(prg)
     except Exception:
-        # enablePrint()
-        print("exception")
         return math.inf
     x_coord_best = fst_pso_loss(prg)
-    y_benchmark_function = benchmark_fun(x_coord_best)
+    try:
+        y_benchmark_function = benchmark_fun(x_coord_best[0], x_coord_best[1])
+    except Exception:
+        enablePrint()
+        print("exception")
+        return math.inf
     return y_benchmark_function
 
 

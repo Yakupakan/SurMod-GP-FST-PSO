@@ -8,6 +8,10 @@ def ackley(x):
     return y
 
 
+def ackley_2d(x, y):
+    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 2 * (x**2 + y**2)))) - np.exp(1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y)))
+
+
 def alpine(x):
     D = len(x)
     y = np.sum([(np.abs(x[i] * np.sin(x[i]) + 0.1 * x[i])) for i in range(D)])
@@ -29,5 +33,11 @@ def rastring(x):
 
 def xinshe(x):
     D = len(x)
-    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)])))**(-1)) for i in range(D)])
+    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])
+    return y
+
+
+def vincent(x):
+    D = len(x)
+    y = np.sum([np.sin(10 * np.log(x[i])) for i in range(D)])
     return y
