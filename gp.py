@@ -189,7 +189,8 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             x = np.linspace(interval[0], interval[1], 10001)
             if dire and i % snap == 0:
                 plot_prg(best, x, dire, i)
-        plot_prg_2d(best, dire, i)
+        if dire and i % snap == 0:
+            plot_prg_2d(best, dire, i)
 
     f.close()
     f_loss.close()

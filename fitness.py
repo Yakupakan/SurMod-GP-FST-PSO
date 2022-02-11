@@ -52,7 +52,10 @@ def fit(prg):
         fst_pso_loss(prg)
     except Exception:
         return math.inf
-    x_coord_best = fst_pso_loss(prg)
+    try:
+        x_coord_best = fst_pso_loss(prg)
+    except Exception:
+        return math.inf
     try:
         y_benchmark_function = benchmark_fun(x_coord_best[0], x_coord_best[1])
     except Exception:
