@@ -5,9 +5,10 @@ def N_dim_michalewicz(x):
     return y
 
 N = 2 #dimension of vector x
+interval = [0, np.pi]
 x = []
 for i in range(N):
-    i = np.linspace(0, 3.2, 50)
+    i = np.linspace(interval[0], interval[1], 50)
     x.append(i)
 
 print(N_dim_michalewicz(x))
