@@ -95,6 +95,11 @@ def plot_prg(prg, x, dire=None, it=-1):
         plt.xlim([-2 * np.pi, 2 * np.pi])
         plt.ylim([-2, 18])
 
+    if function == "vincent":
+        y = [vincent([el]) for el in x]
+        plt.xlim([0, 10])
+        plt.ylim([-1.25, 1.25])
+
     plt.plot(x, y, color='k', lw=0.8, alpha=0.5)
     plt.plot(x, y_pred, color='g', lw=2.5)
     plt.legend(['benchmark function', 'smoothed prg'])
@@ -115,7 +120,7 @@ def plot_prg_2d(prg, dire=None, it=-1):
     X, Y = np.meshgrid(x, y)
     Z = function_from_prg([X, Y])
 
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='PuRd', edgecolor='none')
     plt.suptitle(function)
     plt.title("best prg at gen: " + str(it))
     if dire:

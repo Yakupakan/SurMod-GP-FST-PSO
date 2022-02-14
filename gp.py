@@ -163,7 +163,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         print("\n fitness candidate best : " + str(fit(candidate_best)))
         if fit(candidate_best) < fit(best):
             best = candidate_best
-        if fit(best) == 0:
+        if fit(best) < 10**(-8):
             return best
 
         print(f"GEN: {i} \t Best individual: {best}")
@@ -185,12 +185,15 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
                 interval = [-5.12, 5.12]
             if function == "xinshe":
                 interval = [-2 * np.pi, 2 * np.pi]
+            if function == "vincent":
+                interval = [0.25, 10]
 
             x = np.linspace(interval[0], interval[1], 10001)
             if dire and i % snap == 0:
                 plot_prg(best, x, dire, i)
-        if dire and i % snap == 0:
-            plot_prg_2d(best, dire, i)
+        else:
+            if dire and i % snap == 0:
+                plot_prg_2d(best, dire, i)
 
     f.close()
     f_loss.close()

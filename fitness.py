@@ -46,6 +46,12 @@ if function == "xinshe":
     interval = [[-2 * np.pi, 2 * np.pi]]
     dims = 1
 
+if function == "vincent":
+    from benchmark_function import xinshe as benchmark_fun
+
+    interval = [[0.25, 10]]
+    dims = 1
+
 
 def fit(prg):
     try:
