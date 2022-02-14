@@ -78,6 +78,9 @@ def fit_combined_2(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
+        return math.inf
+
     y_benchmark_function = benchmark_fun(x_coord_best)
 
     first_point = [interval[0][0]]
@@ -108,6 +111,9 @@ def fit_combined_4(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
+        return math.inf
+
     y_benchmark_function = benchmark_fun(x_coord_best)
 
     points = [[point] for point in np.linspace(interval[0][0], interval[0][-1], 4)]
@@ -134,6 +140,8 @@ def strong_fitness_4(prg):
     except Exception:
         return math.inf
     if not x_coord_best:
+        return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
         return math.inf
 
     y_benchmark_function = benchmark_fun(x_coord_best)
@@ -168,6 +176,8 @@ def strong_fitness_mul_4(prg):
     except Exception:
         return math.inf
     if not x_coord_best:
+        return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
         return math.inf
 
     y_benchmark_function = benchmark_fun(x_coord_best)
@@ -209,6 +219,8 @@ def strong_fitness(prg, n=8):
     except Exception:
         return math.inf
     if not x_coord_best:
+        return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
         return math.inf
     y_benchmark_function = benchmark_fun(x_coord_best)
 
