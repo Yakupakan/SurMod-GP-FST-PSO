@@ -248,7 +248,7 @@ def strong_fitness(prg, n=8):
     return y_benchmark_function + rmse
 
 
-def strong_fitness_2d(prg, n=10):
+def strong_fitness_2d(prg, n=number_interpolation_point):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
@@ -292,6 +292,57 @@ def strong_fitness_2d(prg, n=10):
         return math.inf
 
     return y_benchmark_function + rmse
+
+
+def strong_fitness_contour_2d(prg, n=number_interpolation_point):
+    """
+    Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
+    that the function and the approx program have some points in common (here n)
+    :param prg: program that approximate the function
+    :param n: number of point for the rmse computation
+    :return: fitness
+    """
+    try:
+        x_coord_best = fst_pso_loss(prg)
+    except Exception:
+        return math.inf
+    if not x_coord_best or len(x_coord_best) < 2:
+        return math.inf
+    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
+        return math.inf
+    try:
+        y_benchmark_function = benchmark_fun(x_coord_best[0], x_coord_best[1])
+    except Exception:
+        return math.inf
+
+    x1a_points = [-30, 30]
+    x2a_points = [point for point in np.linspace(interval[0][0], interval[0][-1], n)]
+
+    x1b_points = [point for point in np.linspace(interval[0][0], interval[0][-1], n)]
+    x2b_points = [-30, 30]
+
+    approx_fun = make_function(prg)
+
+    y_true = [benchmark_fun(x1, x2) for x1 in x1a_points for x2 in x2a_points] + [benchmark_fun(x1, x2) for x1 in
+                                                                                  x1b_points for x2 in x2b_points]
+    # y_true.append(y_benchmark_function)
+
+    try:
+        y_pred = [approx_fun([x1, x2]) for x1 in x1a_points for x2 in x2a_points] + [approx_fun([x1, x2]) for x1 in
+                                                                                     x1b_points for x2 in x2b_points]
+    except Exception:
+        return math.inf
+    # try:
+    #     y_pred.append(approx_fun(x_coord_best))
+    # except Exception:
+    #     return math.inf
+
+    try:
+        rmse = mean_squared_error(y_true, y_pred)
+    except Exception:
+        return math.inf
+
+    return y_benchmark_function * rmse
 
 
 def fst_pso_loss(prg):

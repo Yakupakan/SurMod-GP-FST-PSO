@@ -21,6 +21,8 @@ if fitn == "strong_fitness_mul_4":
     from fitness import strong_fitness_mul_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
+if fitn == "strong_fitness_contour_2d":
+    from fitness import strong_fitness_contour_2d as fit
 
 
 warnings.filterwarnings("ignore")
@@ -32,12 +34,18 @@ if not os.path.exists(dir_results):
 dir_results = dir_results + "/" + fitn + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
+if fitn == "strong_fitness_2d" or fitn == "strong_fitness_contour_2d":
+    dir_results = dir_results + "/" + str(number_interpolation_point) + "/"
+    if not os.path.exists(dir_results):
+        os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 
 print(function)
 print(fitn)
+if fitn == "strong_fitness_2d":
+    print(number_interpolation_point)
 print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
 
 best = linear_GP(fit,

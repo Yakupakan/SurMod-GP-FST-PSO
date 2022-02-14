@@ -17,6 +17,8 @@ if fitn == "strong_fitness_mul_4":
     from fitness import strong_fitness_mul_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
+if fitn == "strong_fitness_contour_2d":
+    from fitness import strong_fitness_contour_2d as fit
 
 
 snap = 5
