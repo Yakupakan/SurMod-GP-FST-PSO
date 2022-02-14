@@ -120,7 +120,7 @@ def plot_prg_2d(prg, dire=None, it=-1):
     X, Y = np.meshgrid(x, y)
     Z = function_from_prg([X, Y])
 
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='PuRd', edgecolor='none')
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
     plt.suptitle(function)
     plt.title("best prg at gen: " + str(it))
     if dire:

@@ -15,6 +15,8 @@ if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_mul_4":
     from fitness import strong_fitness_mul_4 as fit
+if fitn == "strong_fitness_2d":
+    from fitness import strong_fitness_2d as fit
 
 
 snap = 5
@@ -49,9 +51,10 @@ def random_program_attention(n):
             else:
                 op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
-        if fit(prg) and fit(prg) < max_fit:
+        fit_prg = fit(prg)
+        if fit_prg and fit_prg < max_fit:
             enablePrint()
-            print("program find with fitness :" + str(fit(prg)))
+            print("program find with fitness :" + str(fit_prg))
             flag = 1
     return prg
 

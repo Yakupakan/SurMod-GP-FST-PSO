@@ -19,6 +19,8 @@ if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_mul_4":
     from fitness import strong_fitness_mul_4 as fit
+if fitn == "strong_fitness_2d":
+    from fitness import strong_fitness_2d as fit
 
 
 warnings.filterwarnings("ignore")
