@@ -342,7 +342,7 @@ def strong_fitness_contour_2d(prg, n=number_interpolation_point):
     except Exception:
         return math.inf
 
-    return y_benchmark_function * rmse
+    return y_benchmark_function + rmse
 
 
 def fst_pso_loss(prg):
