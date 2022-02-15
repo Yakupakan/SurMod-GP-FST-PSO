@@ -7,6 +7,7 @@ import numpy as np
 from hyperparam import *
 from print import *
 from eval import eval, opcodes, make_function
+from fitness import fst_pso_loss
 from plot_function import plot_prg, plot_prg_2d
 
 if fitn == "fit":
@@ -164,27 +165,24 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         pop = [mutation_attention(x, p_m) for x in offsprings]
 
-        """
-        number_real_solution = [sol for sol in pop if fit(sol) != math.inf]
-        enablePrint()
-        print("number of real solution : " + str(len(number_real_solution)))
-        for j in range(len(number_real_solution)):
-            print(str(j) + " real solution : " + str(number_real_solution[j]) + "\t fitness : " + str(
-                fit(number_real_solution[j])))
-        """
         enablePrint()
         candidate_best = min(pop, key=fit)
-        print("\n fitness candidate best : " + str(fit(candidate_best)))
+
         if fit(candidate_best) < fit(best):
             best = candidate_best
         if fit(best) < 10**(-8):
             return best
 
-        print(f"GEN: {i} \t Best individual: {best}")
-        f.write(f"GEN: {i} \t Best individual: {best}\n")
+        argmin_best = fst_pso_loss(best)
 
-        print(f"GEN: {i} \t Best fitness: {fit(best)}\n")
-        f.write(f"GEN: {i} \t Best fitness: {fit(best)}\n")
+        print(f"GEN: {i} \t best individual: \t {best}")
+        f.write(f"GEN: {i} \t best individual: \t {best}\n")
+
+        print(f"GEN: {i} \t best fitness: \t {fit(best)}")
+        f.write(f"GEN: {i} \t best fitness: \t {fit(best)}\n")
+
+        print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
+        f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
 
         f_loss.write(f"{fit(best)}\n")
 
