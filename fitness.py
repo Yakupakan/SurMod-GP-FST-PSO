@@ -141,7 +141,7 @@ def strong_fitness_4(prg):
         return math.inf
     if not x_coord_best:
         return math.inf
-    if not (interval[0][0] < x_coord_best[0] < interval[0][1] and interval[0][0] < x_coord_best[1] < interval[0][1]):
+    if not interval[0][0] < x_coord_best[0] < interval[0][1]:
         return math.inf
 
     y_benchmark_function = benchmark_fun(x_coord_best)

@@ -22,12 +22,15 @@ if fitn == "strong_fitness_contour_2d":
 
 
 snap = 5
-min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
 if function == "griewank":
     max_fit = 5 * 10 ** 3
     min_con, max_con = -50, 50  # minimum and maximum value that constants can assume
+if function == "vincent":
+    max_fit = 10 ** 3
+    min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:
     max_fit = 10 ** 3
+    min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
 
 
 def random_program(n):
@@ -88,6 +91,12 @@ def two_points_crossover_attention(x, y):
         h2 = random.randint(h1, len(y) - 1)
         of1 = x[0:k1] + y[h1:h2] + x[k2:]
         of2 = y[0:h1] + x[k1:k2] + y[h2:]
+
+        if len(of1) > max_dim_prg:
+            of1 = of1[:max_dim_prg]
+        if len(of2) > max_dim_prg:
+            of2 = of2[:max_dim_prg]
+
         if fit(of1) and fit(of2) and fit(of1) < 10 ** 4 and fit(of2) < 10 ** 4:
             flag = 1
         if numb_combination == max_number_combination:
