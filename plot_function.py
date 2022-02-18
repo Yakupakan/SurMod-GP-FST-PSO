@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 from hyperparam import *
-from eval import make_function
+from eval import make_function, opcodes
 from benchmark_function import *
 
 
@@ -123,12 +123,39 @@ def plot_prg_2d(prg, dire=None, it=-1):
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
     plt.suptitle(function)
     plt.title("best prg at gen: " + str(it))
+    if it == -1:
+       plt.show()
     if dire:
         if it > 0 or it == 0:
             plt.savefig(dire + "/best_prg_" + str(it) + ".png")
     plt.close()
 
 
+def plot_interpolation_points(points, dire=None):
+    x_points = [point[0] for point in points]
+    y_points = [point[1] for point in points]
+    plt.scatter(x_points, y_points, marker='o')
+    if dire:
+        plt.savefig(dire + "/interpolation_point.png")
+    plt.close()
+
+
+
+"""
+from fitness import fst_pso_loss
+import scipy
+from eval import *
+
+prg = [opcodes.TIMES]  #, 9, opcodes.MINUS, opcodes.PLUS, opcodes.MINUS, 0, opcodes.SWAP, -8, 1, opcodes.DIVIDE, opcodes.DIVIDE, 0, opcodes.SWAP, 10, opcodes.MINUS, opcodes.DUP, opcodes.PLUS]
+print(eval([10, 10], prg))
+plot_prg_2d(prg)
+fun = make_function(prg)
+print(fun([0, 0, 10, 10]))
+print(fun([10, 10]))
+print(fst_pso_loss(prg))
+# print(scipy.optimize.fminbound(fun, np.array(-30, 30), np.array(-30, 30)))
+print(ackley_2d(0, 0))
 # interval = [[0.25, 10], [0.25, 10]]
 # x = np.linspace(interval[0], interval[1], 10000)
 # plot_ackley(x)
+"""
