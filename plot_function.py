@@ -20,7 +20,8 @@ def plot_ackley_3d():
     x = np.linspace(-30, 30, 100)
     y = np.linspace(-30, 30, 100)
     X, Y = np.meshgrid(x, y)
-    Z = ackley_2d(X, Y)
+    # Z = ackley_2d(X, Y)
+    Z = np.array([[ackley_2d(x_, y_) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
     plt.show()
@@ -118,7 +119,9 @@ def plot_prg_2d(prg, dire=None, it=-1):
     x = np.linspace(-30, 30, 100)
     y = np.linspace(-30, 30, 100)
     X, Y = np.meshgrid(x, y)
-    Z = function_from_prg([X, Y])
+
+    # Z = function_from_prg([X, Y])
+    Z = np.array([[function_from_prg([x_, y_]) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
     plt.suptitle(function)
