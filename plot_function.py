@@ -140,6 +140,8 @@ def plot_interpolation_points(points, dire=None):
     plt.scatter(x_points, y_points, marker='o')
     if dire:
         plt.savefig(dire + "/interpolation_point.png")
+    else:
+        plt.show()
     plt.close()
 
 
@@ -149,15 +151,13 @@ from fitness import fst_pso_loss
 import scipy
 from eval import *
 
-prg = [opcodes.TIMES]  #, 9, opcodes.MINUS, opcodes.PLUS, opcodes.MINUS, 0, opcodes.SWAP, -8, 1, opcodes.DIVIDE, opcodes.DIVIDE, 0, opcodes.SWAP, 10, opcodes.MINUS, opcodes.DUP, opcodes.PLUS]
-print(eval([10, 10], prg))
+prg = [opcodes.DIVIDE, opcodes.DIVIDE, 10, opcodes.DUP, opcodes.PLUS]
 plot_prg_2d(prg)
 fun = make_function(prg)
-print(fun([0, 0, 10, 10]))
+print(fun([0, 0]))
 print(fun([10, 10]))
 print(fst_pso_loss(prg))
 # print(scipy.optimize.fminbound(fun, np.array(-30, 30), np.array(-30, 30)))
-print(ackley_2d(0, 0))
 # interval = [[0.25, 10], [0.25, 10]]
 # x = np.linspace(interval[0], interval[1], 10000)
 # plot_ackley(x)

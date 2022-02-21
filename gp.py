@@ -22,7 +22,7 @@ if fitn == "strong_fitness_contour_2d":
     from fitness import strong_fitness_contour_2d as fit
 
 
-snap = 5
+snap = 2
 if function == "griewank":
     max_fit = 5 * 10 ** 3
     min_con, max_con = -50, 50  # minimum and maximum value that constants can assume

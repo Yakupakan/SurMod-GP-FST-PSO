@@ -27,7 +27,7 @@ def eval(stack, program):
             try:
                 stack.append(op1 / op2)
             except Exception:
-                pass
+                return math.inf
         elif op == opcodes.SWAP:
             tmp1 = stack.pop()
             tmp2 = stack.pop()
@@ -39,7 +39,7 @@ def eval(stack, program):
             stack.append(tmp)
         else:
             stack.append(op)
-    return stack
+    return stack.pop()
 
 
 def make_function(program):
@@ -50,7 +50,11 @@ def make_function(program):
     """
 
     def function_from_prgr(x, program=program):
-        stack = x
+        # stack = [0, 0] + x  # adding [0, 0] to make compilable all the programs as [opcodes.MINUS]
+        stack = x  # adding [0, 0] to make compilable all the programs as [opcodes.MINUS]
+
+        if type(stack) is not list:
+            stack = stack.tolist()
         while program:
             op = program[0]
             program = program[1:]
@@ -72,7 +76,7 @@ def make_function(program):
                 try:
                     stack.append(op1 / op2)
                 except Exception:
-                    pass
+                    return math.inf
             elif op == opcodes.SWAP:
                 tmp1 = stack.pop()
                 tmp2 = stack.pop()
