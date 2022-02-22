@@ -5,7 +5,7 @@ import enum
 import math
 import numpy as np
 
-opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD DUP NOP')
+opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE MOD SWAP DUP EXP')
 
 
 def eval(stack, program):
@@ -30,31 +30,26 @@ def eval(stack, program):
             try:
                 stack.append(op1 / op2)
             except Exception:
-                pass
+                return math.inf
         elif op == opcodes.MOD:
             op1 = stack.pop()
             op2 = stack.pop()
             stack.append(op1 % op2)
+        elif op == opcodes.SWAP:
+            tmp1 = stack.pop()
+            tmp2 = stack.pop()
+            stack.append(tmp1)
+            stack.append(tmp2)
         elif op == opcodes.DUP:
             tmp = stack.pop()
             stack.append(tmp)
             stack.append(tmp)
-        elif op == opcodes.NOP:
-            pass
-        elif op == opcodes.SIN:
-            if isinstance(stack[-1], float):
-                tmp = stack.pop()
-                stack.append(np.sin(tmp))
-        elif op == opcodes.COS:
-            if isinstance(stack[-1], float):
-                tmp = stack.pop()
-                stack.append(np.cos(tmp))
         elif op == opcodes.EXP:
             tmp = stack.pop()
             stack.append(np.exp(tmp))
         else:
             stack.append(op)
-    return stack
+    return stack.pop()
 
 
 def make_function(program):
@@ -87,40 +82,39 @@ def make_function(program):
                 try:
                     stack.append(op1 / op2)
                 except Exception:
-                    pass
+                    return math.inf
             elif op == opcodes.MOD:
                 op1 = stack.pop()
                 op2 = stack.pop()
                 stack.append(op1 % op2)
+            elif op == opcodes.SWAP:
+                tmp1 = stack.pop()
+                tmp2 = stack.pop()
+                stack.append(tmp1)
+                stack.append(tmp2)
             elif op == opcodes.DUP:
                 tmp = stack.pop()
                 stack.append(tmp)
                 stack.append(tmp)
-            elif op == opcodes.NOP:
-                pass
-            elif op == opcodes.SIN:
-                if isinstance(stack[-1], float):
-                    tmp = stack.pop()
-                    stack.append(np.sin(tmp))
-            elif op == opcodes.COS:
-                if isinstance(stack[-1], float):
-                    tmp = stack.pop()
-                    stack.append(np.cos(tmp))
             elif op == opcodes.EXP:
                 tmp = stack.pop()
                 stack.append(np.exp(tmp))
             else:
                 stack.append(op)
-        return stack[-1]  # in the last value of the stack is collected the value of the fitness
-
+        if stack:
+            return stack.pop()  # in the last value of the stack is collected the value of the fitness
+        else:
+            return 10 * 6
     return lambda x: function_from_prgr(x)
 
 
-""""
-        elif op == opcodes.SWAP:
-            tmp1 = stack.pop()
-            tmp2 = stack.pop()
-            stack.append(tmp1)
-            stack.append(tmp2)
-        
-"""
+'''
+        elif op == opcodes.SIN:
+            if isinstance(stack[-1], float):
+                tmp = stack.pop()
+                stack.append(np.sin(tmp))
+        elif op == opcodes.COS:
+            if isinstance(stack[-1], float):
+                tmp = stack.pop()
+                stack.append(np.cos(tmp))
+        '''
