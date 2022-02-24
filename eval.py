@@ -69,6 +69,8 @@ def make_function(program):
                     return 10 ** 6
                 else:
                     stack.append(op1 / op2)
+            else:
+                stack.append(op)
         if stack:
             return stack.pop()  # in the last value of the stack is collected the value of the fitness
         else:

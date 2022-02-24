@@ -12,4 +12,4 @@ enum_set = 'PLUS MINUS TIMES DIVIDE'
 
 function_set = ["alpine", "ackley", "griewank", "rastring", "xinshe", "vincent"]
 fitn = "strong_fitness_2d"  # "strong_fitness_contour_2d"  # "strong_fitness_mul_4"
-number_interpolation_point = 7
+number_interpolation_point = 3
