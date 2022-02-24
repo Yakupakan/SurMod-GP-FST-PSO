@@ -1,7 +1,8 @@
 import enum
 import math
+from hyperparam import enum_set
 
-opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE')  # MOD = DUP
+opcodes = enum.Enum('opcodes', enum_set)  # MOD = DUP
 
 
 def eval(input_stack, program):
