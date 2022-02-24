@@ -7,7 +7,7 @@ import fstpso
 from fstpso import FuzzyPSO
 
 from print import *
-from eval import eval, make_function
+from eval import make_function
 from hyperparam import *
 
 if function == "alpine":

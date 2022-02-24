@@ -8,8 +8,8 @@ pop_size = 100  # int(sys.argv[2])
 num_iteration = 250  # int(sys.argv[3])
 function = "ackley_2d"  # sys.argv[4]
 
-enum_set = 'PLUS MINUS TIMES DIVIDE'
+enum_set = 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP NOP'
 
 function_set = ["alpine", "ackley", "griewank", "rastring", "xinshe", "vincent"]
 fitn = "strong_fitness_2d"  # "strong_fitness_contour_2d"  # "strong_fitness_mul_4"
-number_interpolation_point = 3
+number_interpolation_point = 5

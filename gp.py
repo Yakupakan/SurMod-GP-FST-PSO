@@ -6,7 +6,7 @@ import numpy as np
 
 from hyperparam import *
 from print import *
-from eval import eval, opcodes, make_function
+from eval import opcodes, make_function
 from fitness import fst_pso_loss
 from plot_function import plot_prg, plot_prg_2d
 
