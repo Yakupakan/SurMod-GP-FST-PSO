@@ -144,7 +144,7 @@ def mutation_attention(x, p_m):
 
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
-    f, f_loss = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w")
+    f, f_loss, f_argmin = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"), open(dire + "argmin.txt", "w")
     p_m = 0.2
     pop = [random_program_attention(dim_prg) for _ in range(0, pop_size)]  # 10
     best = random_program_attention(dim_prg)  # []
@@ -189,6 +189,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
 
         f_loss.write(f"{fit(best)}\n")
+        f_argmin.write(f"{argmin_best}\n")
 
         if function[-2:] != "2d":
             if function == "ackley":
@@ -213,5 +214,6 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
     f.close()
     f_loss.close()
+    f_argmin.close()
 
     return best
