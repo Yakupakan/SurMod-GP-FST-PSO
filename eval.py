@@ -1,11 +1,11 @@
 import enum
 import math
 
-# opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE DUP NOP')
-opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE DUP SWAP')  # MOD = DUP
+opcodes = enum.Enum('opcodes', 'PLUS MINUS TIMES DIVIDE')  # MOD = DUP
 
 
-def eval(stack, program):
+def eval(input_stack, program):
+    stack = input_stack.copy()
     while program:
         op = program[0]
         program = program[1:]
@@ -24,19 +24,10 @@ def eval(stack, program):
         elif op == opcodes.DIVIDE:
             op1 = stack.pop()
             op2 = stack.pop()
-            try:
+            if op2 == 0:
+                return 10 ** 6
+            else:
                 stack.append(op1 / op2)
-            except Exception:
-                return math.inf
-        elif op == opcodes.SWAP:
-            tmp1 = stack.pop()
-            tmp2 = stack.pop()
-            stack.append(tmp1)
-            stack.append(tmp2)
-        elif op == opcodes.DUP:
-            tmp = stack.pop()
-            stack.append(tmp)
-            stack.append(tmp)
         else:
             stack.append(op)
     return stack.pop()
@@ -51,7 +42,7 @@ def make_function(program):
 
     def function_from_prgr(x, program=program):
         # stack = [0, 0] + x  # adding [0, 0] to make compilable all the programs as [opcodes.MINUS]
-        stack = x  # adding [0, 0] to make compilable all the programs as [opcodes.MINUS]
+        stack = x.copy()  # adding [0, 0] to make compilable all the programs as [opcodes.MINUS]
 
         if type(stack) is not list:
             stack = stack.tolist()
@@ -73,21 +64,10 @@ def make_function(program):
             elif op == opcodes.DIVIDE:
                 op1 = stack.pop()
                 op2 = stack.pop()
-                try:
+                if op2 == 0:
+                    return 10 ** 6
+                else:
                     stack.append(op1 / op2)
-                except Exception:
-                    return math.inf
-            elif op == opcodes.SWAP:
-                tmp1 = stack.pop()
-                tmp2 = stack.pop()
-                stack.append(tmp1)
-                stack.append(tmp2)
-            elif op == opcodes.DUP:
-                tmp = stack.pop()
-                stack.append(tmp)
-                stack.append(tmp)
-            else:
-                stack.append(op)
         if stack:
             return stack.pop()  # in the last value of the stack is collected the value of the fitness
         else:
@@ -97,10 +77,13 @@ def make_function(program):
 
 
 """"
-        elif op == opcodes.SWAP:
-            tmp1 = stack.pop()
-            tmp2 = stack.pop()
-            stack.append(tmp1)
-            stack.append(tmp2)
-        
+elif op == opcodes.SWAP:
+    tmp1 = stack.pop()
+    tmp2 = stack.pop()
+    stack.append(tmp1)
+    stack.append(tmp2)
+elif op == opcodes.DUP:
+    tmp = stack.pop()
+    stack.append(tmp)
+    stack.append(tmp)  
 """

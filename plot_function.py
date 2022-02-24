@@ -145,13 +145,13 @@ def plot_interpolation_points(points, dire=None):
     plt.close()
 
 
-
-"""
+'''
 from fitness import fst_pso_loss
 import scipy
 from eval import *
 
-prg = [opcodes.DIVIDE, opcodes.DIVIDE, 10, opcodes.DUP, opcodes.PLUS]
+prg = [-1, opcodes.PLUS, -1, opcodes.TIMES, opcodes.DUP, opcodes.TIMES, opcodes.MINUS, opcodes.DUP, 0, -10, opcodes.DIVIDE, 10, opcodes.PLUS, opcodes.DUP, opcodes.PLUS]
+
 plot_prg_2d(prg)
 fun = make_function(prg)
 print(fun([0, 0]))
@@ -161,4 +161,4 @@ print(fst_pso_loss(prg))
 # interval = [[0.25, 10], [0.25, 10]]
 # x = np.linspace(interval[0], interval[1], 10000)
 # plot_ackley(x)
-"""
+'''

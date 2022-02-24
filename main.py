@@ -28,7 +28,7 @@ if fitn == "strong_fitness_contour_2d":
 warnings.filterwarnings("ignore")
 
 
-dir_results = "results/" + function + "/"
+dir_results = "results_noswap_nodup/" + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 dir_results = dir_results + "/" + fitn + "/"

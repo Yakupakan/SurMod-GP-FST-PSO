@@ -173,7 +173,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         if fit(best) < 10**(-8):
             return best
 
-        argmin_best = fst_pso_loss(best)
+        try:
+            argmin_best = fst_pso_loss(best)
+        except Exception:
+            print("not able to compute argmin within fst-pso")
+            argmin_best = [math.inf, math.inf]
 
         print(f"GEN: {i} \t best individual: \t {best}")
         f.write(f"GEN: {i} \t best individual: \t {best}\n")
