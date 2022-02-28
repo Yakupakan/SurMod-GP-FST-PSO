@@ -10,12 +10,9 @@ from eval import opcodes, make_function
 from fitness import fst_pso_loss
 from plot_function import plot_prg, plot_prg_2d
 
-if fitn == "fit":
-    from fitness import fit as fit
+
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
-if fitn == "strong_fitness_mul_4":
-    from fitness import strong_fitness_mul_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
 if fitn == "strong_fitness_contour_2d":
@@ -23,7 +20,6 @@ if fitn == "strong_fitness_contour_2d":
 
 
 snap = 1
-print(function)
 if function == "griewank" or function == "griewank_2d":
     max_fit = 10 * 10 ** 3
     min_con, max_con = -50, 50  # minimum and maximum value that constants can assume

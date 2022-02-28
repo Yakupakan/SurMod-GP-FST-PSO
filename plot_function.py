@@ -66,12 +66,36 @@ def plot_griewank_3d():
     plt.show()
 
 
+def plot_michalewicz_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(0, np.pi, 100)
+    y = np.linspace(0, np.pi, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[michalewicz_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_rastring(interv):
     y = [rastring([el]) for el in interv]
     plt.plot(interv, y)
     plt.title("rastring")
     plt.show()
     plt.close()
+
+
+def plot_rastring_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-5.12, 5.12, 100)
+    y = np.linspace(-5.12, 5.12, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[rastring_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
 
 
 def plot_xinshe(interv):
@@ -143,6 +167,13 @@ def plot_prg_2d(prg, dire=None, it=-1):
     if function == "griewank_2d":
         x = np.linspace(-600, 600, 100)
         y = np.linspace(-600, 600, 100)
+    if function == "michalewicz_2d":
+        x = np.linspace(0, np.pi, 100)
+        y = np.linspace(0, np.pi, 100)
+    if function == "rastring_2d":
+        x = np.linspace(-5.12, 5.12, 100)
+        y = np.linspace(-5.12, 5.12, 100)
+
     X, Y = np.meshgrid(x, y)
 
     Z = np.array([[function_from_prg([x_, y_]) for x_ in x] for y_ in y])

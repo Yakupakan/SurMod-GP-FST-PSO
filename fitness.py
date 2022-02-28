@@ -46,11 +46,23 @@ if function == "griewank_2d":
     interval = [[-600, 600]]
     dims = 2
 
+if function == "michalewicz_2d":
+    from benchmark_function import michalewicz_2d as benchmark_fun
+
+    interval = [[0, np.pi]]
+    dims = 2
+
 if function == "rastring":
     from benchmark_function import rastring as benchmark_fun
 
     interval = [[-5.12, 5.12]]
     dims = 1
+
+if function == "rastring_2d":
+    from benchmark_function import rastring_2d as benchmark_fun
+
+    interval = [[-5.12, 5.12]]
+    dims = 2
 
 if function == "xinshe":
     from benchmark_function import xinshe as benchmark_fun

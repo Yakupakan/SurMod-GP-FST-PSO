@@ -34,10 +34,18 @@ def griewank_2d(x, y):
     return 1 / 4000 * (x ** 2 + y ** 2) - np.cos(x / np.sqrt(2)) * np.cos(y / np.sqrt(2)) + 1
 
 
+def michalewicz_2d(x, y):
+    return - (np.sin(x) * np.sin(x**2 / np.pi)**20) - (np.sin(y) * np.sin(2 * y**2 / np.pi)**20)
+
+
 def rastring(x):
     D = len(x)
     y = 10 * D + np.sum([(x[i] ** 2 - 10 * np.cos(2 * np.pi * x[i])) for i in range(D)])
     return y
+
+
+def rastring_2d(x, y):
+    return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y))
 
 
 def xinshe(x):

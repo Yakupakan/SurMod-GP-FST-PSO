@@ -13,12 +13,9 @@ from eval import make_function
 from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
 
-if fitn == "fit":
-    from fitness import fit as fit
+
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
-if fitn == "strong_fitness_mul_4":
-    from fitness import strong_fitness_mul_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
 if fitn == "strong_fitness_contour_2d":
