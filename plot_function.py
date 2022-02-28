@@ -20,7 +20,6 @@ def plot_ackley_3d():
     x = np.linspace(-30, 30, 100)
     y = np.linspace(-30, 30, 100)
     X, Y = np.meshgrid(x, y)
-    # Z = ackley_2d(X, Y)
     Z = np.array([[ackley_2d(x_, y_) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
@@ -35,12 +34,36 @@ def plot_alpine(interv):
     plt.close()
 
 
+def plot_alpine_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-10, 10, 100)
+    y = np.linspace(-10, 10, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[alpine_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_griewank(interv):
     y = [griewank([el]) for el in interv]
     plt.plot(interv, y)
     plt.title("griewank")
     plt.show()
     plt.close()
+
+
+def plot_griewank_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-600, 600, 100)
+    y = np.linspace(-600, 600, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[griewank_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
 
 
 def plot_rastring(interv):
@@ -75,27 +98,22 @@ def plot_prg(prg, x, dire=None, it=-1):
         y = [ackley([el]) for el in x]
         plt.xlim([-30, 30])
         plt.ylim([-2, 24])
-
     if function == "alpine":
         y = [alpine([el]) for el in x]
         plt.xlim([-10, 10])
         plt.ylim([-2, 10])
-
     if function == "griewank":
         y = [griewank([el]) for el in x]
         plt.xlim([-600, 600])
         plt.ylim([-2, 10])
-
     if function == "rastring":
         y = [rastring([el]) for el in x]
         plt.xlim([-5.12, 5.12])
         plt.ylim([-2, 40])
-
     if function == "xinshe":
         y = [xinshe([el]) for el in x]
         plt.xlim([-2 * np.pi, 2 * np.pi])
         plt.ylim([-2, 18])
-
     if function == "vincent":
         y = [vincent([el]) for el in x]
         plt.xlim([0, 10])
@@ -116,11 +134,17 @@ def plot_prg_2d(prg, dire=None, it=-1):
     function_from_prg = make_function(prg)
     ax = plt.axes(projection='3d')
 
-    x = np.linspace(-30, 30, 100)
-    y = np.linspace(-30, 30, 100)
+    if function == "ackley_2d":
+        x = np.linspace(-30, 30, 100)
+        y = np.linspace(-30, 30, 100)
+    if function == "alpine_2d":
+        x = np.linspace(-10, 10, 100)
+        y = np.linspace(-10, 10, 100)
+    if function == "griewank_2d":
+        x = np.linspace(-600, 600, 100)
+        y = np.linspace(-600, 600, 100)
     X, Y = np.meshgrid(x, y)
 
-    # Z = function_from_prg([X, Y])
     Z = np.array([[function_from_prg([x_, y_]) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')

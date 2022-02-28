@@ -30,6 +30,10 @@ def griewank(x):
     return y
 
 
+def griewank_2d(x, y):
+    return 1 / 4000 * (x ** 2 + y ** 2) - np.cos(x / np.sqrt(2)) * np.cos(y / np.sqrt(2)) + 1
+
+
 def rastring(x):
     D = len(x)
     y = 10 * D + np.sum([(x[i] ** 2 - 10 * np.cos(2 * np.pi * x[i])) for i in range(D)])

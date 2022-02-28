@@ -23,10 +23,11 @@ if fitn == "strong_fitness_contour_2d":
 
 
 snap = 1
-if function == "griewank":
-    max_fit = 5 * 10 ** 3
+print(function)
+if function == "griewank" or function == "griewank_2d":
+    max_fit = 10 * 10 ** 3
     min_con, max_con = -50, 50  # minimum and maximum value that constants can assume
-if function == "vincent":
+elif function == "vincent":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:

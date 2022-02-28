@@ -16,6 +16,12 @@ if function == "alpine":
     interval = [[-10, 10]]
     dims = 1
 
+if function == "alpine_2d":
+    from benchmark_function import alpine_2d as benchmark_fun
+
+    interval = [[-10, 10]]
+    dims = 2
+
 if function == "ackley":
     from benchmark_function import ackley as benchmark_fun
 
@@ -33,6 +39,12 @@ if function == "griewank":
 
     interval = [[-600, 600]]
     dims = 1
+
+if function == "griewank_2d":
+    from benchmark_function import griewank_2d as benchmark_fun
+
+    interval = [[-600, 600]]
+    dims = 2
 
 if function == "rastring":
     from benchmark_function import rastring as benchmark_fun
