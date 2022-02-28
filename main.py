@@ -50,6 +50,7 @@ print(fitn)
 if fitn == "strong_fitness_2d":
     print(number_interpolation_point)
 print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
+print(enum_set)
 
 best = linear_GP(fit,
                  pop_size=pop_size,

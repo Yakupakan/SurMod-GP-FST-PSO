@@ -22,7 +22,7 @@ if fitn == "strong_fitness_contour_2d":
     from fitness import strong_fitness_contour_2d as fit
 
 
-snap = 2
+snap = 1
 if function == "griewank":
     max_fit = 5 * 10 ** 3
     min_con, max_con = -50, 50  # minimum and maximum value that constants can assume
@@ -150,7 +150,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     best = random_program_attention(dim_prg)  # []
     for i in range(0, n_iter):
         if i > 0:
-            pop.append(best)  # the best solution is inserted again
+            pop.append(best)  # the best solution is inserted (elitism)
 
         pop = list(dict.fromkeys([tuple(el) for el in pop]))
         pop = [list(el) for el in pop]

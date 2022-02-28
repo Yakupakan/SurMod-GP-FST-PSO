@@ -9,13 +9,18 @@ def ackley(x):
 
 
 def ackley_2d(x, y):
-    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 2 * (x**2 + y**2)))) - np.exp(1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y)))
+    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 2 * (x ** 2 + y ** 2)))) - np.exp(
+        1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y)))
 
 
 def alpine(x):
     D = len(x)
     y = np.sum([(np.abs(x[i] * np.sin(x[i]) + 0.1 * x[i])) for i in range(D)])
     return y
+
+
+def alpine_2d(x, y):
+    return np.abs(x * np.sin(x) + 0.1 * x) + np.abs(y * np.sin(y) + 0.1 * y)
 
 
 def griewank(x):

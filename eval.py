@@ -40,13 +40,6 @@ def make_function(program):
                     return 10 ** 6
                 else:
                     stack.append(op1 / op2)
-            elif op == opcodes.MOD:
-                op1 = stack.pop()
-                op2 = stack.pop()
-                if op2 == 0:
-                    return 10 ** 6
-                else:
-                    stack.append(op1 % op2)
             elif op == opcodes.DUP:
                 tmp = stack.pop()
                 stack.append(tmp)
@@ -56,8 +49,6 @@ def make_function(program):
                 tmp2 = stack.pop()
                 stack.append(tmp1)
                 stack.append(tmp2)
-            elif op == opcodes.NOP:
-                pass
             else:
                 stack.append(op)
         if stack:
@@ -69,6 +60,23 @@ def make_function(program):
 
 
 """"
+
+            elif op == opcodes.MOD:
+                op1 = stack.pop()
+                op2 = stack.pop()
+                if op2 == 0:
+                    return 10 ** 6
+                else:
+                    stack.append(op1 % op2)
+            elif op == opcodes.COS:
+                tmp = stack.pop()
+                stack.append(np.cos(tmp))
+            elif op == opcodes.SIN:
+                tmp = stack.pop()
+                stack.append(np.sin(tmp))
+            elif op == opcodes.EXP:
+                tmp = stack.pop()
+                stack.append(np.exp(tmp))
 
 def eval(input_stack, program):
     stack = input_stack.copy()
