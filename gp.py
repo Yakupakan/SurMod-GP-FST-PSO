@@ -21,8 +21,8 @@ if fitn == "strong_fitness_contour_2d":
 
 snap = 1
 if function == "griewank" or function == "griewank_2d":
-    max_fit = 10 * 10 ** 3
-    min_con, max_con = -50, 50  # minimum and maximum value that constants can assume
+    max_fit = 5 * 10 ** 4
+    min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 elif function == "vincent":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
@@ -167,8 +167,10 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         if fit(candidate_best) < fit(best):
             best = candidate_best
-        if fit(best) < 10**(-8):
-            return best
+        if function != "michalewicz_2d":
+            if fit(best) < 10**(-8):
+                print("termination criteria satisfied")
+                return best
 
         try:
             argmin_best = fst_pso_loss(best)
