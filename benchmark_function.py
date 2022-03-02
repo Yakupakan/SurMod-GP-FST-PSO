@@ -35,11 +35,11 @@ def griewank_2d(x, y):
 
 
 def michalewicz(x):
-    return - np.sin(x) * np.sin(x**2 / np.pi)**20
+    return - np.sin(x) * np.sin(x ** 2 / np.pi) ** 20
 
 
 def michalewicz_2d(x, y):
-    return - (np.sin(x) * np.sin(x**2 / np.pi)**20) - (np.sin(y) * np.sin(2 * y**2 / np.pi)**20)
+    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
 
 
 def rastring(x):
@@ -56,6 +56,11 @@ def xinshe(x):
     D = len(x)
     y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])
     return y
+
+
+def xinshe_2d(x, y):
+    return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1) + np.abs(y) * np.abs(
+        np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1)
 
 
 def vincent(x):

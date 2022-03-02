@@ -6,11 +6,11 @@ dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
 pop_size = 100  # int(sys.argv[2])
 num_iteration = 1000  # int(sys.argv[3])
-function = "griewank_2d"  # sys.argv[4]
+function = "xinshe_2d"  # sys.argv[4]
 
 enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP SIN COS EXP NOP'  # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP NOP'
 
-function_set = ["alpine", "ackley", "griewank", "rastring", "xinshe", "vincent"]
+function_set = ["alpine", "ackley", "griewank", "michalewicz", "rastring", "xinshe", "vincent"]
 fitn = "strong_fitness_2d"  # "strong_fitness_contour_2d"  # "strong_fitness_mul_4"
 number_interpolation_point = 51

@@ -106,6 +106,18 @@ def plot_xinshe(interv):
     plt.close()
 
 
+def plot_xinshe_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+    y = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[xinshe_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_vincent(interv):
     y = [vincent([el]) for el in interv]
     plt.plot(interv, y)

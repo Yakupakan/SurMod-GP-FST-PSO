@@ -70,6 +70,12 @@ if function == "xinshe":
     interval = [[-2 * np.pi, 2 * np.pi]]
     dims = 1
 
+if function == "xinshe_2d":
+    from benchmark_function import xinshe_2d as benchmark_fun
+
+    interval = [[-2 * np.pi, 2 * np.pi]]
+    dims = 2
+
 if function == "vincent":
     from benchmark_function import xinshe as benchmark_fun
 
@@ -77,7 +83,7 @@ if function == "vincent":
     dims = 1
 
 
-def strong_fitness(prg, n=8):
+def strong_fitness(prg, n=number_interpolation_point):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
