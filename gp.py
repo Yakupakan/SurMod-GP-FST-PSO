@@ -98,7 +98,7 @@ def two_points_crossover_attention(x, y):
         if len(of2) > max_dim_prg:
             of2 = of2[:max_dim_prg]
 
-        if fit(of1) and fit(of2) and fit(of1) < 10 ** 4 and fit(of2) < 10 ** 4:
+        if fit(of1) and fit(of2) and fit(of1) < max_fit and fit(of2) < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
             return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
@@ -136,7 +136,7 @@ def mutation_attention(x, p_m):
 
     while not flag:
         mutated_prg = [change(b) for b in x]
-        if fit(mutated_prg) and fit(mutated_prg) < 10 ** 4:
+        if fit(mutated_prg) and fit(mutated_prg) < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
             return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi

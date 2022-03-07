@@ -4,7 +4,7 @@ Hyperparameter settings of the problem
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-pop_size = 1  # int(sys.argv[2])
+pop_size = 100  # int(sys.argv[2])
 num_iteration = 1000  # int(sys.argv[3])
 function = "schwefel_2d"  # sys.argv[4]
 
