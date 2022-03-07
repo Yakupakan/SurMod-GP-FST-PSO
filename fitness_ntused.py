@@ -70,11 +70,48 @@ if function == "xinshe":
     interval = [[-2 * np.pi, 2 * np.pi]]
     dims = 1
 
+if function == "xinshe_2d":
+    from benchmark_function import xinshe_2d as benchmark_fun
+
+    interval = [[-2 * np.pi, 2 * np.pi]]
+    dims = 2
+
+if function == "schwefel":
+    from benchmark_function import schwefel as benchmark_fun
+
+    interval = [[-500, 500]]
+    dims = 1
+
+if function == "schwefel_2d":
+    from benchmark_function import schwefel_2d as benchmark_fun
+
+    interval = [[-500, 500]]
+    dims = 2
+
+if function == "shubert":
+    from benchmark_function import shubert as benchmark_fun
+
+    interval = [[-10, 10]]
+    dims = 1
+
+if function == "shubert_2d":
+    from benchmark_function import shubert_2d as benchmark_fun
+
+    interval = [[-10, 10]]
+    dims = 2
+
 if function == "vincent":
-    from benchmark_function import xinshe as benchmark_fun
+    from benchmark_function import vincent as benchmark_fun
 
     interval = [[0.25, 10]]
     dims = 1
+
+if function == "vincent_2d":
+    from benchmark_function import vincent_2d as benchmark_fun
+
+    interval = [[0.25, 10]]
+    dims = 2
+
 
 
 def fit(prg):
