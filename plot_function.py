@@ -98,6 +98,30 @@ def plot_rastring_3d():
     plt.show()
 
 
+def plot_rosenbrock_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-5, 10, 100)
+    y = np.linspace(-5, 10, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[rosenbrock_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
+def plot_schwefel_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-500, 500, 100)
+    y = np.linspace(-500, 500, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[schwefel_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_xinshe(interv):
     y = [xinshe([el]) for el in interv]
     plt.plot(interv, y)
@@ -185,6 +209,12 @@ def plot_prg_2d(prg, dire=None, it=-1):
     if function == "rastring_2d":
         x = np.linspace(-5.12, 5.12, 100)
         y = np.linspace(-5.12, 5.12, 100)
+    if function == "schwefel_2d":
+        x = np.linspace(-500, 500, 100)
+        y = np.linspace(-500, 500, 100)
+    if function == "xinshe_2d":
+        x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+        y = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 
     X, Y = np.meshgrid(x, y)
 

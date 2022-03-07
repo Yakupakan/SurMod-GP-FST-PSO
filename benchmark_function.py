@@ -52,6 +52,14 @@ def rastring_2d(x, y):
     return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y))
 
 
+def rosenbrock_2d(x, y):
+    return 100 * (x ** 2 - y) ** 2 + (x - 1) ** 2
+
+
+def schwefel_2d(x, y):
+    return 2 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y)))
+
+
 def xinshe(x):
     D = len(x)
     y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])

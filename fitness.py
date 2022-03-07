@@ -64,6 +64,12 @@ if function == "rastring_2d":
     interval = [[-5.12, 5.12]]
     dims = 2
 
+if function == "schwefel_2d":
+    from benchmark_function import schwefel_2d as benchmark_fun
+
+    interval = [[-500, 500]]
+    dims = 2
+
 if function == "xinshe":
     from benchmark_function import xinshe as benchmark_fun
 
