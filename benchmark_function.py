@@ -48,38 +48,12 @@ def rastring(x):
     return y
 
 
-def michalewicz(x):
-    D = len(x)
-    y = -1 * np.sum([np.sin(x[i]) * np.sin((1 * x[i] ** 2) / np.pi) ** 20 for i in range(D)])
-    return y
-
-
-def michalewicz_Nd(x):
-    y = -1 * np.sum([np.sin(item) * np.sin((1 * item ** 2) / np.pi) ** 20 for item in x], axis=0)
-    return y
-
-
 def rastring_2d(x, y):
     return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y))
 
 
 def rosenbrock_2d(x, y):
     return (x - 1) ** 2 + 10 * (y - x ** 2) ** 2
-
-
-def schwefel_2d(x, y):
-    return 2 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y)))
-
-
-def xinshe(x):
-    D = len(x)
-    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])
-    return y
-
-
-def xinshe_2d(x, y):
-    return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1) + np.abs(y) * np.abs(
-        np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1)
 
 
 def schwefel(x):
@@ -89,7 +63,7 @@ def schwefel(x):
 
 
 def schwefel_2d(x, y):
-    return (418.9829 * 2) - (x * np.sin(np.sqrt(np.abs(x)))) - (y * np.sin(np.sqrt(np.abs(y))))
+    return 2 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y)))
 
 
 def shubert(x):
@@ -115,3 +89,14 @@ def vincent(x):
 
 def vincent_2d(x, y):
     return np.sin(10 * np.log(x)) + np.sin(10 * np.log(y))
+
+
+def xinshe(x):
+    D = len(x)
+    y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])
+    return y
+
+
+def xinshe_2d(x, y):
+    return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1) + np.abs(y) * np.abs(
+        np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1)

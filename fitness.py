@@ -10,18 +10,6 @@ from print import *
 from eval import make_function
 from hyperparam import *
 
-if function == "alpine":
-    from benchmark_function import alpine as benchmark_fun
-
-    interval = [[-10, 10]]
-    dims = 1
-
-if function == "alpine_2d":
-    from benchmark_function import alpine_2d as benchmark_fun
-
-    interval = [[-10, 10]]
-    dims = 2
-
 if function == "ackley":
     from benchmark_function import ackley as benchmark_fun
 
@@ -32,6 +20,18 @@ if function == "ackley_2d":
     from benchmark_function import ackley_2d as benchmark_fun
 
     interval = [[-30, 30]]
+    dims = 2
+
+if function == "alpine":
+    from benchmark_function import alpine as benchmark_fun
+
+    interval = [[-10, 10]]
+    dims = 1
+
+if function == "alpine_2d":
+    from benchmark_function import alpine_2d as benchmark_fun
+
+    interval = [[-10, 10]]
     dims = 2
 
 if function == "griewank":
