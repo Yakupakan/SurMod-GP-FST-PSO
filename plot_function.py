@@ -150,6 +150,18 @@ def plot_vincent(interv):
     plt.close()
 
 
+def plot_vincent_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(0.25, 10, 100)
+    y = np.linspace(0.25, 10, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[vincent_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_prg(prg, x, dire=None, it=-1):
     function_from_prg = make_function(prg)
     y_pred = [function_from_prg([el]) for el in x]
