@@ -224,6 +224,12 @@ def plot_prg_2d(prg, dire=None, it=-1):
     if function == "schwefel_2d":
         x = np.linspace(-500, 500, 100)
         y = np.linspace(-500, 500, 100)
+    if function == "shubert_2d":
+        x = np.linspace(-10, 10, 100)
+        y = np.linspace(-10, 10, 100)
+    if function == "vincent_2d":
+        x = np.linspace(0.25, 10, 100)
+        y = np.linspace(0.25, 10, 100)
     if function == "xinshe_2d":
         x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
         y = np.linspace(-2 * np.pi, 2 * np.pi, 100)
