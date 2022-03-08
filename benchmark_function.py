@@ -47,10 +47,12 @@ def rastring(x):
     y = 10 * D + np.sum([(x[i] ** 2 - 10 * np.cos(2 * np.pi * x[i])) for i in range(D)])
     return y
 
+
 def michalewicz(x):
     D = len(x)
     y = -1 * np.sum([np.sin(x[i]) * np.sin((1 * x[i] ** 2) / np.pi) ** 20 for i in range(D)])
     return y
+
 
 def michalewicz_Nd(x):
     y = -1 * np.sum([np.sin(item) * np.sin((1 * item ** 2) / np.pi) ** 20 for item in x], axis=0)
@@ -62,7 +64,7 @@ def rastring_2d(x, y):
 
 
 def rosenbrock_2d(x, y):
-    return 100 * (x ** 2 - y) ** 2 + (x - 1) ** 2
+    return (x - 1) ** 2 + 10 * (y - x ** 2) ** 2
 
 
 def schwefel_2d(x, y):
@@ -85,16 +87,16 @@ def schwefel(x):
     y = (418.9829 * D) - np.sum([x[i] * np.sin(np.sqrt(np.abs(x[i]))) for i in range(D)])
     return y
 
+
 def schwefel_2d(x, y):
     return (418.9829 * 2) - (x * np.sin(np.sqrt(np.abs(x)))) - (y * np.sin(np.sqrt(np.abs(y))))
 
+
 def shubert(x):
     D = len(x)
-    for d in range(D):
-        for i in range(1, 6):
-            y = np.prod(np.sum(i * np.cos(((i + 1) * x[d]) + i )))
-
+    y = np.prod([np.sum([i * np.cos(((i + 1) * x[d]) + i for i in range(5))]) for d in range(D)])
     return y
+
 
 def shubert_2d(x, y):
     sum1 = 0
@@ -110,7 +112,6 @@ def vincent(x):
     y = np.sum([np.sin(10 * np.log(x[i])) for i in range(D)])
     return y
 
+
 def vincent_2d(x, y):
     return np.sin(10 * np.log(x)) + np.sin(10 * np.log(y))
-
-

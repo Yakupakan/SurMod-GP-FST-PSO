@@ -64,22 +64,10 @@ if function == "rastring_2d":
     interval = [[-5.12, 5.12]]
     dims = 2
 
-if function == "schwefel_2d":
-    from benchmark_function import schwefel_2d as benchmark_fun
+if function == "rosenbrock_2d":
+    from benchmark_function import rosenbrock_2d as benchmark_fun
 
-    interval = [[-500, 500]]
-    dims = 2
-
-if function == "xinshe":
-    from benchmark_function import xinshe as benchmark_fun
-
-    interval = [[-2 * np.pi, 2 * np.pi]]
-    dims = 1
-
-if function == "xinshe_2d":
-    from benchmark_function import xinshe_2d as benchmark_fun
-
-    interval = [[-2 * np.pi, 2 * np.pi]]
+    interval = [[-2, 2]]
     dims = 2
 
 if function == "schwefel":
@@ -116,6 +104,18 @@ if function == "vincent_2d":
     from benchmark_function import vincent_2d as benchmark_fun
 
     interval = [[0.25, 10]]
+    dims = 2
+
+if function == "xinshe":
+    from benchmark_function import xinshe as benchmark_fun
+
+    interval = [[-2 * np.pi, 2 * np.pi]]
+    dims = 1
+
+if function == "xinshe_2d":
+    from benchmark_function import xinshe_2d as benchmark_fun
+
+    interval = [[-2 * np.pi, 2 * np.pi]]
     dims = 2
 
 

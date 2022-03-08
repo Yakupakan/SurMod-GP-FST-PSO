@@ -6,7 +6,7 @@ dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
 pop_size = 100  # int(sys.argv[2])
 num_iteration = 1000  # int(sys.argv[3])
-function = "schwefel_2d"  # sys.argv[4]
+function = "shubert_2d"  # sys.argv[4]
 
 enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP SIN COS EXP NOP'  # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP NOP'
