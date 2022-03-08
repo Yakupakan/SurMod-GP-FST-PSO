@@ -11,6 +11,6 @@ function = "schwefel_2d"  # sys.argv[4]
 enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP SIN COS EXP NOP'  # 'PLUS MINUS TIMES DIVIDE MOD DUP SWAP NOP'
 
-function_set = ["alpine", "ackley", "griewank", "michalewicz", "rastring", "schwefel", "xinshe", "vincent"]
+function_set = ["alpine", "ackley", "griewank", "michalewicz", "rastring", "schwefel", "shubert", "vincent", "xinshe"]
 fitn = "strong_fitness_2d"  # "strong_fitness_contour_2d"  # "strong_fitness_mul_4"
 number_interpolation_point = 51
