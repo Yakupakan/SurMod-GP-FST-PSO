@@ -90,11 +90,20 @@ def schwefel_2d(x, y):
 
 def shubert(x):
     D = len(x)
-    y = np.prod([np.sum([i * np.cos(((i+1)*x[d])+i for i in range(5))]) for d in range(D)])
+    for d in range(D):
+        for i in range(1, 6):
+            y = np.prod(np.sum(i * np.cos(((i + 1) * x[d]) + i )))
+
     return y
 
 def shubert_2d(x, y):
-    return np.sum([i * np.cos(((i + 1) * x) + i for i in range(5))]) * np.sum([i * np.cos(((i + 1) * y) + i for i in range(5))])
+    sum1 = 0
+    sum2 = 0
+    for i in range(1, 6):
+        sum1 = sum1 + (i * np.cos(((i + 1) * x) + i))
+        sum2 = sum2 + (i * np.cos(((i + 1) * y) + i))
+    return sum1 * sum2
+
 
 def vincent(x):
     D = len(x)
