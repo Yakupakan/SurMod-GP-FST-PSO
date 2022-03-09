@@ -8,18 +8,10 @@ import gplearn
 import matplotlib.pyplot as plt
 
 from hyperparam import *
-from gp import linear_GP
+from gp import linear_GP, fit
 from eval import make_function
 from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
-
-
-if fitn == "strong_fitness_4":
-    from fitness import strong_fitness_4 as fit
-if fitn == "strong_fitness_2d":
-    from fitness import strong_fitness_2d as fit
-if fitn == "strong_fitness_contour_2d":
-    from fitness import strong_fitness_contour_2d as fit
 
 
 warnings.filterwarnings("ignore")

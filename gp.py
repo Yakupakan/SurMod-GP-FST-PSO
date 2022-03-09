@@ -15,8 +15,8 @@ if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
-if fitn == "strong_fitness_contour_2d":
-    from fitness import strong_fitness_contour_2d as fit
+if fitn == "strong_fitness_2d_weighted":
+    from fitness import strong_fitness_2d_weighted as fit
 
 
 snap = 1
@@ -28,25 +28,13 @@ elif function == "rosenbrock_2d":
     min_con, max_con = -10 ** 3, 10 ** 3  # minimum and maximum value that constants can assume
 elif function == "schwefel" or function == "schwefel_2d":
     max_fit = 5 * 10 ** 6
-    min_con, max_con = -250, 250
+    min_con, max_con = -500, 500
 elif function == "vincent":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:
     max_fit = 10 ** 3
     min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
-
-
-def random_program(n):
-    prg = []
-    func = list(opcodes)
-    for i in range(0, n):
-        if random.random() < 0.5:
-            op = random.choice(func)
-        else:
-            op = random.randint(-2, 2)
-        prg.append(op)
-    return prg
 
 
 def random_program_attention(n):
@@ -73,16 +61,6 @@ def tournament_selection(fit, pop, t_size=4):
     return min(tournament, key=fit)
 
 
-def two_points_crossover(x, y):
-    k1 = random.randint(0, len(x) - 1)
-    k2 = random.randint(k1, len(x) - 1)
-    h1 = random.randint(0, len(y) - 1)
-    h2 = random.randint(h1, len(y) - 1)
-    of1 = x[0:k1] + y[h1:h2] + x[k2:]
-    of2 = y[0:h1] + x[k1:k2] + y[h2:]
-    return of1, of2
-
-
 def two_points_crossover_attention(x, y):
     flag = 0  # return if the program is valid
     max_number_combination = 50
@@ -106,20 +84,6 @@ def two_points_crossover_attention(x, y):
         if numb_combination == max_number_combination:
             return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
     return of1, of2
-
-
-def mutation(x, p_m):
-    def change(b):
-        if random.random() < p_m:
-            if random.random() < 0.5:  # 0.5
-                op = random.choice(list(opcodes))
-            else:
-                op = random.randint(min_con, max_con)  # (-2, 2)
-            return op
-        else:
-            return b
-
-    return [change(b) for b in x]
 
 
 def mutation_attention(x, p_m):
@@ -173,7 +137,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         if fit(candidate_best) < fit(best):
             best = candidate_best
-        if function != "michalewicz_2d":
+        if function != "michalewicz_2d" and function != "vincent_2d":
             if fit(best) < 10**(-8):
                 print("termination criteria satisfied")
                 return best
