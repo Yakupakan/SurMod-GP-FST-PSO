@@ -24,8 +24,8 @@ if function == "griewank" or function == "griewank_2d":
     max_fit = 5 * 10 ** 4
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 if function == "rosenbrock_2d":
-    max_fit = 5 * 10 ** 4
-    min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
+    max_fit = 10 ** 4
+    min_con, max_con = -10 ** 3, 10 ** 3  # minimum and maximum value that constants can assume
 elif function == "schwefel" or function == "schwefel_2d":
     max_fit = 5 * 10 ** 6
     min_con, max_con = -250, 250
