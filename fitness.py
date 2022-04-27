@@ -250,7 +250,7 @@ def strong_fitness_2d_weighted(prg, n=number_interpolation_point):
     except Exception:
         return math.inf
 
-    return 0.5 * y_benchmark_function + 0.5 * rmse
+    return 0.75 * y_benchmark_function + 0.25 * rmse
 
 
 def fst_pso_loss(prg):

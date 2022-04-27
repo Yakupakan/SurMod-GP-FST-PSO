@@ -112,6 +112,7 @@ def mutation_attention(x, p_m):
 
 def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
     f, f_loss, f_argmin = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"), open(dire + "argmin.txt", "w")
+    f_final_argmin = open(dire + "argmin_final", "w")
     p_m = 0.2
     pop = [random_program_attention(dim_prg) for _ in range(0, pop_size)]  # 10
     best = random_program_attention(dim_prg)  # []
@@ -181,8 +182,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
             if dire and i % snap == 0:
                 plot_prg_2d(best, dire, i)
 
+    f_final_argmin.write(f"{argmin_best}")
+
     f.close()
     f_loss.close()
     f_argmin.close()
+    f_final_argmin.close()
 
     return best
