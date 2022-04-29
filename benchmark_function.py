@@ -44,7 +44,7 @@ def griewank_2d(x, y):
 
 
 def griewank_3d(x, y, z):
-    return 1 / 4000 * (x ** 2 + y ** 2 + z ** 2) - np.cos(x / np.sqrt(2)) * np.cos(y / np.sqrt(2)) * np.cos(z / np.sqrt(2)) + 1
+    return 1 / 4000 * (x ** 2 + y ** 2 + z ** 2) - np.cos(x / np.sqrt(1)) * np.cos(y / np.sqrt(2)) * np.cos(z / np.sqrt(3)) + 1
 
 
 def michalewicz(x):

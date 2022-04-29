@@ -26,9 +26,9 @@ if not os.path.exists(dir_results):
 dir_results = dir_results + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + "/" + fitn + "/"
-if not os.path.exists(dir_results):
-    os.mkdir(dir_results)
+# dir_results = dir_results + "/" + fitn + "/"
+# if not os.path.exists(dir_results):
+#     os.mkdir(dir_results)
 if fitn == "strong_fitness_2d" or fitn == "strong_fitness_contour_2d":
     dir_results = dir_results + "/" + str(number_interpolation_point) + "/"
     if not os.path.exists(dir_results):
@@ -44,11 +44,13 @@ if fitn == "strong_fitness_2d":
 print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
 print(enum_set)
 
-best = linear_GP(fit,
-                 pop_size=pop_size,
-                 n_iter=num_iteration,
-                 dim_prg=dim_prg,
-                 dire=dir_results)
+for run in range(num_runs):
+    best = linear_GP(fit,
+                     pop_size=pop_size,
+                     n_iter=num_iteration,
+                     dim_prg=dim_prg,
+                     dire=dir_results,
+                     run=run)
 
 # function_approximated = make_function(best)
-fitness_plot(dir_results)
+# fitness_plot(dir_results)

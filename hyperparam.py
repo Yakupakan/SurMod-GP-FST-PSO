@@ -3,12 +3,14 @@ Hyperparameter settings of the problem
 """
 import numpy as np
 
-dim_prg = 15  # int(sys.argv[1])
+dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-pop_size = 100  # int(sys.argv[2])
+pop_size = 50  # int(sys.argv[2])
 num_iteration = 100  # int(sys.argv[3])
 
-function_name = "alpine"
+num_runs = 30
+
+function_name = "xinshe"
 dim = 3
 
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]

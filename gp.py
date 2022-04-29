@@ -10,7 +10,6 @@ from eval import opcodes, make_function
 from fitness import fst_pso_loss
 from plot_function import plot_prg, plot_prg_2d
 
-
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_2d":
@@ -18,15 +17,14 @@ if fitn == "strong_fitness_2d":
 if fitn == "strong_fitness_3d":
     from fitness import strong_fitness_3d as fit
 
-
 snap = 1
-if function == "griewank" or function == "griewank_2d" or function == "griewank_3d":
+if function_name == "griewank":
     max_fit = 10 ** 5
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
-elif function == "schwefel" or function == "schwefel_2d":
+elif function_name == "schwefel":
     max_fit = 5 * 10 ** 6
     min_con, max_con = -500, 500
-elif function == "vincent" or function == "vincent_2d" or function == "michalewicz_3d":
+elif function_name == "vincent" or function_name == "michalewicz":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:
@@ -111,12 +109,18 @@ def mutation_attention(x, p_m):
     return mutated_prg
 
 
-def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
+def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
+    external_dire = dire
+    dire = dire + str(run) + "/"
+    if not os.path.exists(dire):
+        os.mkdir(dire)
     f, f_loss, f_argmin = open(dire + "res.txt", "w"), open(dire + "loss.txt", "w"), open(dire + "argmin.txt", "w")
-    f_final_argmin = open(dire + "argmin_final", "w")
+    f_final_argmin, f_resume_argmin, f_resume_loss = open(dire + "argmin_final.txt", "w"), open(
+        external_dire + "argmins.txt", "w"), open(external_dire + "fitness.txt", "w")
     p_m = 0.2
     pop = [random_program_attention(dim_prg) for _ in range(0, pop_size)]  # 10
     best = random_program_attention(dim_prg)  # []
+    fit_best = fit(best)
     for i in range(0, n_iter):
         if i > 0:
             pop.append(best)  # the best solution is inserted (elitism)
@@ -137,14 +141,21 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         enablePrint()
         candidate_best = min(pop, key=fit)
 
-        if fit(candidate_best) < fit(best):
+        if fit(candidate_best) < fit_best:
             best = candidate_best
+            fit_best = fit(best)
         if function_name != "michalewicz" and function_name != "vincent":
-            if fit(best) < 10**(-10):
+            if fit(best) < 10 ** (-10):
                 print("termination criteria satisfied")
 
                 print(f"GEN: {i} \t best fitness: \t {fit(best)}")
                 f.write(f"GEN: {i} \t best fitness: \t {fit(best)}\n")
+
+                try:
+                    argmin_best = fst_pso_loss(best)
+                except Exception:
+                    print("not able to compute argmin within fst-pso")
+                    argmin_best = [math.inf, math.inf]
 
                 print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
                 f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
@@ -152,6 +163,8 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
                 f_loss.write(f"{fit(best)}\n")
                 f_argmin.write(f"{argmin_best}\n")
                 f_final_argmin.write(f"{argmin_best}")
+                f_resume_argmin.write(f"{argmin_best}\n")
+                f_resume_loss.write(f"{fit(best)}\n")
 
                 return best
 
@@ -182,10 +195,14 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
                 plot_prg_2d(best, dire, i)
 
     f_final_argmin.write(f"{argmin_best}")
+    f_resume_argmin.write(f"{argmin_best}\n")
+    f_resume_loss.write(f"{fit(best)}\n")
 
     f.close()
     f_loss.close()
     f_argmin.close()
     f_final_argmin.close()
+    f_resume_argmin.close()
+    f_resume_loss.close()
 
     return best
