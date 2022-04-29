@@ -20,6 +20,9 @@ warnings.filterwarnings("ignore")
 dir_results = enum_set.replace(" ", "_") + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
+dir_results = dir_results + str(dim) + "/"
+if not os.path.exists(dir_results):
+    os.mkdir(dir_results)
 dir_results = dir_results + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)

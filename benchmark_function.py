@@ -13,6 +13,11 @@ def ackley_2d(x, y):
         1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y)))
 
 
+def ackley_3d(x, y, z):
+    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 2 * (x ** 2 + y ** 2 + z ** 2)))) - np.exp(
+        1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y) + np.cos(2 * np.pi * z)))
+
+
 def alpine(x):
     D = len(x)
     y = np.sum([(np.abs(x[i] * np.sin(x[i]) + 0.1 * x[i])) for i in range(D)])
@@ -21,6 +26,10 @@ def alpine(x):
 
 def alpine_2d(x, y):
     return np.abs(x * np.sin(x) + 0.1 * x) + np.abs(y * np.sin(y) + 0.1 * y)
+
+
+def alpine_3d(x, y, z):
+    return np.abs(x * np.sin(x) + 0.1 * x) + np.abs(y * np.sin(y) + 0.1 * y) + np.abs(z * np.sin(z) + 0.1 * z)
 
 
 def griewank(x):
@@ -34,12 +43,20 @@ def griewank_2d(x, y):
     return 1 / 4000 * (x ** 2 + y ** 2) - np.cos(x / np.sqrt(2)) * np.cos(y / np.sqrt(2)) + 1
 
 
+def griewank_3d(x, y, z):
+    return 1 / 4000 * (x ** 2 + y ** 2 + z ** 2) - np.cos(x / np.sqrt(2)) * np.cos(y / np.sqrt(2)) * np.cos(z / np.sqrt(2)) + 1
+
+
 def michalewicz(x):
     return - np.sin(x) * np.sin(x ** 2 / np.pi) ** 20
 
 
 def michalewicz_2d(x, y):
     return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
+
+
+def michalewicz_3d(x, y, z):
+    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20) - (np.sin(z) * np.sin(2 * z ** 2 / np.pi) ** 20)
 
 
 def rastring(x):
@@ -52,8 +69,16 @@ def rastring_2d(x, y):
     return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y))
 
 
+def rastring_3d(x, y, z):
+    return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y)) + (z ** 2 - 10 * np.cos(2 * np.pi * z))
+
+
 def rosenbrock_2d(x, y):
     return (x - 1) ** 2 + 10 * (y - x ** 2) ** 2
+
+
+def rosenbrock_3d(x, y, z):
+    return (x - 1) ** 2 + (y - 1) ** 2 + 10 * (y - x ** 2) ** 2 + 10 * (z - y ** 2) ** 2
 
 
 def schwefel(x):
@@ -64,6 +89,10 @@ def schwefel(x):
 
 def schwefel_2d(x, y):
     return 2 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y)))
+
+
+def schwefel_3d(x, y, z):
+    return 3 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y))) - z * np.sin(np.sqrt(np.abs(z)))
 
 
 def shubert(x):
@@ -91,6 +120,10 @@ def vincent_2d(x, y):
     return np.sin(10 * np.log(x)) + np.sin(10 * np.log(y))
 
 
+def vincent_3d(x, y, z):
+    return np.sin(10 * np.log(x)) + np.sin(10 * np.log(y)) + np.sin(10 * np.log(z))
+
+
 def xinshe(x):
     D = len(x)
     y = np.sum([(np.abs(x[i]) * (np.exp(np.sum([np.sin(x[k] ** 2) for k in range(D)]))) ** (-1)) for i in range(D)])
@@ -100,3 +133,9 @@ def xinshe(x):
 def xinshe_2d(x, y):
     return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1) + np.abs(y) * np.abs(
         np.exp(np.sin(x ** 2) + np.sin(y ** 2))) ** (-1)
+
+
+def xinshe_3d(x, y, z):
+    return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1) \
+           + np.abs(y) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1) \
+           + np.abs(z) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1)

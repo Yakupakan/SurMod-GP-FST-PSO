@@ -15,21 +15,18 @@ if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
 if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
-if fitn == "strong_fitness_2d_weighted":
-    from fitness import strong_fitness_2d_weighted as fit
+if fitn == "strong_fitness_3d":
+    from fitness import strong_fitness_3d as fit
 
 
 snap = 1
-if function == "griewank" or function == "griewank_2d":
-    max_fit = 5 * 10 ** 4
+if function == "griewank" or function == "griewank_2d" or function == "griewank_3d":
+    max_fit = 10 ** 5
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
-elif function == "rosenbrock_2d":
-    max_fit = 10 ** 4
-    min_con, max_con = -10 ** 3, 10 ** 3  # minimum and maximum value that constants can assume
 elif function == "schwefel" or function == "schwefel_2d":
     max_fit = 5 * 10 ** 6
     min_con, max_con = -500, 500
-elif function == "vincent":
+elif function == "vincent" or function == "vincent_2d" or function == "michalewicz_3d":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:
@@ -63,7 +60,7 @@ def tournament_selection(fit, pop, t_size=4):
 
 def two_points_crossover_attention(x, y):
     flag = 0  # return if the program is valid
-    max_number_combination = 50
+    max_number_combination = 10
     numb_combination = 0
     while not flag:
         numb_combination += 1
@@ -79,16 +76,18 @@ def two_points_crossover_attention(x, y):
         if len(of2) > max_dim_prg:
             of2 = of2[:max_dim_prg]
 
-        if fit(of1) and fit(of2) and fit(of1) < max_fit and fit(of2) < max_fit:
+        fit_of1 = fit(of1)
+        fit_of2 = fit(of2)
+        if fit_of1 and fit_of2 and fit_of1 < max_fit and fit_of2 < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
-            return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
+            return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 10 tentativi
     return of1, of2
 
 
 def mutation_attention(x, p_m):
     flag = 0  # return if the program is valid
-    max_number_combination = 50
+    max_number_combination = 10
     numb_combination = 0
 
     def change(b):
@@ -103,10 +102,12 @@ def mutation_attention(x, p_m):
 
     while not flag:
         mutated_prg = [change(b) for b in x]
-        if fit(mutated_prg) and fit(mutated_prg) < max_fit:
+
+        fit_m = fit(mutated_prg)
+        if fit_m and fit_m < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
-            return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 100 tentativi
+            return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 10 tentativi
     return mutated_prg
 
 
@@ -138,9 +139,20 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
 
         if fit(candidate_best) < fit(best):
             best = candidate_best
-        if function != "michalewicz_2d" and function != "vincent_2d":
-            if fit(best) < 10**(-8):
+        if function_name != "michalewicz" and function_name != "vincent":
+            if fit(best) < 10**(-10):
                 print("termination criteria satisfied")
+
+                print(f"GEN: {i} \t best fitness: \t {fit(best)}")
+                f.write(f"GEN: {i} \t best fitness: \t {fit(best)}\n")
+
+                print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
+                f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
+
+                f_loss.write(f"{fit(best)}\n")
+                f_argmin.write(f"{argmin_best}\n")
+                f_final_argmin.write(f"{argmin_best}")
+
                 return best
 
         try:
@@ -161,24 +173,11 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None):
         f_loss.write(f"{fit(best)}\n")
         f_argmin.write(f"{argmin_best}\n")
 
-        if function[-2:] != "2d":
-            if function == "ackley":
-                interval = [-30, 30]
-            if function == "alpine":
-                interval = [-10, 10]
-            if function == "griewank":
-                interval = [-600, 600]
-            if function == "rastring":
-                interval = [-5.12, 5.12]
-            if function == "xinshe":
-                interval = [-2 * np.pi, 2 * np.pi]
-            if function == "vincent":
-                interval = [0.25, 10]
-
-            x = np.linspace(interval[0], interval[1], 10001)
+        if dim < 2:
+            x = np.linspace(interval[0][0], interval[0][1], 10001)
             if dire and i % snap == 0:
                 plot_prg(best, x, dire, i)
-        else:
+        if dim == 2:
             if dire and i % snap == 0:
                 plot_prg_2d(best, dire, i)
 

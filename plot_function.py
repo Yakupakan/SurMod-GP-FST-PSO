@@ -218,36 +218,8 @@ def plot_prg_2d(prg, dire=None, it=-1):
     function_from_prg = make_function(prg)
     ax = plt.axes(projection='3d')
 
-    if function == "ackley_2d":
-        x = np.linspace(-30, 30, 100)
-        y = np.linspace(-30, 30, 100)
-    if function == "alpine_2d":
-        x = np.linspace(-10, 10, 100)
-        y = np.linspace(-10, 10, 100)
-    if function == "griewank_2d":
-        x = np.linspace(-600, 600, 100)
-        y = np.linspace(-600, 600, 100)
-    if function == "michalewicz_2d":
-        x = np.linspace(0, np.pi, 100)
-        y = np.linspace(0, np.pi, 100)
-    if function == "rastring_2d":
-        x = np.linspace(-5.12, 5.12, 100)
-        y = np.linspace(-5.12, 5.12, 100)
-    if function == "rosenbrock_2d":
-        x = np.linspace(-2, 2, 100)
-        y = np.linspace(-2, 2, 100)
-    if function == "schwefel_2d":
-        x = np.linspace(-500, 500, 100)
-        y = np.linspace(-500, 500, 100)
-    if function == "shubert_2d":
-        x = np.linspace(-10, 10, 100)
-        y = np.linspace(-10, 10, 100)
-    if function == "vincent_2d":
-        x = np.linspace(0.25, 10, 100)
-        y = np.linspace(0.25, 10, 100)
-    if function == "xinshe_2d":
-        x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-        y = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+    x = np.linspace(interval[0][0], interval[0][1], 100)
+    y = np.linspace(interval[0][0], interval[0][1], 100)
 
     X, Y = np.meshgrid(x, y)
 
