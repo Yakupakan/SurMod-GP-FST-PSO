@@ -22,8 +22,8 @@ if function_name == "griewank":
     max_fit = 10 ** 5
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 elif function_name == "schwefel":
-    max_fit = 5 * 10 ** 6
-    min_con, max_con = -500, 500
+    max_fit = 10 ** 5
+    min_con, max_con = -10 ** 3, 10 ** 3
 elif function_name == "vincent" or function_name == "michalewicz":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
@@ -144,12 +144,13 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
         if fit(candidate_best) < fit_best:
             best = candidate_best
             fit_best = fit(best)
+        '''
         if function_name != "michalewicz" and function_name != "vincent":
-            if fit(best) < 10 ** (-10):
+            if fit_best < 10 ** (-10):
                 print("termination criteria satisfied")
 
-                print(f"GEN: {i} \t best fitness: \t {fit(best)}")
-                f.write(f"GEN: {i} \t best fitness: \t {fit(best)}\n")
+                print(f"GEN: {i} \t best fitness: \t {fit_best}")
+                f.write(f"GEN: {i} \t best fitness: \t {fit_best}\n")
 
                 try:
                     argmin_best = fst_pso_loss(best)
@@ -160,13 +161,14 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
                 print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
                 f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
 
-                f_loss.write(f"{fit(best)}\n")
+                f_loss.write(f"{fit_best}\n")
                 f_argmin.write(f"{argmin_best}\n")
                 f_final_argmin.write(f"{argmin_best}")
                 f_resume_argmin.write(f"{argmin_best}\n")
-                f_resume_loss.write(f"{fit(best)}\n")
+                f_resume_loss.write(f"{fit_best}\n")
 
                 return best
+        '''
 
         try:
             argmin_best = fst_pso_loss(best)
@@ -177,13 +179,13 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
         print(f"GEN: {i} \t best individual: \t {best}")
         f.write(f"GEN: {i} \t best individual: \t {best}\n")
 
-        print(f"GEN: {i} \t best fitness: \t {fit(best)}")
-        f.write(f"GEN: {i} \t best fitness: \t {fit(best)}\n")
+        print(f"GEN: {i} \t best fitness: \t {fit_best}")
+        f.write(f"GEN: {i} \t best fitness: \t {fit_best}\n")
 
         print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
         f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
 
-        f_loss.write(f"{fit(best)}\n")
+        f_loss.write(f"{fit_best}\n")
         f_argmin.write(f"{argmin_best}\n")
 
         if dim < 2:
@@ -196,7 +198,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
 
     f_final_argmin.write(f"{argmin_best}")
     f_resume_argmin.write(f"{argmin_best}\n")
-    f_resume_loss.write(f"{fit(best)}\n")
+    f_resume_loss.write(f"{fit_best}\n")
 
     f.close()
     f_loss.close()

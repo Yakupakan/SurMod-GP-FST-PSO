@@ -14,8 +14,8 @@ def ackley_2d(x, y):
 
 
 def ackley_3d(x, y, z):
-    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 2 * (x ** 2 + y ** 2 + z ** 2)))) - np.exp(
-        1 / 2 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y) + np.cos(2 * np.pi * z)))
+    return 20 + np.e - 20 * np.exp((-0.2 * np.sqrt(1 / 3 * (x ** 2 + y ** 2 + z ** 2)))) - np.exp(
+        1 / 3 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y) + np.cos(2 * np.pi * z)))
 
 
 def alpine(x):
@@ -56,7 +56,7 @@ def michalewicz_2d(x, y):
 
 
 def michalewicz_3d(x, y, z):
-    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20) - (np.sin(z) * np.sin(2 * z ** 2 / np.pi) ** 20)
+    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20) - (np.sin(z) * np.sin(3 * z ** 2 / np.pi) ** 20)
 
 
 def rastring(x):
@@ -70,7 +70,7 @@ def rastring_2d(x, y):
 
 
 def rastring_3d(x, y, z):
-    return 20 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y)) + (z ** 2 - 10 * np.cos(2 * np.pi * z))
+    return 30 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y)) + (z ** 2 - 10 * np.cos(2 * np.pi * z))
 
 
 def rosenbrock_2d(x, y):
@@ -78,7 +78,7 @@ def rosenbrock_2d(x, y):
 
 
 def rosenbrock_3d(x, y, z):
-    return (x - 1) ** 2 + (y - 1) ** 2 + 10 * (y - x ** 2) ** 2 + 10 * (z - y ** 2) ** 2
+    return (x - 1) ** 2 + (y - 1) ** 2 + 100 * (- y + x ** 2) ** 2 + 100 * (- z + y ** 2) ** 2
 
 
 def schwefel(x):
