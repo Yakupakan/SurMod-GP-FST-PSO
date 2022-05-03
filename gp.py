@@ -21,7 +21,7 @@ snap = 1
 if function_name == "griewank":
     max_fit = 10 ** 5
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
-elif function_name == "schwefel":
+elif function_name == "schwefel" or function_name == "rosenbrock":
     max_fit = 10 ** 5
     min_con, max_con = -10 ** 3, 10 ** 3
 elif function_name == "vincent" or function_name == "michalewicz":

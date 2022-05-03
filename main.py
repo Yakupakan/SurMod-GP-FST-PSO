@@ -29,7 +29,7 @@ if not os.path.exists(dir_results):
 # dir_results = dir_results + "/" + fitn + "/"
 # if not os.path.exists(dir_results):
 #     os.mkdir(dir_results)
-if fitn == "strong_fitness_2d" or fitn == "strong_fitness_contour_2d":
+if dim == 2:
     dir_results = dir_results + "/" + str(number_interpolation_point) + "/"
     if not os.path.exists(dir_results):
         os.mkdir(dir_results)

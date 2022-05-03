@@ -10,7 +10,7 @@ num_iteration = 100  # int(sys.argv[3])
 
 num_runs = 30
 
-function_name = "schwefel"
+function_name = "rosenbrock"
 dim = 3
 
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
