@@ -46,6 +46,18 @@ def plot_alpine_3d():
     plt.show()
 
 
+def plot_deceptive_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(0, 1, 100)
+    y = np.linspace(0, 1, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[deceptive_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
 def plot_griewank(interv):
     y = [griewank([el]) for el in interv]
     plt.plot(interv, y)
@@ -125,10 +137,22 @@ def plot_schwefel_3d():
 def plot_shubert_3d():
     ax = plt.axes(projection='3d')
 
-    x = np.linspace(-10, 10, 100)
-    y = np.linspace(-10, 10, 100)
+    x = np.linspace(-5.12, 5.12, 100)
+    y = np.linspace(-5.12, 5.12, 100)
     X, Y = np.meshgrid(x, y)
     Z = np.array([[shubert_2d(x_, y_) for x_ in x] for y_ in y])
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    plt.show()
+
+
+def plot_sum_power_3d():
+    ax = plt.axes(projection='3d')
+
+    x = np.linspace(-1, 1, 100)
+    y = np.linspace(-1, 1, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = np.array([[sum_power_2d(x_, y_) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
     plt.show()
