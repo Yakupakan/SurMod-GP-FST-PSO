@@ -18,12 +18,12 @@ if fitn == "strong_fitness_3d":
     from fitness import strong_fitness_3d as fit
 
 snap = 1
-if function_name == "griewank":
+if function_name == "griewank" or function_name == "shubert":
     max_fit = 10 ** 5
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 elif function_name == "schwefel" or function_name == "rosenbrock":
-    max_fit = 10 ** 5
-    min_con, max_con = -10 ** 3, 10 ** 3
+    max_fit = 10 ** 3
+    min_con, max_con = - 2000, 2000
 elif function_name == "vincent" or function_name == "michalewicz":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
@@ -137,6 +137,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
             offsprings.append(of2)
 
         pop = [mutation_attention(x, p_m) for x in offsprings]
+        pop.append(best)
 
         enablePrint()
         candidate_best = min(pop, key=fit)

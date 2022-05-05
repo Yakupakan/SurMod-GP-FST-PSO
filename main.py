@@ -44,7 +44,7 @@ if fitn == "strong_fitness_2d":
 print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
 print(enum_set)
 
-for run in range(num_runs):
+for run in range(0, num_runs):
     best = linear_GP(fit,
                      pop_size=pop_size,
                      n_iter=num_iteration,
