@@ -25,6 +25,19 @@ function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
 enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 interval = interval_dict[function_name]
 
+min_dict = {"alpine": 0,
+            "ackley": 0,
+            "deceptive": -1,
+            "griewank": 0,
+            "michalewicz": None,
+            "rastring": 0,
+            "rosenbrock": 0,  # [-2, 2]
+            "schwefel": 0,
+            "shubert": None,
+            "sum_power": 0,
+            "vincent": -dim,
+            "xinshe": 0}
+
 
 def mk_dir(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=num_iteration, enum_set=enum_set):
     dir = enum_set.replace(" ", "_") + "/" + str(dim) + "/" + fun + "/" + "prg_size" + str(dim_prg) + "_pop_size" + str(
@@ -43,9 +56,8 @@ def bp(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=
                 if contents:
                     losses.append(float(contents[-1]))
     if losses:
-        ax = sns.boxplot(data=losses,
-                         linewidth=2) # ,
-                         #showfliers=False)
+        sns.boxplot(data=losses,
+                    linewidth=2)
         plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss/bp_" + function + ".png")
@@ -64,13 +76,13 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
                 if contents:
                     losses.append(float(contents[-1]))
     if losses:
-        ax = sns.boxplot(data=losses,
-                         linewidth=2,
-                         showfliers=False)
+        sns.boxplot(data=losses,
+                    linewidth=2,
+                    showfliers=False)
         plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
-        # plt.show()
+        plt.show()
         plt.close()
 
 

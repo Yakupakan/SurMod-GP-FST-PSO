@@ -6,12 +6,13 @@ import numpy as np
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
 pop_size = 50  # int(sys.argv[2])
-num_iteration = 100  # int(sys.argv[3])
+num_iteration = 500  # int(sys.argv[3])
 
+flag_plot = 1
 num_runs = 30
 
-function_name = "shubert"
-dim = 3
+function_name = "michalewicz"
+dim = 2
 
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
 
@@ -39,5 +40,6 @@ if dim == 2:
 if dim == 3:
     fitn = "strong_fitness_3d"  # "strong_fitness_2d_weighted"
 
-number_interpolation_point = 15  # 51
+if flag_plot == 1:
+    number_interpolation_point = 101  # 51
 

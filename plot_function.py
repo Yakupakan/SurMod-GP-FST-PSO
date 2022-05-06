@@ -14,16 +14,40 @@ def plot_ackley(x):
     plt.close()
 
 
-def plot_ackley_3d():
+def plot_3d(name_function):
     ax = plt.axes(projection='3d')
 
-    x = np.linspace(-30, 30, 100)
-    y = np.linspace(-30, 30, 100)
+    x = np.linspace(interval_dict[name_function][0][0], interval_dict[name_function][0][1], 100)
+    y = np.linspace(interval_dict[name_function][0][0], interval_dict[name_function][0][1], 100)
     X, Y = np.meshgrid(x, y)
-    Z = np.array([[ackley_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "ackley":
+        Z = np.array([[ackley_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "alpine":
+        Z = np.array([[alpine_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "deceptive":
+        Z = np.array([[deceptive_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "griewank":
+        Z = np.array([[griewank_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "michalewicz":
+        Z = np.array([[michalewicz_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "rastring":
+        Z = np.array([[rastring_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "rosenbrock":
+        Z = np.array([[rosenbrock_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "schwefel":
+        Z = np.array([[schwefel_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "shubert":
+        Z = np.array([[shubert_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "sum_power":
+        Z = np.array([[sum_power_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "xinshe":
+        Z = np.array([[xinshe_2d(x_, y_) for x_ in x] for y_ in y])
+    if name_function == "vincent":
+        Z = np.array([[vincent_2d(x_, y_) for x_ in x] for y_ in y])
 
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
     plt.show()
+    plt.savefig("plot/plot_2d/" + name_function + ".png")
 
 
 def plot_alpine(interv):
@@ -34,30 +58,6 @@ def plot_alpine(interv):
     plt.close()
 
 
-def plot_alpine_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-10, 10, 100)
-    y = np.linspace(-10, 10, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[alpine_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
-def plot_deceptive_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(0, 1, 100)
-    y = np.linspace(0, 1, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[deceptive_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
 def plot_griewank(interv):
     y = [griewank([el]) for el in interv]
     plt.plot(interv, y)
@@ -66,84 +66,12 @@ def plot_griewank(interv):
     plt.close()
 
 
-def plot_griewank_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-600, 600, 100)
-    y = np.linspace(-600, 600, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[griewank_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
-def plot_michalewicz_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(0, np.pi, 100)
-    y = np.linspace(0, np.pi, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[michalewicz_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
 def plot_rastring(interv):
     y = [rastring([el]) for el in interv]
     plt.plot(interv, y)
     plt.title("rastring")
     plt.show()
     plt.close()
-
-
-def plot_rastring_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-5.12, 5.12, 100)
-    y = np.linspace(-5.12, 5.12, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[rastring_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
-def plot_rosenbrock_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-2, 2, 100)
-    y = np.linspace(-2, 2, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[rosenbrock_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
-def plot_schwefel_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-500, 500, 100)
-    y = np.linspace(-500, 500, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[schwefel_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
-
-
-def plot_shubert_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-5.12, 5.12, 100)
-    y = np.linspace(-5.12, 5.12, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[shubert_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
 
 
 def plot_sum_power_3d():
@@ -163,19 +91,7 @@ def plot_xinshe(interv):
     plt.plot(interv, y)
     plt.title("xinshe")
     plt.show()
-    plt.close()
-
-
-def plot_xinshe_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-    y = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[xinshe_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
+    plt.savefig("plot/plot_2d/xinshe.png")
 
 
 def plot_vincent(interv):
@@ -184,18 +100,6 @@ def plot_vincent(interv):
     plt.title("vincent")
     plt.show()
     plt.close()
-
-
-def plot_vincent_3d():
-    ax = plt.axes(projection='3d')
-
-    x = np.linspace(0.25, 10, 100)
-    y = np.linspace(0.25, 10, 100)
-    X, Y = np.meshgrid(x, y)
-    Z = np.array([[vincent_2d(x_, y_) for x_ in x] for y_ in y])
-
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-    plt.show()
 
 
 def plot_prg(prg, x, dire=None, it=-1):
@@ -250,8 +154,8 @@ def plot_prg_2d(prg, dire=None, it=-1):
     Z = np.array([[function_from_prg([x_, y_]) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
-    plt.suptitle(function)
-    plt.title("best prg at gen: " + str(it))
+    # plt.suptitle(function)
+    # plt.title("best prg at gen: " + str(it))
     if it == -1:
        plt.show()
     if dire:

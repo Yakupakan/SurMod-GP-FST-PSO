@@ -12,19 +12,21 @@ from plot_function import plot_prg, plot_prg_2d
 
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
-if fitn == "strong_fitness_2d":
+if fitn == "strong_fitness_2d" and flag_plot == 1:
     from fitness import strong_fitness_2d as fit
+if fitn == "strong_fitness_2d" and flag_plot == 0:
+    from fitness import fitness_2d as fit
 if fitn == "strong_fitness_3d":
     from fitness import strong_fitness_3d as fit
 
 snap = 1
 if function_name == "griewank" or function_name == "shubert":
-    max_fit = 10 ** 5
+    max_fit = 10 ** 3
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 elif function_name == "schwefel" or function_name == "rosenbrock":
     max_fit = 10 ** 3
     min_con, max_con = - 2000, 2000
-elif function_name == "vincent" or function_name == "michalewicz":
+elif function_name == "vincent":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
 else:
@@ -145,31 +147,6 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
         if fit(candidate_best) < fit_best:
             best = candidate_best
             fit_best = fit(best)
-        '''
-        if function_name != "michalewicz" and function_name != "vincent":
-            if fit_best < 10 ** (-10):
-                print("termination criteria satisfied")
-
-                print(f"GEN: {i} \t best fitness: \t {fit_best}")
-                f.write(f"GEN: {i} \t best fitness: \t {fit_best}\n")
-
-                try:
-                    argmin_best = fst_pso_loss(best)
-                except Exception:
-                    print("not able to compute argmin within fst-pso")
-                    argmin_best = [math.inf, math.inf]
-
-                print(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
-                f.write(f"GEN: {i} \t argmin best prg: \t {argmin_best}\n")
-
-                f_loss.write(f"{fit_best}\n")
-                f_argmin.write(f"{argmin_best}\n")
-                f_final_argmin.write(f"{argmin_best}")
-                f_resume_argmin.write(f"{argmin_best}\n")
-                f_resume_loss.write(f"{fit_best}\n")
-
-                return best
-        '''
 
         try:
             argmin_best = fst_pso_loss(best)
@@ -193,7 +170,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
             x = np.linspace(interval[0][0], interval[0][1], 10001)
             if dire and i % snap == 0:
                 plot_prg(best, x, dire, i)
-        if dim == 2:
+        if dim == 2 and flag_plot == 1:
             if dire and i % snap == 0:
                 plot_prg_2d(best, dire, i)
 
