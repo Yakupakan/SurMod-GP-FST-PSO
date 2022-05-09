@@ -32,6 +32,11 @@ def alpine_3d(x, y, z):
     return np.abs(x * np.sin(x) + 0.1 * x) + np.abs(y * np.sin(y) + 0.1 * y) + np.abs(z * np.sin(z) + 0.1 * z)
 
 
+def alpine_5d(x1, x2, x3, x4, x5):
+    return np.abs(x1 * np.sin(x1) + 0.1 * x1) + np.abs(x2 * np.sin(x2) + 0.1 * x2) + np.abs(x3 * np.sin(x3) + 0.1 * x3) \
+           + np.abs(x4 * np.sin(x4) + 0.1 * x4) + np.abs(x5 * np.sin(x5) + 0.1 * x5)
+
+
 def griewank(x):
     D = len(x)
     y = 1 / 4000 * np.sum([x[i] ** 2 for i in range(D)]) - np.prod(
@@ -53,7 +58,7 @@ def michalewicz(x):
 
 
 def michalewicz_2d(x, y):
-    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
+    return 2 - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
 
 
 def michalewicz_3d(x, y, z):
@@ -112,7 +117,7 @@ def shubert_2d(x, y):
         6 * y + 1))
     res = res_x * res_y
 
-    return res
+    return 200 + res
 
 
 def shubert_3d(x, y, z):

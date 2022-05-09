@@ -9,10 +9,11 @@ pop_size = 50  # int(sys.argv[2])
 num_iteration = 500  # int(sys.argv[3])
 
 flag_plot = 1
+flag_countour = 0
 num_runs = 30
 
-function_name = "michalewicz"
-dim = 2
+function_name = "alpine"
+dim = 5
 
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
 
@@ -35,11 +36,16 @@ interval_dict = {"alpine": [[-10, 10]],
 interval = interval_dict[function_name]
 
 function_set = ["alpine", "ackley", "griewank", "michalewicz", "rastring", "rosenbrock", "schwefel", "vincent", "xinshe"]
-if dim == 2:
+if dim == 2 and flag_plot == 1:
     fitn = "strong_fitness_2d"  # "strong_fitness_2d_weighted"
+if dim == 2 and flag_plot == 1 and flag_countour == 1:
+    fitn = "strong_fitness_contour_2d"
+if dim == 2 and flag_plot == 0:
+    fitn = "fitness_2d"  # "strong_fitness_2d_weighted"
 if dim == 3:
     fitn = "strong_fitness_3d"  # "strong_fitness_2d_weighted"
+if dim == 5:
+    fitn = "strong_fitness_5d"
 
-if flag_plot == 1:
-    number_interpolation_point = 101  # 51
+number_interpolation_point = 51  # 51
 

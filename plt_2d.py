@@ -56,8 +56,8 @@ def plot_prg_2d(fun_name):
     plt.close()
 
 
-plot_3d("michalewicz")
+# plot_3d("michalewicz")
 
-# for name_function in bf_dict.keys():
-#    plot_3d(name_function)
-#    plot_prg_2d(name_function)
+for name_function in bf_dict.keys():
+   plot_3d(name_function)
+   plot_prg_2d(name_function)

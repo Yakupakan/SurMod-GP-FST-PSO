@@ -78,11 +78,13 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
     if losses:
         sns.boxplot(data=losses,
                     linewidth=2,
+                    color='#F08030',
+                    boxprops=dict(alpha=.75),
                     showfliers=False)
         plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
-        plt.show()
+        # plt.show()
         plt.close()
 
 
@@ -99,7 +101,8 @@ def loss(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteratio
     col_average = [sum(los) / len(los) for los in zip(*losses)]
     if losses:
         ax = sns.lineplot(data=col_average,
-                          linewidth=2)
+                          linewidth=2,
+                          color='#F08030')
         # plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.title(function)
         plt.savefig(dir + "bp_fitness.png")

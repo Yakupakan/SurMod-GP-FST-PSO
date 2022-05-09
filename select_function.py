@@ -15,6 +15,8 @@ if function_name == "alpine":
         from benchmark_function import alpine_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import alpine_3d as benchmark_fun
+    if dim == 5:
+        from benchmark_function import alpine_5d as benchmark_fun
 
 if function_name == "deceptive":
     if dim == 2:

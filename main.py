@@ -14,7 +14,7 @@ from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
 
 
-warnings.filterwarnings("ignore")
+# warnings.filterwarnings("ignore")
 
 
 dir_results = enum_set.replace(" ", "_") + "/"
@@ -26,18 +26,21 @@ if not os.path.exists(dir_results):
 dir_results = dir_results + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
+dir_results = dir_results + fitn + "/"
+if not os.path.exists(dir_results):
+    os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 
 print(function)
 print(fitn)
-if fitn == "strong_fitness_2d":
+if fitn == "strong_fitness_2d" or fitn == "strong_fitness_contour_2d":
     print(number_interpolation_point)
 print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
 print(enum_set)
 
-for run in range(0, 1):  # num_runs):
+for run in range(0, num_runs):  # num_runs):
     best = linear_GP(fit,
                      pop_size=pop_size,
                      n_iter=num_iteration,

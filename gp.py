@@ -12,20 +12,24 @@ from plot_function import plot_prg, plot_prg_2d
 
 if fitn == "strong_fitness_4":
     from fitness import strong_fitness_4 as fit
-if fitn == "strong_fitness_2d" and flag_plot == 1:
+if fitn == "strong_fitness_2d":
     from fitness import strong_fitness_2d as fit
-if fitn == "strong_fitness_2d" and flag_plot == 0:
+if fitn == "strong_fitness_contour_2d":
+    from fitness import strong_fitness_contour_2d as fit
+if fitn == "fitness_2d":
     from fitness import fitness_2d as fit
 if fitn == "strong_fitness_3d":
     from fitness import strong_fitness_3d as fit
+if fitn == "strong_fitness_5d":
+    from fitness import strong_fitness_5d as fit
 
 snap = 1
 if function_name == "griewank" or function_name == "shubert":
-    max_fit = 10 ** 3
+    max_fit = 10 ** 4
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
 elif function_name == "schwefel" or function_name == "rosenbrock":
-    max_fit = 10 ** 3
-    min_con, max_con = - 2000, 2000
+    max_fit = 10 ** 6
+    min_con, max_con = - 2500, 2500
 elif function_name == "vincent":
     max_fit = 10 ** 3
     min_con, max_con = -2, 2  # minimum and maximum value that constants can assume

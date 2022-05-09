@@ -46,7 +46,7 @@ def plot_3d(name_function):
         Z = np.array([[vincent_2d(x_, y_) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
-    plt.show()
+    # plt.show()
     plt.savefig("plot/plot_2d/" + name_function + ".png")
 
 
@@ -154,8 +154,6 @@ def plot_prg_2d(prg, dire=None, it=-1):
     Z = np.array([[function_from_prg([x_, y_]) for x_ in x] for y_ in y])
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
-    # plt.suptitle(function)
-    # plt.title("best prg at gen: " + str(it))
     if it == -1:
        plt.show()
     if dire:
