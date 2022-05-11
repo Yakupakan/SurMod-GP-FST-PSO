@@ -24,10 +24,10 @@ if fitn == "strong_fitness_5d":
     from fitness import strong_fitness_5d as fit
 
 snap = 1
-if function_name == "griewank" or function_name == "shubert":
+if function_name == "griewank":
     max_fit = 10 ** 4
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
-elif function_name == "schwefel" or function_name == "rosenbrock":
+elif function_name == "schwefel" or function_name == "rosenbrock" or function_name == "shubert":
     max_fit = 10 ** 6
     min_con, max_con = - 2500, 2500
 elif function_name == "vincent":

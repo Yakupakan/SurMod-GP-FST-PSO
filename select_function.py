@@ -7,6 +7,8 @@ if function_name == "ackley":
         from benchmark_function import ackley_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import ackley_3d as benchmark_fun
+    if dim == 5:
+        from benchmark_function import ackley_5d as benchmark_fun
 
 if function_name == "alpine":
     if dim == 1:
@@ -31,6 +33,8 @@ if function_name == "griewank":
         from benchmark_function import griewank_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import griewank_3d as benchmark_fun
+    if dim == 5:
+        from benchmark_function import griewank_5d as benchmark_fun
 
 if function_name == "michalewicz":
     if dim == 2:

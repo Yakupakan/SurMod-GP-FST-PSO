@@ -18,6 +18,13 @@ def ackley_3d(x, y, z):
         1 / 3 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y) + np.cos(2 * np.pi * z)))
 
 
+def ackley_5d(x1, x2, x3, x4, x5):
+    return 20 + np.e - 20 * np.exp(
+        (-0.2 * np.sqrt(1 / 5 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2 + x5 ** 2)))) - np.exp(
+        1 / 5 * (np.cos(2 * np.pi * x1) + np.cos(2 * np.pi * x2) + np.cos(2 * np.pi * x3) + np.cos(
+            2 * np.pi * x4) + np.cos(2 * np.pi * x5)))
+
+
 def alpine(x):
     D = len(x)
     y = np.sum([(np.abs(x[i] * np.sin(x[i]) + 0.1 * x[i])) for i in range(D)])
@@ -51,6 +58,11 @@ def griewank_2d(x, y):
 def griewank_3d(x, y, z):
     return 1 / 4000 * (x ** 2 + y ** 2 + z ** 2) - np.cos(x / np.sqrt(1)) * np.cos(y / np.sqrt(2)) * np.cos(
         z / np.sqrt(3)) + 1
+
+
+def griewank_5d(x1, x2, x3, x4, x5):
+    return 1 / 4000 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2 + x5 ** 2) - np.cos(x1 / np.sqrt(1)) * np.cos(
+        x2 / np.sqrt(2)) * np.cos(x3 / np.sqrt(3)) * np.cos(x4 / np.sqrt(4)) * np.cos(x5 / np.sqrt(5)) + 1
 
 
 def michalewicz(x):

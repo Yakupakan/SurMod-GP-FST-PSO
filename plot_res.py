@@ -12,18 +12,19 @@ matplotlib.rc('font', **{'size': 6, 'weight': 'bold'})
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-pop_size = 50  # int(sys.argv[2])
+pop_size = 100  # int(sys.argv[2])
 num_iteration = 100  # int(sys.argv[3])
 
-num_runs = 30
-
 function_name = "alpine"
-dim = 3
 
+num_runs = 30
+dim = 5
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
-
-enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 interval = interval_dict[function_name]
+
+fitness_2d = "fitness_2d"
+enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
+
 
 min_dict = {"alpine": 0,
             "ackley": 0,
@@ -42,6 +43,9 @@ min_dict = {"alpine": 0,
 def mk_dir(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=num_iteration, enum_set=enum_set):
     dir = enum_set.replace(" ", "_") + "/" + str(dim) + "/" + fun + "/" + "prg_size" + str(dim_prg) + "_pop_size" + str(
         pop_size) + "_iter" + str(num_iteration) + "/"
+    if dim == 2:
+        dir = enum_set.replace(" ", "_") + "/" + str(dim) + "/" + fun + "/" + fitness_2d + "/" + "prg_size" \
+              + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
     return dir
 
 
@@ -84,7 +88,7 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
         plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
-        # plt.show()
+        plt.show()
         plt.close()
 
 

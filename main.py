@@ -14,7 +14,7 @@ from plot_function import plot_ackley, plot_prg
 from plot import fitness_plot
 
 
-# warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore")
 
 
 dir_results = enum_set.replace(" ", "_") + "/"
@@ -26,9 +26,10 @@ if not os.path.exists(dir_results):
 dir_results = dir_results + function + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
-dir_results = dir_results + fitn + "/"
-if not os.path.exists(dir_results):
-    os.mkdir(dir_results)
+if dim == 2:
+    dir_results = dir_results + fitn + "/"
+    if not os.path.exists(dir_results):
+        os.mkdir(dir_results)
 dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_size) + "_iter" + str(num_iteration) + "/"
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
