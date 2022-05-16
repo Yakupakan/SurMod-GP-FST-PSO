@@ -18,6 +18,13 @@ def ackley_3d(x, y, z):
         1 / 3 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y) + np.cos(2 * np.pi * z)))
 
 
+def ackley_4d(x1, x2, x3, x4):
+    return 20 + np.e - 20 * np.exp(
+        (-0.2 * np.sqrt(1 / 4 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2)))) - np.exp(
+        1 / 4 * (np.cos(2 * np.pi * x1) + np.cos(2 * np.pi * x2) + np.cos(2 * np.pi * x3) + np.cos(
+            2 * np.pi * x4)))
+
+
 def ackley_5d(x1, x2, x3, x4, x5):
     return 20 + np.e - 20 * np.exp(
         (-0.2 * np.sqrt(1 / 5 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2 + x5 ** 2)))) - np.exp(
@@ -37,6 +44,11 @@ def alpine_2d(x, y):
 
 def alpine_3d(x, y, z):
     return np.abs(x * np.sin(x) + 0.1 * x) + np.abs(y * np.sin(y) + 0.1 * y) + np.abs(z * np.sin(z) + 0.1 * z)
+
+
+def alpine_4d(x1, x2, x3, x4):
+    return np.abs(x1 * np.sin(x1) + 0.1 * x1) + np.abs(x2 * np.sin(x2) + 0.1 * x2) + np.abs(x3 * np.sin(x3) + 0.1 * x3) \
+           + np.abs(x4 * np.sin(x4) + 0.1 * x4)
 
 
 def alpine_5d(x1, x2, x3, x4, x5):
@@ -60,6 +72,11 @@ def griewank_3d(x, y, z):
         z / np.sqrt(3)) + 1
 
 
+def griewank_4d(x1, x2, x3, x4):
+    return 1 / 4000 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2) - np.cos(x1 / np.sqrt(1)) * np.cos(
+        x2 / np.sqrt(2)) * np.cos(x3 / np.sqrt(3)) * np.cos(x4 / np.sqrt(4)) + 1
+
+
 def griewank_5d(x1, x2, x3, x4, x5):
     return 1 / 4000 * (x1 ** 2 + x2 ** 2 + x3 ** 2 + x4 ** 2 + x5 ** 2) - np.cos(x1 / np.sqrt(1)) * np.cos(
         x2 / np.sqrt(2)) * np.cos(x3 / np.sqrt(3)) * np.cos(x4 / np.sqrt(4)) * np.cos(x5 / np.sqrt(5)) + 1
@@ -78,6 +95,11 @@ def michalewicz_3d(x, y, z):
             np.sin(z) * np.sin(3 * z ** 2 / np.pi) ** 20)
 
 
+def michalewicz_4d(x1, x2, x3, x4):
+    return - (np.sin(x1) * np.sin(x1 ** 2 / np.pi) ** 20) - (np.sin(x2) * np.sin(2 * x2 ** 2 / np.pi) ** 20) - (
+            np.sin(x3) * np.sin(3 * x3 ** 2 / np.pi) ** 20) - (np.sin(x4) * np.sin(4 * x4 ** 2 / np.pi) ** 20)
+
+
 def rastring(x):
     D = len(x)
     y = 10 * D + np.sum([(x[i] ** 2 - 10 * np.cos(2 * np.pi * x[i])) for i in range(D)])
@@ -91,6 +113,11 @@ def rastring_2d(x, y):
 def rastring_3d(x, y, z):
     return 30 + (x ** 2 - 10 * np.cos(2 * np.pi * x)) + (y ** 2 - 10 * np.cos(2 * np.pi * y)) + (
             z ** 2 - 10 * np.cos(2 * np.pi * z))
+
+
+def rastring_4d(x1, x2, x3, x4):
+    return 40 + (x1 ** 2 - 10 * np.cos(2 * np.pi * x1)) + (x2 ** 2 - 10 * np.cos(2 * np.pi * x2)) + (
+            x3 ** 2 - 10 * np.cos(2 * np.pi * x3)) + (x4 ** 2 - 10 * np.cos(2 * np.pi * x4))
 
 
 def rosenbrock_2d(x, y):
@@ -114,6 +141,11 @@ def schwefel_2d(x, y):
 def schwefel_3d(x, y, z):
     return 3 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y))) - z * np.sin(
         np.sqrt(np.abs(z)))
+
+
+def schwefel_4d(x1, x2, x3, x4):
+    return 4 * 418.9829 - x1 * np.sin(np.sqrt(np.abs(x1))) - x2 * np.sin(np.sqrt(np.abs(x2))) - x3 * np.sin(
+        np.sqrt(np.abs(x3))) - x4 * np.sin(np.sqrt(np.abs(x4)))
 
 
 def shubert(x):
@@ -140,6 +172,25 @@ def shubert_3d(x, y, z):
     res_z = (1 * np.cos(2 * z + 1) + 2 * np.cos(3 * z + 1) + 3 * np.cos(4 * z + 1) + 4 * np.cos(5 * z + 1) + 5 * np.cos(
         6 * z + 1))
     res = res_x * res_y * res_z
+
+    return res
+
+
+def shubert_4d(x1, x2, x3, x4):
+    r_x1 = (1 * np.cos(2 * x1 + 1) + 2 * np.cos(3 * x1 + 1) + 3 * np.cos(4 * x1 + 1) + 4 * np.cos(
+        5 * x1 + 1) + 5 * np.cos(
+        6 * x1 + 1))
+    r_x2 = (1 * np.cos(2 * x2 + 1) + 2 * np.cos(3 * x2 + 1) + 3 * np.cos(4 * x2 + 1) + 4 * np.cos(
+        5 * x2 + 1) + 5 * np.cos(
+        6 * x2 + 1))
+    r_x3 = (1 * np.cos(2 * x3 + 1) + 2 * np.cos(3 * x3 + 1) + 3 * np.cos(4 * x3 + 1) + 4 * np.cos(
+        5 * x3 + 1) + 5 * np.cos(
+        6 * x3 + 1))
+    r_x4 = (1 * np.cos(2 * x4 + 1) + 2 * np.cos(3 * x4 + 1) + 3 * np.cos(4 * x4 + 1) + 4 * np.cos(
+        5 * x4 + 1) + 5 * np.cos(
+        6 * x4 + 1))
+
+    res = r_x1 * r_x2 * r_x3 * r_x4
 
     return res
 
@@ -173,6 +224,14 @@ def xinshe_3d(x, y, z):
     return np.abs(x) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1) \
            + np.abs(y) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1) \
            + np.abs(z) * np.abs(np.exp(np.sin(x ** 2) + np.sin(y ** 2) + np.sin(z ** 2))) ** (-1)
+
+
+def xinshe_4d(x1, x2, x3, x4):
+    return np.abs(x1) * np.abs(np.exp(np.sin(x1 ** 2) + np.sin(x2 ** 2) + np.sin(x3 ** 2) + np.sin(x4 ** 2))) ** (
+        -1) + np.abs(x2) * np.abs(np.exp(np.sin(x1 ** 2) + np.sin(x2 ** 2) + np.sin(x3 ** 2) + np.sin(x4 ** 2))) ** (
+               -1) + np.abs(x3) * np.abs(
+        np.exp(np.sin(x1 ** 2) + np.sin(x2 ** 2) + np.sin(x3 ** 2) + np.sin(x4 ** 2))) ** (-1) + np.abs(x4) * np.abs(
+        np.exp(np.sin(x1 ** 2) + np.sin(x2 ** 2) + np.sin(x3 ** 2) + np.sin(x4 ** 2))) ** (-1)
 
 
 def sum_power_2d(x, y):

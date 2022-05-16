@@ -12,13 +12,13 @@ matplotlib.rc('font', **{'size': 6, 'weight': 'bold'})
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-pop_size = 100  # int(sys.argv[2])
+pop_size = 50  # int(sys.argv[2])
 num_iteration = 100  # int(sys.argv[3])
 
 function_name = "alpine"
 
 num_runs = 30
-dim = 5
+dim = 2
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
 interval = interval_dict[function_name]
 
@@ -78,7 +78,8 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
             with open(dir_runs) as f:
                 contents = f.readlines()
                 if contents:
-                    losses.append(float(contents[-1]))
+                    contents = [float(cont) for cont in contents]
+                    losses.append(min(contents))
     if losses:
         sns.boxplot(data=losses,
                     linewidth=2,

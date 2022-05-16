@@ -4,12 +4,12 @@ Hyperparameter settings of the problem
 import numpy as np
 
 
-function_name = "griewank"
-dim = 5
+function_name = "xinshe"
+dim = 4
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-if dim == 5:
+if dim == 4 or dim == 5:
     pop_size = 100  # int(sys.argv[2])
 if dim == 2 or dim == 3:
     pop_size = 50
@@ -26,15 +26,15 @@ enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
 
 interval_dict = {"alpine": [[-10, 10]],  # 2
                  "ackley": [[-30, 30]],  # 2
-                 "deceptive": [[0, 1]],
+                 "deceptive": [[0, 1]],  # 2
                  "griewank": [[-600, 600]],  # 2
                  "michalewicz": [[0, np.pi]],  # 2
                  "rastring":  [[-5.12, 5.12]],  # 2
                  "rosenbrock": [[-5, 10]],  # [-2, 2]
-                 "schwefel": [[-100, 500]],
+                 "schwefel": [[-100, 500]],  # 2
                  "shubert": [[-5.12, 5.12]],  # 2
                  "sum_power": [[-1, 1]],
-                 "vincent": [[0.25, 10]],
+                 "vincent": [[0.25, 10]],  # 2
                  "xinshe": [[-2 * np.pi, 2 * np.pi]]  # 2
                  }
 
@@ -49,6 +49,8 @@ if dim == 2 and flag_plot == 0:
     fitn = "fitness_2d"  # "strong_fitness_2d_weighted"
 if dim == 3:
     fitn = "strong_fitness_3d"  # "strong_fitness_2d_weighted"
+if dim == 4:
+    fitn = "strong_fitness_4d"
 if dim == 5:
     fitn = "strong_fitness_5d"
 

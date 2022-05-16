@@ -20,6 +20,8 @@ if fitn == "fitness_2d":
     from fitness import fitness_2d as fit
 if fitn == "strong_fitness_3d":
     from fitness import strong_fitness_3d as fit
+if fitn == "strong_fitness_4d":
+    from fitness import strong_fitness_4d as fit
 if fitn == "strong_fitness_5d":
     from fitness import strong_fitness_5d as fit
 
@@ -47,7 +49,11 @@ def random_program_attention(n):
             if random.random() < 0.5:  # 0.5
                 op = random.choice(func)
             else:
-                op = random.randint(min_con, max_con)  # (-2, 2)
+                if function_name == "shubert" or function_name == "michalewicz" or function_name == "schwefel":
+                    op = random.uniform(0, 1)
+                    op = round(op, 2)
+                else:
+                    op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
         fit_prg = fit(prg)
         if fit_prg and fit_prg < max_fit:
@@ -99,7 +105,11 @@ def mutation_attention(x, p_m):
             if random.random() < 0.5:  # 0.5
                 op = random.choice(list(opcodes))
             else:
-                op = random.randint(min_con, max_con)  # (-2, 2)
+                if function_name == "shubert" or function_name == "michalewicz" or function_name == "schwefel":
+                    op = random.uniform(0, 1)
+                    op = round(op, 2)
+                else:
+                    op = random.randint(min_con, max_con)  # (-2, 2)
             return op
         else:
             return b

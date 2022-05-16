@@ -150,6 +150,32 @@ def strong_fitness_3d(prg, n=number_interpolation_point):
     return y_benchmark_function  # + rmse
 
 
+def strong_fitness_4d(prg, n=number_interpolation_point):
+    """
+    Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
+    that the function and the approx program have some points in common (here n)
+    :param prg: program that approximate the function
+    :param n: number of point for the rmse computation
+    :return: fitness
+    """
+    try:
+        x_coord_best = fst_pso_loss(prg)
+    except Exception:
+        return math.inf
+    if not x_coord_best or len(x_coord_best) < 2:
+        return math.inf
+    for coord_best in x_coord_best:
+        if not interval[0][0] < coord_best < interval[0][1]:
+            return math.inf
+
+    try:
+        y_benchmark_function = benchmark_fun(x_coord_best[0], x_coord_best[1], x_coord_best[2], x_coord_best[3])
+    except Exception:
+        return math.inf
+
+    return y_benchmark_function  # + rmse
+
+
 def strong_fitness_5d(prg, n=number_interpolation_point):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and

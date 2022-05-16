@@ -7,6 +7,8 @@ if function_name == "ackley":
         from benchmark_function import ackley_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import ackley_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import ackley_4d as benchmark_fun
     if dim == 5:
         from benchmark_function import ackley_5d as benchmark_fun
 
@@ -17,6 +19,8 @@ if function_name == "alpine":
         from benchmark_function import alpine_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import alpine_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import alpine_4d as benchmark_fun
     if dim == 5:
         from benchmark_function import alpine_5d as benchmark_fun
 
@@ -33,6 +37,8 @@ if function_name == "griewank":
         from benchmark_function import griewank_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import griewank_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import griewank_4d as benchmark_fun
     if dim == 5:
         from benchmark_function import griewank_5d as benchmark_fun
 
@@ -41,6 +47,8 @@ if function_name == "michalewicz":
         from benchmark_function import michalewicz_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import michalewicz_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import michalewicz_4d as benchmark_fun
 
 if function_name == "rastring":
     if dim == 1:
@@ -49,6 +57,8 @@ if function_name == "rastring":
         from benchmark_function import rastring_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import rastring_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import rastring_4d as benchmark_fun
 
 if function_name == "rosenbrock":
     if dim == 2:
@@ -63,6 +73,8 @@ if function_name == "schwefel":
         from benchmark_function import schwefel_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import schwefel_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import schwefel_4d as benchmark_fun
 
 if function_name == "shubert":
     if dim == 1:
@@ -71,6 +83,8 @@ if function_name == "shubert":
         from benchmark_function import shubert_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import shubert_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import shubert_4d as benchmark_fun
 
 if function_name == "vincent":
     if dim == 1:
@@ -87,6 +101,8 @@ if function_name == "xinshe":
         from benchmark_function import xinshe_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import xinshe_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import xinshe_4d as benchmark_fun
 
 if function_name == "sum_power":
     if dim == 3:
