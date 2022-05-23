@@ -29,7 +29,7 @@ snap = 1
 if function_name == "griewank":
     max_fit = 10 ** 4
     min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
-elif function_name == "schwefel" or function_name == "rosenbrock" or function_name == "shubert":
+elif function_name == "rosenbrock":
     max_fit = 10 ** 6
     min_con, max_con = - 2500, 2500
 elif function_name == "vincent":
@@ -38,6 +38,33 @@ elif function_name == "vincent":
 else:
     max_fit = 10 ** 3
     min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
+
+
+special_op_func = ["shubert", "michalewicz", "schwefel", "vincent", "rosenbrock"]
+
+
+def random_op_small():
+    if random.random() < 0.5:  # 0.5
+        op = random.randint(-5, 5)
+    else:
+        op = random.uniform(0, 1)
+        op = round(op, 1)
+
+    return op
+
+
+def random_op_very_small():
+    rnd = random.random()
+    if rnd < 0.33:  # 0.5
+        op = random.randint(-3, 3)
+    elif 0.33 < rnd < 0.66:
+        op = random.uniform(0, 1)
+        op = round(op, 1)
+    else:
+        op = random.uniform(0, 1)
+        op = round(op, 1) * 0.1
+
+    return op
 
 
 def random_program_attention(n):
@@ -49,9 +76,8 @@ def random_program_attention(n):
             if random.random() < 0.5:  # 0.5
                 op = random.choice(func)
             else:
-                if function_name == "shubert" or function_name == "michalewicz" or function_name == "schwefel":
-                    op = random.uniform(0, 1)
-                    op = round(op, 2)
+                if function_name in special_op_func:
+                    op = random_op_very_small()
                 else:
                     op = random.randint(min_con, max_con)  # (-2, 2)
             prg.append(op)
@@ -105,9 +131,8 @@ def mutation_attention(x, p_m):
             if random.random() < 0.5:  # 0.5
                 op = random.choice(list(opcodes))
             else:
-                if function_name == "shubert" or function_name == "michalewicz" or function_name == "schwefel":
-                    op = random.uniform(0, 1)
-                    op = round(op, 2)
+                if function_name in special_op_func:
+                    op = random_op_very_small()
                 else:
                     op = random.randint(min_con, max_con)  # (-2, 2)
             return op

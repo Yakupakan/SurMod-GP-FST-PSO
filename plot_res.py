@@ -1,30 +1,34 @@
 import os
 import numpy as np
 
+import colorsys
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.ticker import ScalarFormatter
 
 from hyperparam import interval_dict
 
-sns.set_theme(style="darkgrid")
-matplotlib.rc('font', **{'size': 6, 'weight': 'bold'})
+sns.set_theme(style="whitegrid")
+matplotlib.rc('font', **{'size': 1, 'weight': 'bold'})
+
+function_name = "alpine"
+dim = 2
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
-pop_size = 50  # int(sys.argv[2])
+if dim == 4 or dim == 5:
+    pop_size = 100  # int(sys.argv[2])
+if dim == 2 or dim == 3:
+    pop_size = 50
 num_iteration = 100  # int(sys.argv[3])
 
-function_name = "alpine"
-
 num_runs = 30
-dim = 2
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
 interval = interval_dict[function_name]
 
 fitness_2d = "fitness_2d"
 enum_set = 'PLUS MINUS TIMES DIVIDE DUP SWAP'
-
 
 min_dict = {"alpine": 0,
             "ackley": 0,
@@ -81,12 +85,44 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
                     contents = [float(cont) for cont in contents]
                     losses.append(min(contents))
     if losses:
-        sns.boxplot(data=losses,
-                    linewidth=2,
-                    color='#F08030',
-                    boxprops=dict(alpha=.75),
-                    showfliers=False)
-        plt.xticks(plt.xticks()[0], [fun[:-3]])
+        col = "black"
+        col2 = "indigo"
+        lw = 2
+        lw_median = 2.5
+        boxprops = dict(linestyle='-', linewidth=3, color="w", edgecolor="black", alpha=.75)
+        medianprops = dict(linestyle='-', linewidth=lw_median, color='firebrick')
+        meanpointprops = dict(marker='D', markeredgecolor='black',
+                              markerfacecolor='green')
+
+        ax2 = sns.boxplot(data=losses,
+                          boxprops=boxprops,
+                          medianprops=medianprops,
+                          meanprops=meanpointprops,
+                          showmeans=True,
+                          linewidth=lw,
+                          showfliers=False)
+
+        for i, artist in enumerate(ax2.artists):
+            # col = artist.get_facecolor()
+            artist.set_edgecolor(col)
+            artist.set_facecolor('khaki')
+
+            for j in range(i * 6, i * 6 + 6):
+                line = ax2.lines[j]
+                line.set_color(col)
+                line.set_mfc(col2)
+
+            for line in ax2.get_lines()[4::12]:
+                line.set_color('crimson')
+
+        current_values = plt.gca().get_yticks()
+        if np.abs(np.mean(current_values)) < 0.01:
+            plt.gca().set_yticklabels(['{:.1e}'.format(x) for x in current_values])
+
+        # plt.xticks(plt.xticks()[0], [fun[:-3]])
+        plt.title(function)
+
+        plt.xticks([])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
         plt.show()
@@ -117,7 +153,8 @@ def loss(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteratio
 
 
 for function_name in interval_dict.keys():
-    function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
-    bp(fun=function)
-    bp_no(fun=function)
-    loss(fun=function)
+    for dim in range(2, 5):
+        function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
+        bp(fun=function, dim=dim)
+        bp_no(fun=function, dim=dim)
+        loss(fun=function, dim=dim)

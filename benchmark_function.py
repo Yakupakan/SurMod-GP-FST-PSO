@@ -87,7 +87,11 @@ def michalewicz(x):
 
 
 def michalewicz_2d(x, y):
-    return 2 - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
+    x = x + 2.2044
+    y = y + 1.5692
+    # provo a traslarla per vedere se il codice compila meglio
+
+    return (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
 
 
 def michalewicz_3d(x, y, z):
@@ -121,6 +125,9 @@ def rastring_4d(x1, x2, x3, x4):
 
 
 def rosenbrock_2d(x, y):
+    x = x + 1
+    y = y + 1
+    # provo a traslarla per vedere se il codice compila meglio
     return (x - 1) ** 2 + 10 * (y - x ** 2) ** 2
 
 
@@ -135,6 +142,8 @@ def schwefel(x):
 
 
 def schwefel_2d(x, y):
+    x = x + 420.9687
+    y = y + 420.9687
     return 2 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y)))
 
 

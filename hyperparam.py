@@ -4,8 +4,8 @@ Hyperparameter settings of the problem
 import numpy as np
 
 
-function_name = "xinshe"
-dim = 4
+function_name = "schwefel"
+dim = 2
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
@@ -31,7 +31,7 @@ interval_dict = {"alpine": [[-10, 10]],  # 2
                  "michalewicz": [[0, np.pi]],  # 2
                  "rastring":  [[-5.12, 5.12]],  # 2
                  "rosenbrock": [[-5, 10]],  # [-2, 2]
-                 "schwefel": [[-100, 500]],  # 2
+                 "schwefel": [[-500 - 420.9687, 500 - 420.9687]],  # [[-100, 500]],  # 2
                  "shubert": [[-5.12, 5.12]],  # 2
                  "sum_power": [[-1, 1]],
                  "vincent": [[0.25, 10]],  # 2
