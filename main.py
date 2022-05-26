@@ -34,14 +34,7 @@ dir_results = dir_results + "prg_size" + str(dim_prg) + "_pop_size" + str(pop_si
 if not os.path.exists(dir_results):
     os.mkdir(dir_results)
 
-print(function)
-print(fitn)
-if fitn == "strong_fitness_2d" or fitn == "strong_fitness_contour_2d":
-    print(number_interpolation_point)
-print("program size: \t" + str(dim_prg) + "\npop size: \t" + str(pop_size))
-print(enum_set)
-
-for run in range(0, num_runs):  # num_runs):
+for run in range(5, 10):  # num_runs):
     best = linear_GP(fit,
                      pop_size=pop_size,
                      n_iter=num_iteration,
@@ -49,5 +42,4 @@ for run in range(0, num_runs):  # num_runs):
                      dire=dir_results,
                      run=run)
 
-# function_approximated = make_function(best)
-# fitness_plot(dir_results)
+

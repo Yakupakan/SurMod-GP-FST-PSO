@@ -59,7 +59,6 @@ def fitness_2d(prg):
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
     :param prg: program that approximate the function
-    :param n: number of point for the rmse computation
     :return: fitness
     """
     try:
@@ -75,7 +74,7 @@ def fitness_2d(prg):
     except Exception:
         return math.inf
 
-    return y_benchmark_function  # + rmse
+    return y_benchmark_function
 
 
 def strong_fitness_2d(prg, n=number_interpolation_point):
@@ -124,12 +123,11 @@ def strong_fitness_2d(prg, n=number_interpolation_point):
     return y_benchmark_function + rmse
 
 
-def strong_fitness_3d(prg, n=number_interpolation_point):
+def strong_fitness_3d(prg):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
     :param prg: program that approximate the function
-    :param n: number of point for the rmse computation
     :return: fitness
     """
     try:
@@ -147,15 +145,14 @@ def strong_fitness_3d(prg, n=number_interpolation_point):
     except Exception:
         return math.inf
 
-    return y_benchmark_function  # + rmse
+    return y_benchmark_function
 
 
-def strong_fitness_4d(prg, n=number_interpolation_point):
+def strong_fitness_4d(prg):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
     :param prg: program that approximate the function
-    :param n: number of point for the rmse computation
     :return: fitness
     """
     try:
@@ -173,15 +170,14 @@ def strong_fitness_4d(prg, n=number_interpolation_point):
     except Exception:
         return math.inf
 
-    return y_benchmark_function  # + rmse
+    return y_benchmark_function
 
 
-def strong_fitness_5d(prg, n=number_interpolation_point):
+def strong_fitness_5d(prg):
     """
     Fitness combined: we want both that the minimum of the approx program coincide with the minimum of the function and
     that the function and the approx program have some points in common (here n)
     :param prg: program that approximate the function
-    :param n: number of point for the rmse computation
     :return: fitness
     """
     try:
@@ -199,7 +195,7 @@ def strong_fitness_5d(prg, n=number_interpolation_point):
     except Exception:
         return math.inf
 
-    return y_benchmark_function  # + rmse
+    return y_benchmark_function
 
 
 def fst_pso_loss(prg):

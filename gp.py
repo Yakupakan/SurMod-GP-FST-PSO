@@ -28,17 +28,14 @@ if fitn == "strong_fitness_5d":
 snap = 1
 if function_name == "griewank":
     max_fit = 10 ** 4
-    min_con, max_con = -500, 500  # minimum and maximum value that constants can assume
+    min_con, max_con = -500, 500
 elif function_name == "rosenbrock":
     max_fit = 10 ** 6
-    min_con, max_con = - 2500, 2500
-elif function_name == "vincent":
-    max_fit = 10 ** 3
-    min_con, max_con = -2, 2  # minimum and maximum value that constants can assume
+elif function_name == "rosenbrock" or (function_name == "schwefel" and flag_plot == 1):
+    max_fit = 10 ** 7
 else:
     max_fit = 10 ** 3
-    min_con, max_con = -10, 10  # minimum and maximum value that constants can assume
-
+    min_con, max_con = -10, 10
 
 special_op_func = ["shubert", "michalewicz", "schwefel", "vincent", "rosenbrock"]
 
@@ -68,7 +65,7 @@ def random_op_very_small():
 
 
 def random_program_attention(n):
-    flag = 0  # return if the program is valid
+    flag = 0
     while not flag:
         prg = []
         func = list(opcodes)
@@ -95,7 +92,7 @@ def tournament_selection(fit, pop, t_size=4):
 
 
 def two_points_crossover_attention(x, y):
-    flag = 0  # return if the program is valid
+    flag = 0
     max_number_combination = 10
     numb_combination = 0
     while not flag:
@@ -117,12 +114,12 @@ def two_points_crossover_attention(x, y):
         if fit_of1 and fit_of2 and fit_of1 < max_fit and fit_of2 < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
-            return x, y  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 10 tentativi
+            return x, y
     return of1, of2
 
 
 def mutation_attention(x, p_m):
-    flag = 0  # return if the program is valid
+    flag = 0
     max_number_combination = 10
     numb_combination = 0
 
@@ -146,7 +143,7 @@ def mutation_attention(x, p_m):
         if fit_m and fit_m < max_fit:
             flag = 1
         if numb_combination == max_number_combination:
-            return x  # non modifico i vettori se non riesco a combinarli in modo intelligente dopo 10 tentativi
+            return x
     return mutated_prg
 
 
@@ -164,7 +161,7 @@ def linear_GP(fit, pop_size=100, n_iter=100, dim_prg=10, dire=None, run=1):
     fit_best = fit(best)
     for i in range(0, n_iter):
         if i > 0:
-            pop.append(best)  # the best solution is inserted (elitism)
+            pop.append(best)
 
         pop = list(dict.fromkeys([tuple(el) for el in pop]))
         pop = [list(el) for el in pop]

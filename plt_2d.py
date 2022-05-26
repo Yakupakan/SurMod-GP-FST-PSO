@@ -51,12 +51,9 @@ def plot_prg_2d(fun_name):
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='magma', edgecolor='none')
 
-    # plt.show()
     plt.savefig("plot/plot_2d/" + fun_name + "_approx.png")
     plt.close()
 
-
-# plot_3d("michalewicz")
 
 for name_function in bf_dict.keys():
     plot_3d(name_function)

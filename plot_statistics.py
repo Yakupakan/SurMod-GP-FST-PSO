@@ -15,13 +15,13 @@ matplotlib.rc('font', **{'size': 1, 'weight': 'bold'})
 function_name = "alpine"
 dim = 2
 
-dim_prg = 10  # int(sys.argv[1])
+dim_prg = 10
 max_dim_prg = 5 * dim_prg
 if dim == 4 or dim == 5:
-    pop_size = 100  # int(sys.argv[2])
+    pop_size = 100
 if dim == 2 or dim == 3:
     pop_size = 50
-num_iteration = 100  # int(sys.argv[3])
+num_iteration = 100
 
 num_runs = 30
 function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
@@ -53,6 +53,21 @@ def mk_dir(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterat
     return dir
 
 
+def print_median(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=num_iteration, enum_set=enum_set):
+    dir = mk_dir(fun, dim, dim_prg, pop_size, num_iteration, enum_set)
+    losses = []
+    for run in range(num_runs):
+        dir_runs = dir + str(run) + "/loss.txt"
+        if os.path.exists(dir_runs):
+            with open(dir_runs) as f:
+                contents = f.readlines()
+                if contents:
+                    contents = [float(cont) for cont in contents]
+                    losses.append(min(contents))
+    if losses:
+        print(function + " " + str(dim) + " :" + str(np.median(losses)))
+
+
 def bp(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=num_iteration, enum_set=enum_set):
     dir = mk_dir(fun, dim, dim_prg, pop_size, num_iteration, enum_set)
     losses = []
@@ -69,7 +84,6 @@ def bp(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteration=
         plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss/bp_" + function + ".png")
-        # plt.show()
         plt.close()
 
 
@@ -103,7 +117,6 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
                           showfliers=False)
 
         for i, artist in enumerate(ax2.artists):
-            # col = artist.get_facecolor()
             artist.set_edgecolor(col)
             artist.set_facecolor('khaki')
 
@@ -121,13 +134,9 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
         else:
             plt.gca().set_yticklabels(['{:.2f}'.format(x) for x in current_values])
 
-        # plt.xticks(plt.xticks()[0], [fun[:-3]])
-        # plt.title(function)
-
         plt.xticks([])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
-        # plt.show()
         plt.close()
 
 
@@ -146,17 +155,16 @@ def loss(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iteratio
         ax = sns.lineplot(data=col_average,
                           linewidth=2,
                           color='#F08030')
-        # plt.xticks(plt.xticks()[0], [fun[:-3]])
         plt.title(function)
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/loss/loss_" + function + ".png")
-        # plt.show()
         plt.close()
 
 
 for function_name in interval_dict.keys():
     for dim in range(2, 5):
         function = function_name + "_" + str(dim) + "d"  # sys.argv[4]
-        bp(fun=function, dim=dim)
-        bp_no(fun=function, dim=dim)
-        loss(fun=function, dim=dim)
+        print_median(fun=function, dim=dim)
+        # bp(fun=function, dim=dim)
+        # bp_no(fun=function, dim=dim)
+        # loss(fun=function, dim=dim)
