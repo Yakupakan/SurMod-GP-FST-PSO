@@ -65,6 +65,8 @@ if function_name == "rosenbrock":
         from benchmark_function import rosenbrock_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import rosenbrock_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import rosenbrock_4d as benchmark_fun
 
 if function_name == "schwefel":
     if dim == 1:
@@ -93,6 +95,8 @@ if function_name == "vincent":
         from benchmark_function import vincent_2d as benchmark_fun
     if dim == 3:
         from benchmark_function import vincent_3d as benchmark_fun
+    if dim == 4:
+        from benchmark_function import vincent_4d as benchmark_fun
 
 if function_name == "xinshe":
     if dim == 1:

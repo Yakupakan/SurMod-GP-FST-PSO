@@ -22,9 +22,9 @@ bf_dict = {"alpine": [opcodes.TIMES, opcodes.DUP, opcodes.TIMES, 1, opcodes.SWAP
                         opcodes.TIMES, -2, 4, 10, opcodes.DIVIDE, -9, opcodes.TIMES, -3, opcodes.MINUS,
                         opcodes.SWAP, -10, opcodes.DIVIDE, opcodes.SWAP, opcodes.PLUS, opcodes.SWAP,
                         opcodes.DIVIDE, opcodes.DUP, opcodes.TIMES, -3, -10, opcodes.TIMES, opcodes.PLUS],
-           "rosenbrock": [30, opcodes.TIMES, opcodes.SWAP, opcodes.DUP, 164, opcodes.DUP, 26, opcodes.PLUS, -996,
-                          opcodes.MINUS, -87, opcodes.MINUS, opcodes.DIVIDE, 30, opcodes.PLUS, opcodes.TIMES,
-                          opcodes.TIMES, opcodes.MINUS],
+           "rosenbrock": [-317, -865, opcodes.DIVIDE, opcodes.MINUS, opcodes.TIMES, 937, opcodes.SWAP, 140, 1306,
+                          opcodes.PLUS, opcodes.SWAP, 1012, opcodes.DUP, opcodes.PLUS, opcodes.SWAP, opcodes.DUP,
+                          opcodes.PLUS, opcodes.DUP, opcodes.TIMES],
            "schwefel": None,
            "shubert": None,
            "sum_power": None,
@@ -56,8 +56,8 @@ def plot_prg_2d(fun_name):
     plt.close()
 
 
-plot_3d("schwefel")
+# plot_3d("michalewicz")
 
-# for name_function in bf_dict.keys():
-#    plot_3d(name_function)
-#   plot_prg_2d(name_function)
+for name_function in bf_dict.keys():
+    plot_3d(name_function)
+    plot_prg_2d(name_function)

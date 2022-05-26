@@ -118,14 +118,16 @@ def bp_no(fun=function, dim=dim, dim_prg=dim_prg, pop_size=pop_size, num_iterati
         current_values = plt.gca().get_yticks()
         if np.abs(np.mean(current_values)) < 0.01:
             plt.gca().set_yticklabels(['{:.1e}'.format(x) for x in current_values])
+        else:
+            plt.gca().set_yticklabels(['{:.2f}'.format(x) for x in current_values])
 
         # plt.xticks(plt.xticks()[0], [fun[:-3]])
-        plt.title(function)
+        # plt.title(function)
 
         plt.xticks([])
         plt.savefig(dir + "bp_fitness.png")
         plt.savefig("plot/bp_loss_no_outliers/bp_no_" + function + ".png")
-        plt.show()
+        # plt.show()
         plt.close()
 
 

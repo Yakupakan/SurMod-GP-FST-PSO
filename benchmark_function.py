@@ -87,11 +87,11 @@ def michalewicz(x):
 
 
 def michalewicz_2d(x, y):
-    x = x + 2.2044
-    y = y + 1.5692
+    # x = x + 2.2044
+    # y = y + 1.5692
     # provo a traslarla per vedere se il codice compila meglio
 
-    return (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
+    return - (np.sin(x) * np.sin(x ** 2 / np.pi) ** 20) - (np.sin(y) * np.sin(2 * y ** 2 / np.pi) ** 20)
 
 
 def michalewicz_3d(x, y, z):
@@ -132,7 +132,20 @@ def rosenbrock_2d(x, y):
 
 
 def rosenbrock_3d(x, y, z):
+    x = x + 1
+    y = y + 1
+    z = z + 1
     return (x - 1) ** 2 + (y - 1) ** 2 + 100 * (- y + x ** 2) ** 2 + 100 * (- z + y ** 2) ** 2
+
+
+def rosenbrock_4d(x1, x2, x3, x4):
+    x1 = x1 + 1
+    x2 = x2 + 1
+    x3 = x3 + 1
+    x4 = x4 + 1
+
+    return (x1 - 1) ** 2 + (x2 - 1) ** 2 + (x3 - 1) ** 2 + 100 * (- x2 + x1 ** 2) ** 2 + 100 * (
+                - x3 + x2 ** 2) ** 2 + 100 * (- x4 + x3 ** 2) ** 2
 
 
 def schwefel(x):
@@ -148,11 +161,18 @@ def schwefel_2d(x, y):
 
 
 def schwefel_3d(x, y, z):
+    x = x + 420.9687
+    y = y + 420.9687
+    z = z + 420.9687
     return 3 * 418.9829 - x * np.sin(np.sqrt(np.abs(x))) - y * np.sin(np.sqrt(np.abs(y))) - z * np.sin(
         np.sqrt(np.abs(z)))
 
 
 def schwefel_4d(x1, x2, x3, x4):
+    x1 = x1 + 420.9687
+    x2 = x2 + 420.9687
+    x3 = x3 + 420.9687
+    x4 = x4 + 420.9687
     return 4 * 418.9829 - x1 * np.sin(np.sqrt(np.abs(x1))) - x2 * np.sin(np.sqrt(np.abs(x2))) - x3 * np.sin(
         np.sqrt(np.abs(x3))) - x4 * np.sin(np.sqrt(np.abs(x4)))
 
@@ -216,6 +236,10 @@ def vincent_2d(x, y):
 
 def vincent_3d(x, y, z):
     return np.sin(10 * np.log(x)) + np.sin(10 * np.log(y)) + np.sin(10 * np.log(z))
+
+
+def vincent_4d(x1, x2, x3, x4):
+    return np.sin(10 * np.log(x1)) + np.sin(10 * np.log(x2)) + np.sin(10 * np.log(x3)) + np.sin(10 * np.log(x4))
 
 
 def xinshe(x):

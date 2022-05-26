@@ -5,7 +5,7 @@ import numpy as np
 
 
 function_name = "schwefel"
-dim = 2
+dim = 4
 
 dim_prg = 10  # int(sys.argv[1])
 max_dim_prg = 5 * dim_prg
